@@ -1,0 +1,83 @@
+# MCSP Assembly / Disassembly Official Architecture 0.37
+
+Status: Constructive architecture amendment
+Qualification: Under Conditional Experiment
+Supersedes/extends: ASSEMBLY-DOMINANCE-0.27
+
+## Official disciplines
+
+MCSP formally recognizes two reciprocal machine-realization disciplines:
+
+    ASSEMBLY
+    DISASSEMBLY
+
+Both are first-class project disciplines for implementation, qualification, reconstruction, inspection and recovery.
+
+## Assembly
+
+ASSEMBLY projects a qualified MCSP semantic/scaffold obligation toward a machine realization.
+
+    MCSP semantic obligation
+    -> qualified scaffold
+    -> assembly realization
+    -> encoding
+    -> machine behavior
+
+Assembler syntax, mnemonic spelling, register names, directives, object format and concrete instruction sequence are realization-specific and SHALL NOT define MCSP meaning.
+
+Independent assemblers/ISAs are encouraged as preservation witnesses.
+
+## Disassembly
+
+DISASSEMBLY inspects/reconstructs machine realization evidence toward an MCSP-qualified projection.
+
+    machine encoding/artifact
+    -> disassembly/structural inspection
+    -> realization observations
+    -> MCSP projection
+    -> qualification comparison
+
+Disassembly SHALL NOT be treated as an automatic inverse that recovers original source, documentary names, comments, assembler directives, provenance or semantic intent.
+
+A disassembler reports a realization interpretation. MCSP qualification determines which observed distinctions are materially relevant.
+
+## Reciprocity
+
+Assembly and disassembly are reciprocal qualification directions, not mathematical inverses:
+
+    ASSEMBLE(S,H) -> R
+    DISASSEMBLE(R,H) -> O
+    PROJECT(O,scope) -> S'
+
+Qualification asks whether S' PRESERVES the applicable pre-settled material invariant of S.
+
+Source-text equality is not required.
+Instruction-sequence equality is not required.
+Binary equality across materially different realizations is not required.
+Semantic preservation under declared applicability is required.
+
+## Official project rule
+
+From 0.37 onward, material assembly witnesses SHOULD retain proportional disassembly evidence when it improves reconstruction, audit or qualification.
+
+Disassembly evidence SHOULD include where applicable:
+- artifact hash;
+- architecture/object format;
+- section/symbol boundary relevant to the test;
+- decoded instruction evidence;
+- realization-specific addresses/encodings when material to reconstruction;
+- explicit distinction between observation and semantic conclusion.
+
+## Recovery
+
+Qualified release checkpoints SHOULD retain enough source/build/disassembly evidence for deterministic reconstruction or contradiction analysis.
+
+## Security
+
+Disassembly does not grant authority to inspect artifacts outside user-authorized project scope.
+
+## C boundary
+
+C remains a temporary testing stud only. Assembly and disassembly are the official primary machine-level implementation/inspection disciplines.
+
+Kernel remains DETERMINATE CONDITION.
