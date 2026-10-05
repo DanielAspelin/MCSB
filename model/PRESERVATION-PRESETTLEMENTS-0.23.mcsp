@@ -1,0 +1,271 @@
+# MCSP Preservation and Pre-Settlements 0.23
+
+Status: Constructive reduction
+Qualification: Under Conditional Experiment
+Parent: Reconciliation 0.22
+
+## 1. Pre-settlement
+
+MCSP uses PRE-SETTLEMENT as a provisional architectural term.
+
+A pre-settlement is a qualified semantic commitment established before a particular realization is selected.
+
+A pre-settlement may establish:
+- material distinctions;
+- semantic invariants;
+- admissible variation;
+- required relations;
+- forbidden semantic changes;
+- applicability;
+- qualification obligations.
+
+A pre-settlement SHALL NOT unnecessarily establish:
+- host;
+- hardware;
+- ISA;
+- assembler;
+- opcode;
+- register;
+- address representation;
+- ABI;
+- bus;
+- device protocol;
+- physical encoding;
+- implementation sequence.
+
+Thus:
+
+    pre-settle meaning where justified
+    leave realization unsettled where possible
+
+This is a principal mechanism of hardware clearance.
+
+## 2. Pre-settlement is not preconfiguration
+
+PRE-SETTLEMENT is semantic.
+
+It does not necessarily configure hardware or software before execution.
+
+It establishes what must remain true when later realization occurs.
+
+## 3. Preservation problem
+
+PRESERVE cannot be understood without something previously settled as material.
+
+If nothing is pre-settled, there is no qualified basis for saying that a later realization preserved or violated anything.
+
+Therefore preservation is relative to a pre-settlement.
+
+## 4. Preservation candidate
+
+Provisional:
+
+    PRESERVE(P, A, B)
+
+where:
+
+    P = pre-settled material semantic invariant
+    A = one interpreted condition/relation
+    B = another interpreted condition/relation
+
+PRESERVE holds only insofar as the material distinctions required by P remain qualified across the comparison.
+
+This notation is documentary and not a final MCSP encoding.
+
+## 5. Reduction
+
+PRESERVE does not require physical sameness.
+
+It does not require:
+- same bits;
+- same address;
+- same instruction;
+- same register;
+- same encoding;
+- same timing;
+- same topology;
+- same physical carrier.
+
+It requires sameness only for the semantic distinctions pre-settled as material.
+
+Therefore:
+
+    preservation != identity
+    preservation != copying
+    preservation != persistence
+    preservation != equality of representation
+
+## 6. Correspondence
+
+Preservation appears to require a qualified correspondence between material distinctions.
+
+Candidate reduction:
+
+    PRE-SETTLEMENT
+      declares material distinction relation M
+
+    realization A
+      projects M_A
+
+    realization B
+      projects M_B
+
+    CORRESPOND(M_A, M_B, P)
+      demonstrates preservation under P
+
+Thus PRESERVE may be derived from qualified correspondence under a pre-settlement rather than being primitive.
+
+## 7. Correspondence attack
+
+CORRESPOND is not automatically primitive either.
+
+It may be a relation established when determinate conditions on different sides satisfy the same pre-settled semantic distinction.
+
+Provisional deeper form:
+
+    determinate condition
+      -> qualified distinction
+
+    pre-settlement
+      -> declares which distinction is material
+
+    another determinate condition
+      -> qualified distinction
+
+    qualification
+      -> determines whether the material distinction remains admissibly matched
+
+"matched" remains residue.
+
+## 8. Hardware independence
+
+Hardware independence can now be stated more precisely.
+
+A semantic construct is hardware-independent within qualification Q when:
+
+1. its material semantic commitments are pre-settled without unnecessary hardware assumptions;
+2. materially different hardware realizations are permitted;
+3. each realization projects observations sufficient for qualification;
+4. the pre-settled material distinctions are preserved;
+5. hardware-specific differences outside the pre-settlement do not redefine the semantic invariant.
+
+Therefore:
+
+    PRE-SETTLEMENT
+      + REALIZATION VARIATION
+      + PRESERVATION
+      + QUALIFICATION
+        -> bounded evidence of HARDWARE INDEPENDENCE
+
+## 9. Host independence
+
+The same structure applies to hosts.
+
+Host-specific ABI, OS, runtime, compiler, assembler, or language choices may vary if they are not material pre-settlements of the semantic construct.
+
+## 10. Canonicals
+
+A qualified canonical is a reusable pre-settlement.
+
+This improves the earlier definition:
+
+    CANONICAL
+      := reusable qualified semantic pre-settlement
+         with stable material invariant
+
+Canonical does not mean mandatory.
+
+Canonical does not mean primitive.
+
+Invoking a canonical opts into its pre-settled semantic obligations.
+
+## 11. Orthogonals
+
+Orthogonalization determines which semantic dimensions may remain unsettled independently.
+
+Thus:
+
+    canonicalization
+      pre-settles stable meaning
+
+    orthogonalization
+      identifies independently variable dimensions
+
+Together they directly support hardware clearance.
+
+## 12. Dimensions
+
+A semantic dimension may be:
+
+    pre-settled
+    constrained
+    left open
+    realization-defined
+
+The status must be explicit where material.
+
+This permits MCSP to be precise without over-specifying hardware.
+
+## 13. Extensions
+
+An extension introduces additional pre-settlements for a narrower applicability.
+
+It SHALL NOT retroactively alter the pre-settlements of an invoked parent canonical.
+
+## 14. Driver consequence
+
+A driver may operate as a settlement layer:
+
+    MCSP pre-settlements
+      + device determinate conditions
+      + device-specific extension pre-settlements
+      -> qualified OS-facing semantics
+
+The device implementation may remain hardware-specific while the exposed semantic contract preserves higher-level pre-settlements.
+
+## 15. Transfer reduction
+
+TRANSFER is now provisionally decomposed as:
+
+    source determinate conditions
+    + destination determinate conditions
+    + pre-settled material distinction correspondence
+    + completion applicability
+    + qualification of preservation
+
+Therefore TRANSFER remains a useful canonical candidate but is not primitive.
+
+Its apparent "movement" is not required by the semantic invariant.
+
+## 16. Read / write direction
+
+READ and WRITE should next be tested as directional applicability roles over determinate-condition relations rather than assumed primitive machine actions.
+
+No conclusion is asserted yet.
+
+## 17. Current reduction result
+
+PRESERVE:
+    likely DERIVED from qualified correspondence under pre-settlement.
+
+PRE-SETTLEMENT:
+    architectural semantic commitment role; not currently pre-semantic kernel.
+
+CORRESPOND:
+    remains reduction target.
+
+Kernel remains:
+
+    DETERMINATE CONDITION
+
+## 18. Next work
+
+1. reduce CORRESPOND / "matched";
+2. formalize pre-settlement records without natural-language semantic authority;
+3. normalize canonicals as reusable pre-settlement graphs;
+4. test orthogonal dimensions as settled versus intentionally unsettled;
+5. decompose READ / WRITE / COPY / TRANSFER;
+6. encode self-description;
+7. execute realization witnesses.
+
+No Permanent Seal is asserted.
