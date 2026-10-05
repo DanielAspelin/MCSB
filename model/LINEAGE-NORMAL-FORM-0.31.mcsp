@@ -1,0 +1,76 @@
+# MCSP Deterministic Lineage Normal Form 0.31
+
+Status: Constructive bootstrap contract
+Qualification: Under Conditional Experiment
+
+## Purpose
+
+Define a deterministic bootstrap projection for scaffold lineage so independent assembly realizations can be compared without requiring identical source text, instruction sequences, registers, encodings, or assembler syntax.
+
+This is a bootstrap representation contract, not the MCSP kernel.
+
+## Projected lineage tuple
+
+For each accepted propagation edge project:
+
+    invariant
+    parent_lineage
+    child_lineage
+    applicability
+    dimension_status
+    qualification
+    unresolved_residue
+    event_kind
+
+Documentary names are excluded.
+
+## Deterministic order
+
+Edges SHALL be projected in ascending child_lineage order for this bootstrap checkpoint.
+
+This ordering is a normalization procedure over lineage records. It does not establish pre-semantic ORDER as a kernel primitive.
+
+## Structural fingerprint
+
+For 0.31 the projected tuple stream is folded with a deliberately simple deterministic 64-bit bootstrap accumulator:
+
+    H0 = 1469598103934665603
+    H(n+1) = (Hn XOR field) * 1099511628211 modulo 2^64
+
+Fields are folded in tuple order and edges in normalized child_lineage order.
+
+This fingerprint:
+- is representation evidence only;
+- is not cryptographic;
+- is not semantic identity;
+- does not prove semantic equivalence;
+- may be replaced without changing MCSP meaning.
+
+Independent realizations satisfy this checkpoint when they:
+1. accept and reject the same declared fixture cases;
+2. project the same normalized lineage tuples;
+3. produce the same bootstrap fingerprint.
+
+## Fixture projection
+
+Accepted lineage successors:
+- 0x101 compatible inheritance;
+- 0x102 qualification refinement;
+- 0x103 explicit settlement;
+- 0x104 explicit applicability narrowing;
+- 0x105 realization-defined branch.
+
+Rejected:
+- 0x106 invariant contradiction;
+- 0x107 failed qualification;
+- 0x108 unresolved-residue loss.
+
+The parent lineage is 0x100 and inherited canonical invariant is 0xA11.
+
+## Independence rule
+
+NASM and GAS implementations SHALL be authored against this contract.
+
+Neither implementation is semantic authority for the other.
+
+Agreement is evidence that the projected contract survived different assembler representations on the same ISA. It is not yet cross-ISA hardware-independence evidence.
