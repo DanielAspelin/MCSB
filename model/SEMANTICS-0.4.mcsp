@@ -1,16 +1,25 @@
-# MCSP Semantic Definitions — 0.4
+# MCSP Semantic Definitions — 0.5
 
-**Qualification:** Under Conditional Experiment
+**Status:** Constructive implementation  
+**Qualification:** Under Conditional Experiment  
+**Goal:** Reduce 0.4 semantic residue and make the definition mechanism recursively representable.
 
-This file is the first machine-oriented bridge toward MCSP self-description. It is deliberately independent of ISA mnemonics.
+## Core representation
 
-## Definition form
+MCSP provisionally treats every representable entity as a CONSTRUCT.
 
-Each semantic construct is represented by:
+    CONSTRUCT {
+      identity
+      kind
+      relations
+      state
+    }
+
+A definition is itself a construct:
 
     DEFINE {
       identity
-      category
+      kind
       inputs
       outputs
       preconditions
@@ -20,107 +29,301 @@ Each semantic construct is represented by:
       realization_constraints
     }
 
-The DEFINE form is itself provisional and must eventually be representable as an MCSP construct.
+Therefore DEFINE is not a privileged external metalanguage. Its fields must themselves resolve to constructs and relations.
 
-## Definitions
+## Foundational candidates
 
-    DEFINE VALUE {
-      category: state-construction
-      inputs: value, width
-      outputs: destination
-      transition: destination receives value under width
-      outcomes: completed | exception | unsupported
+    DEFINE IDENTITY {
+      kind: relation
+      inputs: construct
+      outputs: identity
+      transition: distinguish construct within a declared scope
     }
 
-    DEFINE COPY {
-      category: state-transfer
-      inputs: source, width
-      outputs: destination
-      transition: destination receives source value
-      outcomes: completed | exception | unsupported
+    DEFINE RELATION {
+      kind: construct
+      inputs: source, target, relation-kind
+      outputs: related-state
+      transition: associate source and target under relation-kind
     }
 
     DEFINE POSITION {
-      category: relation
-      inputs: base, displacement, index, scale, relation
-      outputs: address
-      transition: derive address relation
+      kind: relation
+      inputs: construct, space, coordinates
+      outputs: position
+      transition: relate construct to a position within space
+    }
+
+    DEFINE VALUE {
+      kind: construct
+      inputs: representation, width
+      outputs: value
+      transition: represent distinguishable state under width
+    }
+
+    DEFINE WIDTH {
+      kind: relation
+      inputs: value-or-space, unit, extent
+      outputs: width
+      transition: relate an extent to a declared unit
+    }
+
+    DEFINE STATE {
+      kind: construct
+      inputs: construct, observations
+      outputs: state
+      transition: represent observable properties of construct at a logical observation position
+    }
+
+    DEFINE TRANSITION {
+      kind: relation
+      inputs: pre-state, operation, constraints
+      outputs: post-state, outcome
+      transition: relate pre-state to post-state under operation and constraints
+    }
+
+    DEFINE CONDITION {
+      kind: construct
+      inputs: relation, observations
+      outputs: condition
+      transition: represent the evaluated state of a relation
+    }
+
+    DEFINE ATTRIBUTE {
+      kind: relation
+      inputs: construct, attribute-kind, value
+      outputs: attributed-construct
+      transition: relate a declared property to a construct
+    }
+
+    DEFINE CONSTRAINT {
+      kind: relation
+      inputs: construct-or-transition, requirement
+      outputs: constrained-relation
+      transition: restrict admissible states or transitions
+    }
+
+    DEFINE SPACE {
+      kind: construct
+      inputs: identity, relations
+      outputs: space
+      transition: establish a positional relation domain
+    }
+
+## Machine-operation candidates
+
+    DEFINE COPY {
+      kind: transition
+      inputs: source, destination, width
+      outputs: destination-state
+      transition: destination value becomes source value under width
+    }
+
+    DEFINE TRANSLATE {
+      kind: transition
+      inputs: position, source-space, target-space, mapping
+      outputs: target-position
+      transition: derive corresponding target-space position
       outcomes: completed | exception | unsupported
     }
 
     DEFINE READ {
-      category: state-transfer
-      inputs: address, width, attributes
-      outputs: destination
-      relations: POSITION, TRANSLATE
-      transition: addressed state is observed and transferred to destination
-      outcomes: completed | exception | unsupported | environment-defined
+      kind: transition
+      inputs: position, width, attributes
+      outputs: destination-state
+      relations: TRANSLATE
+      transition: observe addressed state and transfer its value to destination
     }
 
     DEFINE WRITE {
-      category: state-transfer
-      inputs: address, source, width, attributes
+      kind: transition
+      inputs: position, source, width, attributes
       outputs: addressed-state
-      relations: POSITION, TRANSLATE
-      transition: source value changes addressed state subject to constraints
-      outcomes: completed | exception | unsupported | environment-defined
+      relations: TRANSLATE
+      transition: change addressed state using source value subject to constraints
     }
 
     DEFINE COMPUTE {
-      category: state-transition
+      kind: transition
       inputs: operation, values, width, attributes
-      outputs: destination
-      transition: operation maps input values to output value/state
-      outcomes: completed | exception | unsupported
+      outputs: destination-state
+      transition: apply operation relation to inputs
     }
 
     DEFINE COMPARE {
-      category: relation-evaluation
+      kind: transition
       inputs: relation, values, width
       outputs: condition
-      transition: derive condition state
-      outcomes: completed | exception | unsupported
+      transition: evaluate relation over values
+    }
+
+    DEFINE SCHEDULE {
+      kind: relation
+      inputs: transitions, ordering, constraints
+      outputs: execution-order
+      transition: establish admissible temporal/logical ordering
+    }
+
+    DEFINE ALLOCATE {
+      kind: transition
+      inputs: resource-space, extent, constraints
+      outputs: allocation-relation
+      transition: associate an available region/resource with a construct
+    }
+
+    DEFINE RELEASE {
+      kind: transition
+      inputs: allocation-relation
+      outputs: resource-state
+      transition: terminate allocation relation subject to constraints
+    }
+
+    DEFINE TRANSFER {
+      kind: transition
+      inputs: source, destination, extent, constraints
+      outputs: destination-state, outcome
+      transition: move or reproduce represented state across positions/spaces
+    }
+
+    DEFINE SIGNAL {
+      kind: transition
+      inputs: source, target, event
+      outputs: target-observable-state
+      transition: make event state observable to target
     }
 
     DEFINE BRANCH {
-      category: control-transition
-      inputs: condition?, target, fallthrough?
+      kind: transition
+      inputs: condition, target, fallthrough
       outputs: control-position
-      transition: select next control position
-      outcomes: completed | exception | unsupported
+      transition: select next control position from condition
     }
 
     DEFINE INVOKE {
-      category: control-transition
+      kind: transition
       inputs: target, continuation, convention
       outputs: control-position, continuation-relation
-      transition: transfer control while preserving a continuation relation
-      outcomes: completed | exception | unsupported
+      transition: select target control position and preserve continuation relation
     }
 
     DEFINE RETURN {
-      category: control-transition
+      kind: transition
       inputs: continuation, convention
       outputs: control-position
-      transition: restore/select continuation control position
-      outcomes: completed | exception | unsupported
+      transition: select control position from continuation relation
     }
 
-## Unresolved definitions
+## Outcome model
 
-The following terms are intentionally not declared closed:
+    DEFINE OUTCOME {
+      kind: construct
+      inputs: transition, result-kind, state
+      outputs: outcome
+      transition: classify observed completion state
+    }
 
-- STATE
-- VALUE representation
-- width
-- relation
-- attributes
-- TRANSLATE
-- condition
-- operation
-- convention
-- exception
-- environment-defined
-- realization constraint
+Initial result kinds:
 
-They form the current self-description residue. The next closure work must decompose them rather than assuming their meaning.
+    completed
+    exception
+    unsupported
+    implementation-defined
+    environment-defined
+    incomplete
+
+These labels are classifications, not assumptions that every host exposes identical exception machinery.
+
+## Operation model
+
+An OPERATION is a construct related to a TRANSITION rule.
+
+    DEFINE OPERATION {
+      kind: construct
+      inputs: identity, input-relations, output-relations, transition-rule
+      outputs: operation
+      transition: establish executable semantic relation
+    }
+
+This allows ADD, AND, comparison relations, protocol actions and device commands to be described as operation constructs rather than privileged language keywords.
+
+## Exception model
+
+    DEFINE EXCEPTION {
+      kind: outcome
+      inputs: transition, cause, observable-state
+      outputs: exception
+      transition: classify a transition that did not produce its normal completed post-state
+    }
+
+Host trap vectors, exception levels, fault codes and handlers are realization mappings.
+
+## Convention model
+
+    DEFINE CONVENTION {
+      kind: relation
+      inputs: participating-constructs, rules
+      outputs: convention
+      transition: establish agreed constraints without changing fundamental semantics
+    }
+
+Calling conventions, ABIs and protocol conventions therefore remain explicit relations rather than universal machine laws.
+
+## Realization model
+
+    DEFINE REALIZATION {
+      kind: relation
+      inputs: mcsp-construct, host, host-capabilities, mapping
+      outputs: host-realization
+      transition: relate stable MCSP semantics to concrete host mechanisms
+    }
+
+    DEFINE CAPABILITY {
+      kind: relation
+      inputs: host, construct-or-feature
+      outputs: supported | unsupported | constrained
+      transition: classify host realization availability
+    }
+
+## Recursive definition test
+
+The definition form can now be restated in its own terms:
+
+    DEFINE is a CONSTRUCT.
+    each DEFINE field is a RELATION from the defined CONSTRUCT.
+    inputs and outputs are RELATION sets.
+    preconditions and realization_constraints are CONSTRAINT relations.
+    transition is a TRANSITION relation.
+    outcomes are OUTCOME constructs.
+    identity is an IDENTITY relation.
+    kind is a RELATION to another CONSTRUCT.
+
+This removes the 0.4 assumption that DEFINE must remain an external privileged schema.
+
+## Remaining residue
+
+The following are still not closed and require further decomposition:
+
+- representation
+- observation
+- unit
+- extent
+- scope
+- coordinates
+- mapping
+- ordering
+- requirement
+- event
+- rule
+- cause
+- logical observation position
+- availability
+
+The existence of this residue means MCSP self-description is **not yet closed**.
+
+## 0.5 closure result
+
+**PASS:** DEFINE can provisionally describe DEFINE structurally using CONSTRUCT and RELATION.
+
+**NOT YET QUALIFIED:** the primitive vocabulary has not reached finite semantic closure because the remaining residue above still carries meaning not yet expressed in MCSP.
+
+Next: decompose representation/observation/extent/ordering/mapping, then test whether the residue shrinks or merely renames external assumptions.
