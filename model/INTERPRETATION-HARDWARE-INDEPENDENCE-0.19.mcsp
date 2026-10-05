@@ -1,0 +1,225 @@
+# MCSP Interpretation Reduction and Hardware Independence 0.19
+
+Status: Constructive architecture experiment
+Qualification: Under Conditional Experiment
+Parent: Hardware Clearance and Boundary Reduction 0.18
+
+## Strategic distinction
+
+HARDWARE CLEARANCE is the method and direction.
+
+HARDWARE INDEPENDENCE is the target qualification.
+
+Clearance removes unnecessary realization assumptions.
+Independence is demonstrated when qualified semantic meaning survives materially different hardware realizations within its declared applicability.
+
+Abstraction alone does not prove independence.
+
+## Interpretation attack
+
+0.18 left INTERPRETATION as principal residue.
+
+Question:
+
+    Can interpretation be expressed without presupposing semantics?
+
+A definition such as "assign meaning" fails because MEANING already presupposes semantics.
+
+A definition such as "decode representation" fails because REPRESENTATION is later.
+
+A definition such as "observe state" fails because OBSERVATION and STATE are later.
+
+## Projection hypothesis
+
+The useful structural role of interpretation is not creation of arbitrary meaning.
+
+It is selection/projection of determination into a relation that can be qualified.
+
+Provisional form:
+
+    determinate condition
+      -> projection under applicability
+      -> distinguishable relation
+
+But PROJECT and APPLICABILITY are still later vocabulary.
+
+Therefore they describe the first semantic operation, not the pre-semantic kernel.
+
+## Reduction result
+
+INTERPRETATION is not promoted into the pre-semantic kernel.
+
+It is the boundary operation by which determinate condition becomes semantic structure.
+
+Thus:
+
+    PRE-SEMANTIC:
+        DETERMINATE CONDITION
+
+    SEMANTIC COMMENCEMENT:
+        INTERPRETATION
+
+Interpretation may remain a semantic operation rather than an ontological primitive.
+
+Its qualification requires that the resulting distinctions are determined rather than arbitrary.
+
+## MCSP hardware-independence architecture
+
+MCSP targets hardware independence through coordinated semantic systems.
+
+### Semantics
+
+Defines invariant meaning without allowing a host realization to supply missing meaning.
+
+### Canonicals
+
+Provide stable reusable semantic identities/graphs to which differing realizations can map.
+
+### Orthogonals
+
+Separate independently variable semantic dimensions so a hardware-specific choice in one dimension does not contaminate unrelated meaning.
+
+### Dimensions
+
+Declare the coordinates required to describe a construct completely within its semantic applicability.
+
+### Topology
+
+Describes relation, adjacency, containment, reachability, path, and boundary independently of a particular physical layout where possible.
+
+### Taxonomy
+
+Classifies admitted semantic structures without making host categories foundational.
+
+### Ontology
+
+Defines what MCSP itself admits, without imposing a complete ontology on every external machine/device/system.
+
+### Extensions
+
+Permit hardware/device/OS-specific meaning without rewriting kernel or canonical semantics.
+
+### Realizations
+
+Map qualified semantics onto actual hardware, ISA, assembler, ABI, firmware, protocol, bus, or device behavior.
+
+### Qualification
+
+Tests preservation across materially different realizations.
+
+Together these systems are the mechanism by which MCSP targets hardware independence.
+
+## Independence criterion
+
+For semantic construct S and materially different realizations H1...Hn:
+
+    each Hi may differ in representation,
+    encoding, instruction sequence, register use,
+    memory organization, device protocol,
+    assembler notation, or implementation path;
+
+while:
+
+    PROJECT(REALIZE(S, Hi), declared_scope)
+        preserves the material semantic invariant of S.
+
+If preservation is demonstrated across the required witness set, S may receive a bounded hardware-independence qualification.
+
+This does not establish universal independence beyond tested conditions.
+
+## Orthogonal independence
+
+Hardware independence is strengthened when realization choices can vary independently along qualified orthogonal dimensions.
+
+Examples:
+
+    representation may vary while semantic identity remains stable;
+    position may vary while value relation remains stable;
+    instruction sequence may vary while transition invariant remains stable;
+    assembler syntax may vary while ISA realization remains equivalent;
+    device transport may vary while canonical transfer semantics remain stable.
+
+These are hypotheses to test per construct.
+
+## Canonical independence
+
+A canonical is useful for hardware independence only when:
+
+1. its invariant is defined without a particular host encoding;
+2. realization mappings cannot redefine that invariant;
+3. unsupported realizations are explicit;
+4. materially different witnesses preserve the invariant;
+5. extension semantics cannot silently mutate it.
+
+## Hardware-clearance relationship
+
+Provisional relation:
+
+    CLEAR
+      removes unnecessary realization dependency
+
+    REALIZE
+      maps semantics to a concrete host
+
+    PROJECT
+      recovers the observable semantic relation
+
+    PRESERVE
+      compares projected relation with semantic invariant
+
+    QUALIFY
+      establishes bounded evidence of independence
+
+Therefore:
+
+    hardware clearance
+      -> enables independent realizations
+      -> enables preservation tests
+      -> supports hardware-independence qualification
+
+Clearance is necessary methodology but not sufficient proof.
+
+## Assembly boundary
+
+Assembly remains realization notation.
+
+NASM and GNU assembler SHALL remain distinct realization witnesses where applicable.
+
+Agreement between them may strengthen evidence that assembler spelling is not semantic authority.
+
+Machine encoding remains below assembler representation.
+
+## Driver boundary
+
+Drivers are permitted to remain hardware-specific realizations/extensions.
+
+The semantics exposed upward may nevertheless be hardware-independent if their qualified invariants survive alternative device/driver realizations.
+
+Therefore:
+
+    hardware-specific driver
+        does not imply
+    hardware-specific exposed semantic contract.
+
+## Current kernel
+
+No attack in 0.19 defeated:
+
+    DETERMINATE CONDITION
+
+as the smallest current pre-semantic kernel candidate.
+
+INTERPRETATION is moved to semantic commencement rather than added to the kernel.
+
+## Next qualification target
+
+Construct a hardware-independence matrix that tests one semantic construct across:
+- x86-64;
+- AArch64;
+- RISC-V;
+- NASM/GAS boundaries where applicable;
+- at least one non-processor realization domain.
+
+The purpose is to test whether semantics/canonicals/orthogonals actually produce hardware clearance rather than merely describe it.
+
+No Permanent Seal is asserted.
