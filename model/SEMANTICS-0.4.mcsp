@@ -1,23 +1,39 @@
-# MCSP Semantic Definitions — 0.5
+# MCSP Semantic Definitions — 0.6
 
 **Status:** Constructive implementation  
 **Qualification:** Under Conditional Experiment  
-**Goal:** Reduce 0.4 semantic residue and make the definition mechanism recursively representable.
+**Objective:** Reduce semantic residue toward a finite self-describing relation graph.
 
-## Core representation
+## Foundational representation
 
-MCSP provisionally treats every representable entity as a CONSTRUCT.
+Every MCSP entity is provisionally a CONSTRUCT. Every formal association between constructs is a RELATION. Change is represented by TRANSITION. Distinguishable condition at an ordering point is STATE.
 
     CONSTRUCT {
-      identity
-      kind
-      relations
-      state
+      IDENTITY
+      RELATION*
+      STATE*
     }
 
-A definition is itself a construct:
+    RELATION {
+      source
+      target
+      kind
+      STATE*
+    }
 
-    DEFINE {
+    TRANSITION {
+      pre_state
+      OPERATION
+      CONSTRAINT*
+      post_state
+      OUTCOME
+    }
+
+These forms are themselves constructs and relations.
+
+## Definition
+
+    DEFINE is a CONSTRUCT whose RELATION set identifies:
       identity
       kind
       inputs
@@ -27,203 +43,196 @@ A definition is itself a construct:
       outcomes
       relations
       realization_constraints
-    }
 
-Therefore DEFINE is not a privileged external metalanguage. Its fields must themselves resolve to constructs and relations.
+No DEFINE field is privileged syntax at the semantic layer.
 
-## Foundational candidates
+## Residue reduction
 
-    DEFINE IDENTITY {
+### SCOPE
+
+    DEFINE SCOPE {
       kind: relation
-      inputs: construct
-      outputs: identity
-      transition: distinguish construct within a declared scope
+      inputs: identity-set, containing-construct
+      outputs: identity-domain
+      transition: relate identities to a domain in which distinction is evaluated
     }
 
-    DEFINE RELATION {
+IDENTITY is distinction within SCOPE.
+
+### ORDER
+
+    DEFINE ORDER {
+      kind: relation
+      inputs: constructs
+      outputs: precedence-relations
+      transition: relate constructs by before/equal/after positions in an ordering space
+    }
+
+Temporal order is one realization of ORDER; MCSP does not require physical wall-clock time.
+
+### OBSERVE
+
+    DEFINE OBSERVE {
+      kind: relation
+      inputs: construct, state, ordering-position
+      outputs: observation
+      transition: relate distinguishable state to an ordering position
+    }
+
+An observer as an anthropomorphic entity is not required. Observation means state made distinguishable at a relation point.
+
+### REPRESENT
+
+    DEFINE REPRESENT {
+      kind: relation
+      inputs: source-construct, target-state, mapping
+      outputs: representation
+      transition: establish correspondence by which target-state distinguishes source-construct
+    }
+
+Representation is therefore a relation, not a privileged byte/string form.
+
+### UNIT
+
+    DEFINE UNIT {
       kind: construct
-      inputs: source, target, relation-kind
-      outputs: related-state
-      transition: associate source and target under relation-kind
+      inputs: identity, partition-relation
+      outputs: unit
+      transition: establish a repeatable partition reference within a space
     }
 
-    DEFINE POSITION {
+### EXTENT
+
+    DEFINE EXTENT {
       kind: relation
-      inputs: construct, space, coordinates
-      outputs: position
-      transition: relate construct to a position within space
+      inputs: start-position, end-position, unit
+      outputs: extent
+      transition: relate bounded positions under a unit
     }
 
-    DEFINE VALUE {
+### COORDINATE
+
+    DEFINE COORDINATE {
+      kind: relation
+      inputs: position, space, reference-position, extent-relations
+      outputs: coordinate
+      transition: represent position relative to a reference within space
+    }
+
+Coordinates are representations of POSITION, not POSITION itself.
+
+### MAP
+
+    DEFINE MAP {
+      kind: relation
+      inputs: source-space, target-space, correspondence-set
+      outputs: mapping
+      transition: relate source positions/constructs to target positions/constructs
+    }
+
+TRANSLATE applies a MAP to derive a target position.
+
+### REQUIRE
+
+    DEFINE REQUIRE {
+      kind: constraint
+      inputs: construct-or-transition, admissible-state-relation
+      outputs: requirement
+      transition: restrict admissible state/transition set
+    }
+
+### EVENT
+
+    DEFINE EVENT {
       kind: construct
-      inputs: representation, width
-      outputs: value
-      transition: represent distinguishable state under width
+      inputs: transition, observation
+      outputs: event
+      transition: represent an observed transition relation
     }
 
-    DEFINE WIDTH {
+### RULE
+
+    DEFINE RULE {
       kind: relation
-      inputs: value-or-space, unit, extent
-      outputs: width
-      transition: relate an extent to a declared unit
+      inputs: admissible-pre-state, operation, constraints, admissible-post-state
+      outputs: rule
+      transition: relate admissible transition components
     }
 
-    DEFINE STATE {
-      kind: construct
-      inputs: construct, observations
-      outputs: state
-      transition: represent observable properties of construct at a logical observation position
-    }
+A RULE does not execute itself. OPERATION may reference a RULE; TRANSITION records an occurrence/effect.
 
-    DEFINE TRANSITION {
+### CAUSE
+
+    DEFINE CAUSE {
       kind: relation
-      inputs: pre-state, operation, constraints
-      outputs: post-state, outcome
-      transition: relate pre-state to post-state under operation and constraints
+      inputs: antecedent-event-or-state, consequent-event-or-state, rule
+      outputs: cause-relation
+      transition: relate antecedent and consequent under an explicit rule
     }
 
-    DEFINE CONDITION {
-      kind: construct
-      inputs: relation, observations
-      outputs: condition
-      transition: represent the evaluated state of a relation
+This avoids treating causality as an unexplained universal physical assertion; a cause claim is scoped to a declared rule/model.
+
+### AVAILABLE
+
+    DEFINE AVAILABLE {
+      kind: state
+      inputs: resource-or-capability, scope, constraints
+      outputs: availability-state
+      transition: classify whether allocation/realization is admissible in scope
     }
 
-    DEFINE ATTRIBUTE {
-      kind: relation
-      inputs: construct, attribute-kind, value
-      outputs: attributed-construct
-      transition: relate a declared property to a construct
-    }
+### LOGICAL OBSERVATION POSITION
 
-    DEFINE CONSTRAINT {
-      kind: relation
-      inputs: construct-or-transition, requirement
-      outputs: constrained-relation
-      transition: restrict admissible states or transitions
-    }
+No new primitive is introduced.
 
-    DEFINE SPACE {
-      kind: construct
-      inputs: identity, relations
-      outputs: space
-      transition: establish a positional relation domain
-    }
+    logical_observation_position :=
+      POSITION within an ORDER space at which OBSERVE relates STATE
 
-## Machine-operation candidates
+This removes the 0.5 compound residue term.
 
-    DEFINE COPY {
-      kind: transition
-      inputs: source, destination, width
-      outputs: destination-state
-      transition: destination value becomes source value under width
-    }
+## Width and value refinement
 
-    DEFINE TRANSLATE {
-      kind: transition
-      inputs: position, source-space, target-space, mapping
-      outputs: target-position
-      transition: derive corresponding target-space position
-      outcomes: completed | exception | unsupported
-    }
+    WIDTH := EXTENT over a representation space under UNIT
 
-    DEFINE READ {
-      kind: transition
-      inputs: position, width, attributes
-      outputs: destination-state
-      relations: TRANSLATE
-      transition: observe addressed state and transfer its value to destination
-    }
+    VALUE := a CONSTRUCT distinguished by REPRESENT relations and bounded by WIDTH where applicable
 
-    DEFINE WRITE {
-      kind: transition
-      inputs: position, source, width, attributes
-      outputs: addressed-state
-      relations: TRANSLATE
-      transition: change addressed state using source value subject to constraints
-    }
+Bits, bytes, words, vector lanes, sectors and protocol fields are realization/domain units rather than assumed universal units.
 
-    DEFINE COMPUTE {
-      kind: transition
-      inputs: operation, values, width, attributes
-      outputs: destination-state
-      transition: apply operation relation to inputs
-    }
+## Address refinement
 
-    DEFINE COMPARE {
-      kind: transition
-      inputs: relation, values, width
-      outputs: condition
-      transition: evaluate relation over values
-    }
+    ADDRESS := REPRESENT(POSITION within address-space)
 
-    DEFINE SCHEDULE {
-      kind: relation
-      inputs: transitions, ordering, constraints
-      outputs: execution-order
-      transition: establish admissible temporal/logical ordering
-    }
+An address is therefore not identical to a position. It is a representation of a position under a mapping/space model.
 
-    DEFINE ALLOCATE {
-      kind: transition
-      inputs: resource-space, extent, constraints
-      outputs: allocation-relation
-      transition: associate an available region/resource with a construct
-    }
+    TRANSLATE(address/position, MAP) -> target POSITION
 
-    DEFINE RELEASE {
-      kind: transition
-      inputs: allocation-relation
-      outputs: resource-state
-      transition: terminate allocation relation subject to constraints
-    }
+Virtual, physical, bus, device and protocol address forms can use this model without being conflated.
 
-    DEFINE TRANSFER {
-      kind: transition
-      inputs: source, destination, extent, constraints
-      outputs: destination-state, outcome
-      transition: move or reproduce represented state across positions/spaces
-    }
+## Scheduling refinement
 
-    DEFINE SIGNAL {
-      kind: transition
-      inputs: source, target, event
-      outputs: target-observable-state
-      transition: make event state observable to target
-    }
+    SCHEDULE {
+      transitions
+      ORDER
+      CONSTRAINT*
+    } -> admissible execution-order
 
-    DEFINE BRANCH {
-      kind: transition
-      inputs: condition, target, fallthrough
-      outputs: control-position
-      transition: select next control position from condition
-    }
+Scheduling is therefore an ORDER relation constrained over TRANSITION constructs.
 
-    DEFINE INVOKE {
-      kind: transition
-      inputs: target, continuation, convention
-      outputs: control-position, continuation-relation
-      transition: select target control position and preserve continuation relation
-    }
+## Allocation refinement
 
-    DEFINE RETURN {
-      kind: transition
-      inputs: continuation, convention
-      outputs: control-position
-      transition: select control position from continuation relation
-    }
+    ALLOCATE(resource-space, EXTENT, CONSTRAINT*)
+      -> RELATION(construct, available region/resource)
 
-## Outcome model
+    RELEASE(allocation-relation)
+      -> transition terminating that relation
 
-    DEFINE OUTCOME {
-      kind: construct
-      inputs: transition, result-kind, state
-      outputs: outcome
-      transition: classify observed completion state
-    }
+Allocation does not imply ownership, execution or persistence unless separate relations establish them.
 
-Initial result kinds:
+## Outcome refinement
 
+    OUTCOME := STATE classification related to TRANSITION
+
+Initial classifications remain:
     completed
     exception
     unsupported
@@ -231,99 +240,85 @@ Initial result kinds:
     environment-defined
     incomplete
 
-These labels are classifications, not assumptions that every host exposes identical exception machinery.
+Classification names are constructs/identities, not host exception encodings.
 
-## Operation model
+## Realization refinement
 
-An OPERATION is a construct related to a TRANSITION rule.
+    REALIZATION :=
+      MAP from MCSP semantic constructs/relations
+      to host constructs/relations
+      under CAPABILITY and CONSTRAINT relations
 
-    DEFINE OPERATION {
-      kind: construct
-      inputs: identity, input-relations, output-relations, transition-rule
-      outputs: operation
-      transition: establish executable semantic relation
-    }
+A valid realization must preserve the declared semantic relation. It may expand one MCSP operation into multiple host operations.
 
-This allows ADD, AND, comparison relations, protocol actions and device commands to be described as operation constructs rather than privileged language keywords.
+## Recursive closure graph
 
-## Exception model
+Current candidate graph:
 
-    DEFINE EXCEPTION {
-      kind: outcome
-      inputs: transition, cause, observable-state
-      outputs: exception
-      transition: classify a transition that did not produce its normal completed post-state
-    }
+    CONSTRUCT
+      -> IDENTITY
+          -> SCOPE
+              -> RELATION
+      -> RELATION
+          -> CONSTRUCT
+      -> STATE
+          -> OBSERVE
+              -> ORDER
+                  -> RELATION
+      -> TRANSITION
+          -> OPERATION
+              -> RULE
+                  -> RELATION
+          -> CONSTRAINT
+              -> REQUIRE
+                  -> RELATION
+          -> OUTCOME
+              -> STATE
 
-Host trap vectors, exception levels, fault codes and handlers are realization mappings.
+The graph is finite structurally, but semantic circularity remains under examination.
 
-## Convention model
+## Circularity findings
 
-    DEFINE CONVENTION {
-      kind: relation
-      inputs: participating-constructs, rules
-      outputs: convention
-      transition: establish agreed constraints without changing fundamental semantics
-    }
+### Construct / relation cycle
 
-Calling conventions, ABIs and protocol conventions therefore remain explicit relations rather than universal machine laws.
+CONSTRUCT and RELATION refer to one another. This is not automatically failure: a graph model may be mutually recursive. Closure requires that their distinction be representable without importing an undefined external semantic category.
 
-## Realization model
+### State / observation cycle
 
-    DEFINE REALIZATION {
-      kind: relation
-      inputs: mcsp-construct, host, host-capabilities, mapping
-      outputs: host-realization
-      transition: relate stable MCSP semantics to concrete host mechanisms
-    }
+STATE was previously defined through observations while OBSERVE refers to state. 0.6 therefore weakens STATE to:
 
-    DEFINE CAPABILITY {
-      kind: relation
-      inputs: host, construct-or-feature
-      outputs: supported | unsupported | constrained
-      transition: classify host realization availability
-    }
+    STATE := distinguishable configuration relations of a CONSTRUCT at an ORDER position
 
-## Recursive definition test
+OBSERVE records/accesses that state; it no longer creates the definition of STATE.
 
-The definition form can now be restated in its own terms:
+### Identity / scope cycle
 
-    DEFINE is a CONSTRUCT.
-    each DEFINE field is a RELATION from the defined CONSTRUCT.
-    inputs and outputs are RELATION sets.
-    preconditions and realization_constraints are CONSTRAINT relations.
-    transition is a TRANSITION relation.
-    outcomes are OUTCOME constructs.
-    identity is an IDENTITY relation.
-    kind is a RELATION to another CONSTRUCT.
+IDENTITY depends on SCOPE and SCOPE contains identities. Treat SCOPE as a relation domain; identity distinction is evaluated under that relation. Further formal testing is required.
 
-This removes the 0.4 assumption that DEFINE must remain an external privileged schema.
+## 0.6 residue
 
-## Remaining residue
+Remaining semantic questions are reduced to:
 
-The following are still not closed and require further decomposition:
+- distinguishability
+- configuration
+- set/cardinality
+- partition
+- correspondence
+- admissibility
+- occurrence
+- preservation/equivalence of semantic relations
+- primitive graph termination criterion
 
-- representation
-- observation
-- unit
-- extent
-- scope
-- coordinates
-- mapping
-- ordering
-- requirement
-- event
-- rule
-- cause
-- logical observation position
-- availability
+These are deeper mathematical/logical concepts. They must not be silently declared machine primitives merely to force closure.
 
-The existence of this residue means MCSP self-description is **not yet closed**.
+## 0.6 qualification
 
-## 0.5 closure result
+**PASS:** 0.5 residue terms representation, observation, unit, extent, scope, coordinates, mapping, ordering, requirement, event, rule, cause, logical observation position and availability now have explicit MCSP decompositions.
 
-**PASS:** DEFINE can provisionally describe DEFINE structurally using CONSTRUCT and RELATION.
+**PASS:** ADDRESS is separated from POSITION; WIDTH is reduced to EXTENT; scheduling is reduced to ORDER + CONSTRAINT.
 
-**NOT YET QUALIFIED:** the primitive vocabulary has not reached finite semantic closure because the remaining residue above still carries meaning not yet expressed in MCSP.
+**PASS:** a state/observation definitional cycle was identified and reduced.
 
-Next: decompose representation/observation/extent/ordering/mapping, then test whether the residue shrinks or merely renames external assumptions.
+**OPEN:** finite semantic closure has moved to a smaller foundational residue involving distinction, configuration, collection/partition, correspondence, admissibility and semantic preservation.
+
+**Qualification remains:** Under Conditional Experiment.
