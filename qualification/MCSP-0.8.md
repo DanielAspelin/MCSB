@@ -1,61 +1,69 @@
-# MCSP 0.8 Qualification
+# MCSP 0.9 C Bootstrap Qualification
 
 **State:** Under Conditional Experiment
 
-## Implemented evidence
+## Transversion
 
-MCSP 0.8 introduces:
-- `model/foundation-0.8.json`: machine-readable bootstrap graph;
-- `tools/mcsp-closure.js`: deterministic Node.js closure evaluator.
+MCSP 0.8 used `tools/mcsp-closure.js` as an experimental JavaScript/Node.js closure evaluator.
 
-The JSON format is explicitly a **bootstrap carrier**. It is not claimed to be the eventual MCSP-native encoding.
+MCSP 0.9 establishes `tools/mcsp-closure.c` as the canonical bootstrap evaluator.
 
-## Evaluator gates
+The 0.8 JavaScript implementation remains recoverable through Git history but is removed from the active source tree. JavaScript/Node.js is no longer an MCSP bootstrap dependency.
 
-The evaluator fails when:
-- a foundation node lacks a definition;
-- a dependency is not present in the admitted graph;
-- dependency data is malformed;
-- a required foundation node cannot be traversed.
+## Boundaries
 
-Explicit cycles are recorded rather than treated automatically as failure because MCSP permits mutually recursive graph definitions when their interpretation is itself closed.
+C is an implementation carrier only. C syntax, types, memory model and compiler behavior do not define MCSP semantics.
 
-## Repository-level static qualification
+Assembly realization boundaries are explicitly separate:
 
-The committed 0.8 graph contains:
-- 17 foundation nodes;
-- 17 foundation definitions;
-- 26 derived definitions;
-- 0 unresolved external dependency names.
+- ISA semantics;
+- Netwide Assembler (NASM) realization where applicable;
+- GNU assembler (GAS) realization where applicable;
+- concrete machine encoding.
 
-This is a static graph-integrity PASS.
+NASM and GAS are not treated as interchangeable semantic authorities.
 
-## Runtime qualification
+## C evaluator behavior
 
-A runtime execution of:
+The C evaluator:
+- contains the admitted bootstrap dependency graph explicitly;
+- verifies every foundation node has a definition;
+- rejects unresolved dependency names;
+- traverses recursive dependencies;
+- records explicit cycles;
+- verifies every foundation node is reached;
+- emits deterministic PASS/FAIL JSON-like output;
+- exits 0 on structural bootstrap PASS and nonzero on failure.
 
-    node tools/mcsp-closure.js model/foundation-0.8.json
+It requires only a conforming C implementation plus the standard headers used by the source. No Node.js or external JSON library is required.
 
-must return exit status 0 and a report with `"result": "PASS"` before runtime structural closure is qualified.
+## Build qualification command
 
-Runtime execution has not been asserted merely from repository construction.
+A later runtime environment should build with strict diagnostics, for example:
 
-## Future systemd-container qualification
+    cc -std=c11 -Wall -Wextra -Wpedantic -Werror -O2 \
+      -o mcsp-closure tools/mcsp-closure.c
 
-A later, separately authorized qualification stage should execute the same evaluator inside one of the user's systemd containers.
+Then execute:
 
-That future test should preserve:
-- repository commit/SHA under test;
-- Node.js/runtime version;
-- container OS/image identity;
-- exact command and exit status;
-- stdout report;
-- dependency/runtime failures;
-- host architecture;
-- reconstruction instructions.
+    ./mcsp-closure
 
-Container success will be evidence of reproducible realization, not by itself proof of semantic self-description.
+Expected qualification:
+- compiler exit 0;
+- evaluator exit 0;
+- `"result": "PASS"`;
+- no unresolved dependency diagnostics.
 
-## Next
+## Current qualification
 
-After runtime structural closure passes, add host realization records and exercise PRESERVE for representative COPY, READ, WRITE, ADD and BRANCH mappings across x86-64, AArch64 and RISC-V.
+Repository transversion: PASS.
+
+C source construction: complete.
+
+Runtime C compilation/execution: not yet asserted in this repository-only operation.
+
+Systemd-container qualification: intentionally deferred until separately requested.
+
+## Recovery
+
+The JavaScript 0.8 implementation is retained in Git history. Reversion is possible through repository lineage without retaining JavaScript in the current working tree.
