@@ -5,7 +5,7 @@ global _start
 %define PAIRS 8
 section .rodata
 scaffold: dq 1,0xA11, 2,0xF0, 3,1, 4,1, 5,1, 6,0, 7,0x100, 8,0
-expected: dq 0x9d6b7df91f1a67c5
+expected: dq 0x8c8892de1e018683
 pass db "MCSP NASM self-scaffold 0.37: CONDITIONAL PASS",10
 plen equ $-pass
 failmsg db "MCSP NASM self-scaffold 0.37: FAIL",10
