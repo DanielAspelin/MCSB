@@ -70,16 +70,18 @@ section .text
 ; get(role=rsi, record=rdi) => rax=value, CF=0; CF=1 absent
 get:
  xor ecx,ecx
+ mov r8,rdi
 .g:
  cmp ecx,PAIRS
  je .missing
- mov rax,[rdi+rcx*16]
+ mov rax,[r8]
  cmp rax,rsi
  je .found
+ add r8,16
  inc ecx
  jmp .g
 .found:
- mov rax,[rdi+rcx*16+8]
+ mov rax,[r8+8]
  clc
  ret
 .missing:
