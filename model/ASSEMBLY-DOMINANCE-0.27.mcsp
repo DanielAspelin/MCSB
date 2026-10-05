@@ -1,0 +1,225 @@
+# MCSP Assembly Dominance and Bootstrap Policy 0.27
+
+Status: Constructive architecture
+Qualification: Under Conditional Experiment
+Parent: Propagation 0.26
+
+## 1. Architectural rule
+
+MCSP is an ASSEMBLY-DOMINANT project.
+
+Assembly-level realization is the primary implementation direction for MCSP.
+
+C is admitted only as a temporary testing stud for bootstrap experiments, qualification tooling, comparison, and reconstruction assistance.
+
+C SHALL NOT become:
+- semantic authority;
+- the definition of MCSP;
+- a required permanent runtime;
+- the canonical representation;
+- a hidden portability layer;
+- a substitute for assembly realization;
+- a dependency that MCSP cannot ultimately remove.
+
+## 2. Meaning versus assembly
+
+Assembly dominance does not mean a particular assembler defines MCSP semantics.
+
+The direction remains:
+
+    determinate condition
+      -> qualified semantic pre-settlement
+      -> normalized scaffold
+      -> assembly realization
+      -> machine realization
+      -> projection
+      -> qualification
+
+MCSP meaning is pre-settled above a particular assembly spelling.
+
+Assembly is the dominant realization medium.
+
+## 3. Assembly plurality
+
+MCSP SHALL NOT collapse distinct assembler/ISA boundaries merely for implementation convenience.
+
+Examples:
+
+    x86-64 / NASM
+    x86-64 / GAS
+    AArch64 / GAS
+    RISC-V / GAS
+
+Each is a distinct realization witness where applicable.
+
+A qualified canonical may propagate into each realization branch while assembler spelling, registers, encodings, instruction sequences, and ABI details differ.
+
+## 4. C testing stud
+
+A C implementation may temporarily:
+- encode bootstrap scaffold fixtures;
+- normalize structural records;
+- test renaming invariance;
+- test material-order sensitivity;
+- test dimension-status sensitivity;
+- test propagation;
+- inject contradictions;
+- verify deterministic reconstruction;
+- compare assembly witness projections.
+
+Any result obtained through C is qualification evidence only.
+
+It does not establish that C concepts are MCSP primitives.
+
+## 5. Removal obligation
+
+Every C testing stud SHALL have an explicit removal or replacement path.
+
+For each material C capability, record:
+
+    C_TEST_FUNCTION
+    SEMANTIC_OBLIGATION
+    ASSEMBLY_REPLACEMENT_TARGET
+    QUALIFICATION_REQUIRED
+    REMOVAL_STATE
+
+Provisional removal states:
+
+    TEMPORARY
+    ASSEMBLY_CANDIDATE
+    ASSEMBLY_REIMPLEMENTED
+    CROSS_QUALIFIED
+    C_REMOVABLE
+    REMOVED
+
+These are project/qualification statuses, not MCSP kernel ontology.
+
+## 6. No C leakage
+
+A semantic rule discovered while testing in C must be represented independently of C before it can become an MCSP semantic commitment.
+
+C types, structs, pointers, integer widths, calling conventions, object model, compiler behavior, standard library behavior, and source syntax SHALL NOT silently leak into MCSP semantics.
+
+## 7. Assembly-first implementation order
+
+For executable MCSP development:
+
+    semantic obligation
+      -> minimal structural specification
+      -> assembly realization design
+      -> optional temporary C test stud
+      -> assembly implementation
+      -> independent comparison
+      -> qualification
+      -> remove C dependency where qualified
+
+C may accelerate testing but SHALL NOT reverse this authority order.
+
+## 8. Structural bootstrap 0.27 target
+
+The first structural bootstrap implementation SHALL define fixtures independently of documentary names.
+
+Required tests:
+
+    N1 renaming invariance
+    N2 irrelevant ordering invariance
+    N3 material ordering sensitivity
+    N4 OPEN versus PRESET sensitivity
+    N5 qualification sensitivity
+    N6 unresolved-residue sensitivity
+
+Propagation tests:
+
+    P1 compatible inheritance
+    P2 qualified refinement
+    P3 explicit narrowing
+    P4 contradiction stops affected propagation
+    P5 OPEN remains OPEN
+    P6 realization-defined branches may diverge
+    P7 canonical invariant survives compatible branches
+    P8 unresolved residue propagates visibly
+    P9 failed qualification never propagates as PASS
+    P10 lineage reconstructs deterministically
+
+## 9. First assembly targets
+
+The initial assembly qualification path SHOULD begin with:
+
+    x86-64 NASM
+
+followed independently by:
+
+    x86-64 GAS
+
+Then:
+
+    AArch64 GAS
+    RISC-V GAS
+
+The first two provide same-ISA/different-assembler evidence.
+The later witnesses provide materially different ISA evidence.
+
+No witness is semantic authority.
+
+## 10. Assembly scaffold propagation
+
+A normalized semantic scaffold may propagate into an assembly branch.
+
+The branch settles only dimensions required for that realization.
+
+Example:
+
+    canonical scaffold
+        |
+        +-- x86-64 / NASM
+        +-- x86-64 / GAS
+        +-- AArch64 / GAS
+        +-- RISC-V / GAS
+
+OPEN dimensions SHALL remain OPEN until the branch explicitly requires settlement.
+
+## 11. Self-description direction
+
+The long-term target is not:
+
+    English -> C -> MCSP
+
+The target is:
+
+    MCSP-described semantic scaffold
+      -> MCSP-qualified assembly realization
+      -> machine realization
+      -> MCSP-qualified projection
+
+C exists only as temporary construction support while this path is being established.
+
+## 12. Qualification boundary
+
+At 0.27:
+
+Assembly dominance:
+    ESTABLISHED as architectural policy.
+
+C:
+    TEMPORARY TESTING STUD.
+
+Structural normalizer:
+    NOT YET RUNTIME QUALIFIED.
+
+Assembly normalizer:
+    NOT YET IMPLEMENTED.
+
+Host independence:
+    UNVERIFIED.
+
+Hardware independence:
+    UNVERIFIED.
+
+Pre-semantic kernel:
+    DETERMINATE CONDITION.
+
+## 13. Next implementation checkpoint
+
+Implement the bootstrap normalization fixtures and comparison contract, then produce the first x86-64 NASM realization.
+
+A C normalizer may be used temporarily as an independent test oracle/stud, but the assembly implementation is the primary implementation artifact and must be capable of qualification without permanent C dependency.
