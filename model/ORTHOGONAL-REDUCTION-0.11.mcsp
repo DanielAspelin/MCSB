@@ -1,0 +1,325 @@
+# MCSP Orthogonal Reduction — 0.11
+
+**Status:** Constructive reduction
+**Qualification:** Under Conditional Experiment
+**Parent:** Semantic Geometry 0.10
+
+## Purpose
+
+Test the 0.10 candidate orthogonals rather than assuming them primitive.
+
+Candidate set:
+
+    identity
+    value
+    position
+    extent
+    state
+    transition
+    order
+    scope
+    constraint
+    outcome
+    representation
+    realization
+
+## Independence test
+
+For candidate dimensions A and B, ask:
+
+    Can two admitted descriptions differ in A
+    while preserving B and every other declared semantic relation?
+
+If yes, A has evidence of independence from B.
+
+If no, determine whether:
+1. A is derivable from B/others;
+2. B is derivable from A/others;
+3. both depend on a hidden primitive;
+4. the apparent coupling is only a realization constraint.
+
+Pairwise independence is necessary but not sufficient for a minimal basis.
+
+## Reduction
+
+### IDENTITY — retain as primitive candidate
+
+Identity answers which distinguishable semantic subject a relation concerns.
+
+Two constructs may have equal value, position, extent, state and representation while retaining different identities.
+
+    same value != same identity
+
+Status: ORTHOGONAL CANDIDATE.
+
+Dependency:
+    IDENTITY requires distinction within SCOPE.
+
+### VALUE — reduce toward STATE + REPRESENTATION
+
+A value is not free-standing meaning. In 0.6:
+
+    VALUE := CONSTRUCT distinguished by REPRESENT
+             and bounded by WIDTH.
+
+Two different representations may correspond to the same semantic value.
+
+This makes VALUE look derived rather than foundational.
+
+Provisional reduction:
+
+    VALUE(x, scope)
+      := semantic distinction obtained by OBSERVE/REPRESENT
+         over selected STATE relations within scope.
+
+Status: DERIVED CANDIDATE.
+
+Open issue: whether semantic quantity/content requires a primitive independent of representation.
+
+### POSITION — retain as primitive candidate
+
+Position answers where a distinction lies within a declared space/reference relation.
+
+The same identity/value may occur at different positions; a position may contain different values over order.
+
+    identity != position
+    value != position
+
+Status: ORTHOGONAL CANDIDATE.
+
+### EXTENT — derive from POSITION + ORDER/PARTITION + UNIT
+
+Extent describes bounded separation/range over positions under a unit/partition relation.
+
+It does not need independent semantic authority if boundaries and the space relation are already representable.
+
+    EXTENT := relation between boundary POSITIONs under UNIT/PARTITION
+
+Status: DERIVED.
+
+### STATE — retain, but not as a coordinate axis
+
+STATE is a distinguishable CONFIGURATION at an ORDER position.
+
+It composes identities, relations and configurations. It is not independent in the same sense as POSITION or ORDER.
+
+    STATE := CONFIGURATION(construct, relations, order-position)
+
+Status: COMPOSITE FOUNDATION CANDIDATE, NOT ORTHOGONAL AXIS.
+
+### TRANSITION — retain, but as relation between states
+
+TRANSITION relates admitted pre-state and post-state under an operation/rule/constraints.
+
+    TRANSITION := relation(pre-state, post-state, rule, constraints)
+
+It is structurally necessary for change, but not an independent coordinate.
+
+Status: COMPOSITE FOUNDATION CANDIDATE.
+
+### ORDER — retain as primitive candidate
+
+Order distinguishes before/equal/after or another declared precedence without requiring physical time.
+
+The same identities, values and positions can have different order relations.
+
+Status: ORTHOGONAL CANDIDATE.
+
+### SCOPE — retain as primitive candidate
+
+Identity, observation, equivalence and admissibility are meaningful only relative to a declared domain.
+
+The same pair can be equivalent in one scope and distinguishable in another.
+
+Status: ORTHOGONAL CANDIDATE.
+
+### CONSTRAINT — reduce toward RULE + CONDITION
+
+A constraint is a relation limiting admissible states/transitions.
+
+It does not appear to require its own coordinate axis.
+
+    CONSTRAINT := CONDITION participating in ADMIT/RULE
+
+Status: DERIVED/ROLE CANDIDATE.
+
+### OUTCOME — derive from STATE + TRANSITION + CLASSIFICATION
+
+Outcome is a classification of a transition's resulting state/condition.
+
+Normal completion, exception, unsupported and implementation-defined are not a separate dimension of existence.
+
+    OUTCOME := classified relation(TRANSITION, resulting STATE/CONDITION)
+
+Status: DERIVED.
+
+### REPRESENTATION — derive as relation
+
+Representation connects a semantic subject to a state/configuration under a mapping rule.
+
+The same semantics may have many representations.
+
+    REPRESENT := RELATION(source, target-state, mapping-rule)
+
+Representation is important but relational, not a primitive axis.
+
+Status: DERIVED RELATION.
+
+### REALIZATION — derive as constrained preservation mapping
+
+Realization connects semantic relations to host relations and must satisfy PRESERVE.
+
+    REALIZATION := MAP + CAPABILITY + PRESERVE + CONSTRAINTS
+
+Status: DERIVED RELATION.
+
+## Provisional orthogonal basis
+
+After first reduction, the strongest independent-axis candidates are:
+
+    IDENTITY
+    POSITION
+    ORDER
+    SCOPE
+
+These answer four different questions:
+
+    IDENTITY  — which distinction?
+    POSITION  — where in a declared space?
+    ORDER     — in what precedence relation?
+    SCOPE     — within what domain of distinction?
+
+They can be visualized as semantic coordinates, but no physical geometry is implied.
+
+## Hidden primitive: RELATION
+
+The reduction exposes a deeper issue.
+
+IDENTITY, POSITION, ORDER and SCOPE are all expressed through relations. Therefore RELATION is not merely another axis. It is the connective substrate that permits axes to exist.
+
+Provisional structural basis:
+
+    CONSTRUCT
+    RELATION
+    DISTINGUISH
+
+with semantic coordinate roles:
+
+    IDENTITY
+    POSITION
+    ORDER
+    SCOPE
+
+and composites:
+
+    CONFIGURATION
+    STATE
+    TRANSITION
+    RULE
+    CONDITION
+
+and derived systems:
+
+    VALUE
+    EXTENT
+    CONSTRAINT
+    OUTCOME
+    REPRESENTATION
+    REALIZATION
+
+## Bit-space interpretation
+
+A physical bit need not be a primitive semantic value.
+
+A bit can instead be modeled as:
+
+    distinguishable POSITION
+      within a representation SCOPE
+      whose STATE admits distinguishable alternatives
+      under an ORDER relation.
+
+Then:
+
+    "0" and "1"
+
+are representation labels for distinguishable states, not universal semantic atoms.
+
+This prevents binary machine representation from defining MCSP semantics.
+
+## Assembly-space consequence
+
+An ISA/assembler mapping supplies a realization topology over machine positions/states.
+
+An instruction encoding identifies a region/configuration in that realization space whose interpretation admits one or more transitions.
+
+MCSP semantics can therefore remain invariant while:
+- bit positions change;
+- opcode width changes;
+- register numbering changes;
+- mnemonic changes;
+- NASM/GAS syntax changes;
+- instruction sequence length changes.
+
+## Candidate minimal equation
+
+A semantic observation can provisionally be expressed as:
+
+    OBSERVATION =
+      DISTINGUISH(
+        RELATION(
+          IDENTITY,
+          POSITION,
+          ORDER,
+          SCOPE))
+
+This is intentionally not yet declared final syntax.
+
+Change is then:
+
+    TRANSITION =
+      RELATION(
+        STATE_before,
+        STATE_after,
+        ORDER,
+        SCOPE,
+        RULE)
+
+where each STATE is a distinguishable configuration of relations.
+
+## Counterexample requirements
+
+Before accepting the basis, attempt to break it.
+
+1. Find a meaningful semantic distinction that cannot be expressed using identity/position/order/scope plus relation/state.
+2. Find two descriptions that require VALUE to be primitive rather than derived.
+3. Find an EXTENT that cannot be reconstructed from boundaries/partition/unit relations.
+4. Find a CONSTRAINT that cannot be represented as a condition on admissibility.
+5. Find an OUTCOME requiring more than classification of transition/state.
+6. Find a REPRESENTATION that is not a relation/mapping.
+7. Find a REALIZATION that is not a constrained preservation mapping.
+8. Test whether SCOPE itself can be reduced to COLLECTION + RELATION without circular semantic loss.
+9. Test whether POSITION can be reduced to ORDER + SCOPE.
+10. Test whether IDENTITY can be reduced to DISTINGUISH + SCOPE.
+
+## Qualification result
+
+0.11 does **not** declare a final primitive set.
+
+It establishes:
+
+    strong axis candidates:
+      IDENTITY POSITION ORDER SCOPE
+
+    connective substrate:
+      RELATION
+
+    distinction mechanism:
+      DISTINGUISH
+
+    composite structures:
+      CONFIGURATION STATE TRANSITION RULE CONDITION
+
+    first-pass derived:
+      VALUE EXTENT CONSTRAINT OUTCOME REPRESENTATION REALIZATION
+
+Next qualification must attack IDENTITY, POSITION, ORDER and SCOPE themselves.
