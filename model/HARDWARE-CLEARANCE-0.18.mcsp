@@ -1,0 +1,178 @@
+# MCSP Hardware Clearance and Boundary Reduction 0.18
+
+Status: Constructive architecture experiment
+Qualification: Under Conditional Experiment
+Parent: Qualification Residue Reduction 0.17
+
+## Hardware-clearance objective
+
+MCSP pursues a hardware-ready approach at the software semantic level.
+
+The objective is HARDWARE CLEARANCE:
+
+    remove unnecessary software-level assumptions
+    that prevent a semantic construct from being realized
+    across differing machine, ISA, bus, device, firmware,
+    assembler, ABI, or operating-system environments.
+
+Hardware clearance does not mean:
+- software is hardware;
+- hardware differences disappear;
+- one universal opcode exists;
+- one assembler defines semantics;
+- device-specific behavior is ignored.
+
+It means host-specific commitments are deferred to explicit realization boundaries unless they are materially required by the semantic invariant.
+
+## Clearance direction
+
+    determinate condition
+      -> qualified interpretation
+      -> canonical semantic relation
+      -> extension semantic relation
+      -> realization boundary
+      -> hardware-specific realization
+
+The semantic side SHALL NOT import hardware-specific meaning merely for implementation convenience.
+
+The realization side SHALL NOT silently redefine qualified semantic meaning.
+
+## Boundary attack
+
+0.17 left INTERPRETATION BOUNDARY as the main residue.
+
+Question:
+
+    Is BOUNDARY intrinsic to the kernel?
+
+Current result:
+
+    No evidence requires BOUNDARY before interpretation.
+
+A determinate condition may remain uninterpreted without declaring what participates in a semantic comparison.
+
+BOUNDARY becomes necessary when an interpretation selects what is relevant.
+
+Therefore BOUNDARY is provisionally an operation/result of interpretation, not a pre-semantic primitive.
+
+## Selection hypothesis
+
+Interpretation necessarily selects.
+
+To interpret is to make some determination relevant to a claim while leaving other determination irrelevant or unresolved.
+
+This selection establishes a boundary.
+
+Provisional:
+
+    INTERPRETATION
+      -> SELECTION
+      -> BOUNDARY
+      -> SCOPE
+
+But SELECTION must not be promoted to kernel ontology without reduction.
+
+## Boundary as derived relation
+
+A boundary can be represented after interpretation as the separation between:
+
+    participating determination
+and
+    non-participating / unresolved determination
+
+The separation need not be spatial, temporal, binary, or physical.
+
+Thus BOUNDARY is derived from the applicability of an interpretation.
+
+## Scope
+
+SCOPE is the interpreted semantic expression of the applicable boundary.
+
+Provisional reduction:
+
+    BOUNDARY := applicability limit of an interpretation
+    SCOPE    := semantic representation of that limit
+
+Neither is required to define the pre-semantic condition.
+
+## Hardware-clearance test
+
+A semantic construct is more hardware-cleared when its invariant can remain unchanged while realization-specific choices vary outside its declared applicability boundary.
+
+Candidate clearance test:
+
+Given semantic interpretation S and realizations H1 and H2:
+
+    if PROJECT(H1, B) preserves S
+    and PROJECT(H2, B) preserves S
+    while H1 and H2 differ materially outside B,
+    then those differences are not semantic dependencies of S.
+
+This is evidence of clearance, not proof of universal realizability.
+
+## Clearance levels
+
+Provisional qualification vocabulary:
+
+    HC0 — host-bound
+    HC1 — representation-cleared
+    HC2 — assembler-cleared
+    HC3 — ISA-cleared
+    HC4 — platform/OS-cleared
+    HC5 — device-family-cleared
+    HC6 — cross-domain candidate
+
+These are qualification labels, not ontology and not an assertion that every semantic construct should reach HC6.
+
+A construct may legitimately remain hardware-specific.
+
+## NASM / GAS
+
+NASM and GNU assembler remain separate realization witnesses.
+
+Equivalent MCSP semantics may be independently realized through either where applicable.
+
+Assembler agreement is useful evidence but does not define semantic equivalence.
+
+## Driver consequence
+
+A driver is a realization/extension boundary that can progressively clear software semantics toward hardware by declaring:
+- relevant determinate conditions;
+- the applicability boundary;
+- invoked canonical semantics;
+- device-specific extensions;
+- realization mappings;
+- preserved invariants.
+
+This minimizes the requirement for universal pre-written device semantics.
+
+## Kernel result
+
+After the boundary attack:
+
+    PRE-SEMANTIC KERNEL CANDIDATE:
+        DETERMINATE CONDITION
+
+    FIRST INTERPRETATION:
+        establishes applicability/boundary
+
+    SEMANTIC LAYERS:
+        derive scope, relations, state, transition,
+        canonicalization, topology, taxonomy,
+        orthogonal dimensions and realizations.
+
+BOUNDARY is therefore removed from the current kernel candidate.
+
+## Remaining attack
+
+The principal unresolved term is now INTERPRETATION itself.
+
+The next reduction must test whether interpretation can be expressed as a qualified transformation/projection of determination without presupposing semantics.
+
+## Constructive conclusion
+
+MCSP 0.18 retains DETERMINATE CONDITION as the smallest current pre-semantic kernel candidate.
+
+Hardware clearance is established as an architectural objective and qualification direction.
+
+No Permanent Seal is asserted.
