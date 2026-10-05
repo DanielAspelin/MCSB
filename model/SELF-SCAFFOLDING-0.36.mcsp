@@ -1,0 +1,78 @@
+# MCSP Self-Scaffolding 0.36
+
+Status: Constructive self-description experiment
+Qualification: Under Conditional Experiment
+Parent lineage: 0.31 normal form, 0.26 propagation, 0.25 structural scaffold
+
+## Objective
+
+Determine whether an MCSP scaffold can carry and qualify the structural obligations needed to propagate a successor scaffold without documentary names deciding semantic equivalence.
+
+This checkpoint does not claim semantic closure.
+
+## Structural role pre-settlement
+
+The experiment pre-settles a finite structural vocabulary using numeric bootstrap identities:
+
+    0x01 material invariant
+    0x02 applicability
+    0x03 dimension status
+    0x04 qualification
+    0x05 unresolved residue
+    0x06 lineage parent
+    0x07 lineage child
+    0x08 propagation event
+
+These numbers are bootstrap representation tokens. Their numeric values are not universal semantic identities.
+
+The material commitment is the qualified relation among the roles, not their English documentary names.
+
+## Self-scaffold record
+
+A self-scaffold is projected as ordered role/value pairs:
+
+    role,value
+
+The role sequence is itself carried by the scaffold fixture rather than inferred from source variable names.
+
+A successor qualifies only if:
+
+1. every required structural role remains present;
+2. material invariant remains compatible;
+3. applicability is inherited unless an explicit qualified narrowing event exists;
+4. OPEN remains OPEN unless an explicit qualified settlement event exists;
+5. unresolved residue is not silently discarded;
+6. failed qualification does not propagate;
+7. lineage identifies the declared parent and successor;
+8. normalization produces the declared structural fingerprint.
+
+## Name independence
+
+Documentary names, comments, assembler labels and source symbol spelling SHALL NOT participate in the normalized projection.
+
+Renaming documentary source labels while retaining role/value structure must not change the projection.
+
+## Self-propagation boundary
+
+The experiment is self-scaffolding because the structural roles required to judge propagation are represented inside the scaffold being processed.
+
+It is not yet full self-description because:
+- the evaluator procedure is still authored externally in assembly;
+- bootstrap numeric role tokens are admitted;
+- interpretation of the initial role contract is pre-settled by this version;
+- the kernel is not yet encoded wholly by MCSP-native structures.
+
+## Adversarial cases
+
+S1 compatible successor: PASS expected.
+S2 material invariant mutation: FAIL expected.
+S3 residue loss: FAIL expected.
+S4 applicability narrowing without event: FAIL expected.
+S5 applicability narrowing with qualified event: PASS expected.
+S6 OPEN->PRESET without settlement event: FAIL expected.
+S7 OPEN->PRESET with qualified settlement event: PASS expected.
+S8 failed successor qualification: FAIL expected.
+S9 documentary-label independence: structural projection unchanged.
+S10 deterministic reconstruction: repeated normalization identical.
+
+Kernel remains DETERMINATE CONDITION.
