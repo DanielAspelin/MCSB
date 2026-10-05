@@ -1,0 +1,386 @@
+# MCSP Semantic Geometry — 0.10
+
+**Status:** Constructive specification  
+**Qualification:** Under Conditional Experiment
+
+## Thesis
+
+MCSP does not model assembly as the semantic foundation.
+
+A concrete machine is treated as a **realization space** containing distinguishable bit/state positions and permitted transitions. Assembly languages are coordinate/notation systems projected onto portions of that space.
+
+High-level semantics are not "farther instructions." They are relations over sets of possible machine states and transitions.
+
+This establishes five deliberately separate concerns:
+
+    SEMANTICS
+    CANONICALS
+    ORTHOGONALS
+    TOPOLOGIES
+    TAXONOMIES
+
+They interact, but none substitutes for another.
+
+---
+
+## 1. Semantics — meaning
+
+A semantic construct states what relation must hold between admitted pre-state, transition and post-state.
+
+    SEMANTIC {
+      admitted_pre_state
+      required_relation
+      allowed_post_state
+      allowed_outcome
+      observation_scope
+      constraints
+    }
+
+Semantics do not prescribe:
+- mnemonic;
+- instruction count;
+- assembler;
+- register name;
+- opcode;
+- physical bit position;
+- calling convention;
+- compiler strategy.
+
+Example:
+
+    COPY(A, B)
+
+means that under the declared observation scope the destination state corresponds to the source value after completion, subject to declared constraints.
+
+Whether this becomes x86 MOV, an AArch64 alias/operation, a RISC-V ADDI convention, multiple instructions, firmware or emulation belongs to realization.
+
+---
+
+## 2. Canonicals — stable identity
+
+A canonical is the single admitted MCSP identity for a semantic concept within a version/scope.
+
+    CANONICAL(concept, scope) -> identity
+
+Canonicalization prevents host synonyms from multiplying semantic primitives.
+
+Examples:
+
+    COPY      canonical semantic construct
+    READ      canonical semantic construct
+    WRITE     canonical semantic construct
+    POSITION  canonical semantic relation
+    STATE     canonical semantic construct
+
+Host forms such as MOV, LDR, STR, LW, LD, assembler aliases and pseudo-instructions are mappings to canonicals, not competing canonicals.
+
+Canonical does **not** mean "one encoding." It means one semantic identity.
+
+---
+
+## 3. Orthogonals — independent semantic dimensions
+
+An orthogonal is a dimension that can vary without silently redefining another dimension.
+
+Initial candidate orthogonals:
+
+    identity
+    value
+    position
+    extent
+    state
+    transition
+    order
+    scope
+    constraint
+    outcome
+    representation
+    realization
+
+Examples:
+
+- WIDTH should not imply POSITION.
+- POSITION should not imply VALUE.
+- VALUE should not imply REPRESENTATION.
+- ORDER should not imply physical time.
+- ALLOCATION should not imply ownership.
+- WRITE should not imply persistence.
+- READ should not imply mutability.
+- REALIZATION should not redefine SEMANTICS.
+
+Orthogonality is a design discipline. Real machines may couple dimensions; MCSP records such coupling as constraints in the realization.
+
+### Orthogonality test
+
+For candidate dimensions A and B:
+
+1. vary A while holding B's semantic relation stable;
+2. vary B while holding A stable;
+3. if both are representable, keep them orthogonal;
+4. if one necessarily defines the other, record the dependency;
+5. if coupling exists only on some hosts, place coupling in REALIZATION/CONSTRAINT.
+
+---
+
+## 4. Topology — shape of reachable machine state
+
+Topology describes adjacency, reachability and boundaries in a state/position space.
+
+MCSP topology is not limited to geometric physical space.
+
+Candidate topological relations:
+
+    ADJACENT
+    CONNECTED
+    REACHABLE
+    BOUNDED
+    CONTAINED
+    DISJOINT
+    OVERLAP
+    PATH
+    REGION
+    INTERFACE
+
+Examples:
+
+- consecutive bits may be adjacent in a representation space;
+- addresses may identify positions in an address-space topology;
+- control-flow edges form a control topology;
+- memory mappings form a translation topology;
+- buses/devices form an interconnect topology;
+- packet routes form a network topology;
+- state transitions form an execution topology.
+
+A machine instruction is therefore a possible edge or transformation over machine state, not the definition of the semantic space itself.
+
+---
+
+## 5. Taxonomy — classification
+
+Taxonomy answers "what class of construct is this?" It must not define what the construct means.
+
+Candidate top-level taxonomy:
+
+    ENTITY
+      CONSTRUCT
+      STATE
+
+    RELATION
+      IDENTITY
+      POSITION
+      ORDER
+      SCOPE
+      REPRESENTATION
+      CORRESPONDENCE
+
+    TRANSITION
+      COPY
+      READ
+      WRITE
+      COMPUTE
+      TRANSFER
+      ALLOCATE
+      RELEASE
+      SIGNAL
+      CONTROL
+
+    CONDITION
+      CONSTRAINT
+      CAPABILITY
+      OUTCOME
+
+    REALIZATION
+      ISA
+      ASSEMBLER
+      ABI
+      FIRMWARE
+      DEVICE
+      PROTOCOL
+      EMULATOR
+
+Taxonomic membership may be multiple where justified. Taxonomy is an indexing/classification structure, not a forced inheritance hierarchy.
+
+---
+
+## Assembly as realization space
+
+For a concrete architecture, define a machine realization space:
+
+    MACHINE_SPACE {
+      representable_bit_states
+      architectural_state_positions
+      admissible_state_configurations
+      transition_rules
+      exception_outcomes
+      ordering_rules
+      realization_constraints
+    }
+
+Machine code selects transitions in this space.
+
+Assembly is a human/tool-facing representation of selections and operands for those transitions:
+
+    assembler text
+        -> assembler interpretation
+            -> encoding
+                -> machine transition selection
+
+Therefore:
+
+    assembly != machine semantics
+    mnemonic != canonical
+    opcode != semantic identity
+    register name != abstract position
+    encoding != meaning
+
+### Bit space
+
+At the encoding boundary, an instruction can be viewed as a bounded region of bit-state whose interpretation under an ISA selects a transition relation.
+
+    BIT_REGION + ISA_INTERPRETATION
+        -> selected machine transition
+
+The same bit pattern under another interpretation need not have the same meaning.
+
+Bits alone therefore carry state, not universal semantics. Meaning arises from declared relations and interpretation scope.
+
+---
+
+## "Outer space" model
+
+The useful analogy is not hierarchy by altitude but containment by possibility.
+
+The concrete machine exposes a large realization/state space.
+
+Within it:
+
+    possible bit configurations
+        contain encodings
+
+    encodings under an ISA
+        select machine transitions
+
+    machine transitions
+        realize semantic relations
+
+    semantic relations
+        compose into larger constructs
+
+High-level semantics therefore describe **regions, paths and invariants across realization space**, rather than simply sitting several syntax layers above assembly.
+
+For example, a semantic TRANSFER may correspond to:
+- one instruction;
+- an instruction sequence;
+- DMA descriptors plus device execution;
+- a network path;
+- firmware mediation.
+
+The semantic invariant can remain stable while the path through realization space changes radically.
+
+---
+
+## Canonical projection
+
+Define:
+
+    PROJECT(realization_state_or_transition, scope)
+        -> canonical semantic relation
+
+and:
+
+    REALIZE(canonical semantic relation, host, constraints)
+        -> realization path
+
+Desired property:
+
+    PROJECT(REALIZE(S, H, C), declared_scope) EQUIVALENT S
+
+for every qualified supported realization.
+
+This is the central MCSP host-independence equation.
+
+---
+
+## Semantic coordinates versus machine coordinates
+
+Machine coordinates include:
+- bit offsets;
+- instruction fields;
+- register numbers;
+- addresses;
+- opcode spaces;
+- privilege levels;
+- device registers;
+- queue entries.
+
+Semantic coordinates include:
+- identity;
+- source/destination relation;
+- value;
+- position;
+- extent;
+- ordering;
+- state;
+- outcome;
+- constraints.
+
+A realization mapping relates semantic coordinates to machine coordinates without identifying them as the same thing.
+
+---
+
+## NASM and GNU assembler boundary
+
+Assembler realization is explicitly below ISA semantics.
+
+    MCSP
+      -> ISA semantic realization
+          -> assembler/tool representation
+              -> object/machine encoding
+
+For x86-family witnesses:
+
+    x86 ISA realization
+      -> NASM representation
+      -> encoding
+
+and independently:
+
+    x86 ISA realization
+      -> GNU assembler representation
+      -> encoding
+
+For AArch64/RISC-V GNU toolchains:
+
+    ISA realization
+      -> GNU assembler representation
+      -> encoding
+
+Assembler directives, pseudo-instructions, aliases, expression syntax, section syntax and object-format behavior remain assembler/toolchain properties.
+
+---
+
+## Design invariants
+
+1. No assembler mnemonic becomes an MCSP primitive merely because it is common.
+2. No binary encoding becomes canonical semantic identity.
+3. Canonicals name semantics, not host spellings.
+4. Orthogonals are kept independent unless a semantic dependency is demonstrated.
+5. Topology describes relation/reachability structure, not taxonomy.
+6. Taxonomy classifies; it does not supply semantics.
+7. Realization maps semantics into machine space.
+8. Projection maps qualified realization observations back to semantic relations.
+9. Host-specific coupling is represented by constraints.
+10. Self-description must eventually represent all five systems using MCSP itself.
+
+---
+
+## Next qualification questions
+
+The next implementation should test:
+
+1. whether the candidate orthogonals are genuinely independent;
+2. whether topology can be represented entirely using RELATION, POSITION, STATE and TRANSITION;
+3. whether taxonomy can remain derived metadata rather than foundational semantics;
+4. whether canonicalization can select one identity without importing natural-language meaning;
+5. whether PROJECT/REALIZE/PRESERVE form a closed host-independence relation;
+6. whether bit-space mappings for representative instructions can be reconstructed independently through NASM and GNU assembler while projecting to the same MCSP canonical.
