@@ -1,0 +1,206 @@
+# MCSP Propagation 0.26
+
+Status: Constructive architecture
+Qualification: Under Conditional Experiment
+Repository lineage: MCSB
+System: MCSP
+Parent: Structural Scaffold Carrier 0.25
+
+## 1. Purpose
+
+MCSP SHALL have its own propagation mechanism.
+
+Propagation carries qualified semantic pre-settlements, scaffold structure, and qualification obligations through compatible descendants without silently copying conclusions into incompatible contexts.
+
+Propagation is semantic lineage, not mere file copying.
+
+## 2. Propagation rule
+
+A qualified settlement may propagate from source scaffold A to descendant scaffold B only when:
+
+    inherited applicability remains valid;
+    governing conditions remain compatible;
+    no material invariant is contradicted;
+    required dependencies remain qualified;
+    dimension status changes are explicit;
+    unresolved residue is not silently discarded.
+
+Otherwise propagation stops at the affected boundary.
+
+## 3. Propagation payload
+
+A propagation may carry:
+
+    qualified commitments
+    canonical invariants
+    applicability
+    dimensional statuses
+    orthogonal constraints
+    topology obligations
+    unresolved residue
+    qualification state
+    realization obligations
+    provenance / lineage
+
+Documentary names are not semantic payload.
+
+## 4. Continuous pre-settlement
+
+Propagation and continuous pre-settlement compose:
+
+    qualified scaffold
+      -> propagate inherited settlements
+      -> add new qualified settlements
+      -> preserve open dimensions
+      -> produce successor scaffold
+
+A successor therefore need not reconstruct every inherited semantic commitment.
+
+## 5. Propagation modes
+
+Provisional modes:
+
+    INHERIT
+        preserve settlement unchanged.
+
+    REFINE
+        add compatible qualified detail.
+
+    NARROW
+        reduce applicability explicitly.
+
+    REALIZE
+        fill a realization-defined dimension without redefining inherited meaning.
+
+    PROJECT
+        expose a qualified semantic view.
+
+    SUSPEND
+        stop reliance on an affected settlement pending qualification.
+
+    REJECT
+        refuse propagation because governing conditions fail.
+
+These are scaffolding/qualification operations, not kernel primitives.
+
+## 6. Non-propagation
+
+The following SHALL NOT automatically propagate:
+
+    unsupported assumptions
+    failed qualification
+    host-specific convenience
+    assembler spelling
+    incidental encoding
+    undocumented side effects
+    unresolved contradiction
+    realization-specific behavior outside inherited applicability
+
+## 7. Contradiction
+
+When a descendant contradicts an inherited qualified commitment:
+
+    stop affected propagation;
+    preserve originating settlement;
+    record contradiction;
+    identify affected descendants;
+    suspend reliance where necessary;
+    successor-version the changed settlement;
+    requalify affected propagation paths.
+
+No silent mutation is permitted.
+
+## 8. Orthogonal propagation
+
+An OPEN orthogonal dimension remains OPEN through propagation unless a descendant explicitly settles or constrains it.
+
+A PRESET dimension remains PRESET unless an explicit successor changes applicability and requalifies the affected semantic structure.
+
+This protects hardware clearance.
+
+## 9. Canonical propagation
+
+Invoking a canonical propagates its qualified material invariant into the invoking scaffold.
+
+Only the canonical's applicable commitments propagate.
+
+Extensions may add commitments but SHALL NOT mutate inherited canonical meaning.
+
+## 10. Hardware independence
+
+Propagation supports hardware independence by allowing the same pre-settled semantic invariant to descend into materially different realization branches.
+
+Example structural pattern:
+
+    canonical semantic scaffold
+      -> x86-64 realization branch
+      -> AArch64 realization branch
+      -> RISC-V realization branch
+      -> DMA/device realization branch
+
+Each branch inherits the same applicable semantic commitments while settling different realization dimensions.
+
+Preservation is qualified per branch.
+
+## 11. Driver propagation
+
+A driver may inherit:
+
+    kernel obligations
+    selected canonicals
+    selected extension semantics
+
+and then settle only device-specific realization dimensions.
+
+The driver need not inherit unrelated taxonomy or semantics.
+
+## 12. Propagation graph
+
+Propagation forms a directed lineage graph of qualified scaffold relations.
+
+The graph SHALL retain:
+- source;
+- successor;
+- propagation mode;
+- inherited commitments;
+- additions;
+- applicability changes;
+- qualification changes;
+- unresolved residue.
+
+Graph direction is lineage direction and does not define pre-semantic ORDER.
+
+## 13. Self-propagation target
+
+Ultimately MCSP SHALL be capable of expressing and qualifying its own propagation rules using MCSP structures.
+
+Self-propagation does not authorize uncontrolled self-modification.
+
+It means MCSP definitions can produce qualified successor scaffolds under their own declared propagation rules.
+
+## 14. Kernel boundary
+
+PROPAGATION is not added to the pre-semantic kernel.
+
+Kernel remains:
+
+    DETERMINATE CONDITION
+
+Propagation begins only after semantic pre-settlements and lineage exist.
+
+## 15. Next implementation
+
+The structural carrier and C normalizer should include propagation tests:
+
+    P1 renaming does not break propagation;
+    P2 compatible refinement inherits qualification;
+    P3 explicit narrowing changes applicability;
+    P4 contradiction stops affected propagation;
+    P5 OPEN remains open unless explicitly settled;
+    P6 realization-defined dimensions may diverge across branches;
+    P7 canonical invariant remains identical across compatible branches;
+    P8 unresolved residue remains visible;
+    P9 failed qualification does not propagate as PASS;
+    P10 lineage is deterministically reconstructible.
+
+No runtime PASS is asserted.
