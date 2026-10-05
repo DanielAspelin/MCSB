@@ -1,0 +1,81 @@
+# MCSP Native Machine Description 0.39
+
+Status: Constructive native-description experiment
+Qualification: Under Conditional Experiment
+Parent: 0.38 assembly/disassembly/decompilation triad
+
+## Objective
+
+Describe one actual machine transition using MCSP structural commitments such that the instruction mnemonic is documentary rather than semantic authority.
+
+The selected realization witness is x86-64 register-register exclusive-or.
+
+## Pre-settled semantic structure
+
+The material transition is:
+
+    destination_before = A
+    source = B
+    destination_after = bitwise-exclusive(A,B)
+
+Material commitments:
+- two input roles exist: destination-before and source;
+- one output role exists: destination-after;
+- output width is 64 material binary positions;
+- each output position is determined independently from corresponding input positions;
+- equal input positions produce 0;
+- unequal input positions produce 1;
+- source is not materially modified by this transition;
+- destination-after replaces destination-before for the destination role.
+
+The documentary token XOR is not required to define the transition.
+
+## Bootstrap structural operation code
+
+For 0.39 only, the per-position relation is represented by bootstrap token:
+
+    0x01 = output distinction iff corresponding input distinctions differ
+
+This numeric token is a representation handle, not universal semantic identity.
+
+Truth-table structural fixture:
+
+    input-A input-B output
+       0       0       0
+       0       1       1
+       1       0       1
+       1       1       0
+
+The table, width, operand roles and preservation obligations are the material description.
+
+## x86-64 realization
+
+One admissible realization is an x86-64 instruction whose decoded machine operation applies the declared relation to a 64-bit destination register and 64-bit source register.
+
+Mnemonic spelling, register spelling and concrete opcode bytes are REALIZATION_DEFINED.
+
+For the qualification fixture, concrete registers and encoding are fixed only to make reconstruction deterministic.
+
+## Round-trip
+
+    MCSP structural description
+    -> assembly realization
+    -> machine encoding
+    -> execution
+    -> disassembly observation
+    -> decompilation/reconstruction
+    -> MCSP structural projection
+
+Pass requires:
+1. predicted destination equals observed destination;
+2. source preservation where declared material;
+3. decoded operation supports the four-row per-position relation;
+4. reconstructed width/roles/relation preserve the original pre-settlement;
+5. a deliberately incompatible relation fails.
+
+## Boundary
+
+0.39 does not establish a general assembler, disassembler or decompiler.
+It establishes a machine-describable structural seed from which those native facilities can grow.
+
+Kernel remains DETERMINATE CONDITION.
