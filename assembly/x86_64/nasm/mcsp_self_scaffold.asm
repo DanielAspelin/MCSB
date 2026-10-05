@@ -189,34 +189,41 @@ _start:
  test eax,eax
  jz fail
  ; expected failures
+ lea rdi,[parent]
  lea rdx,[child_bad_invariant]
  call valid
  test eax,eax
  jnz fail
+ lea rdi,[parent]
  lea rdx,[child_lost_residue]
  call valid
  test eax,eax
  jnz fail
+ lea rdi,[parent]
  lea rdx,[child_narrow_bad]
  call valid
  test eax,eax
  jnz fail
  ; narrowing with event passes
+ lea rdi,[parent]
  lea rdx,[child_narrow_ok]
  call valid
  test eax,eax
  jz fail
  ; settlement without event fails
+ lea rdi,[parent]
  lea rdx,[child_settle_bad]
  call valid
  test eax,eax
  jnz fail
  ; settlement with event passes
+ lea rdi,[parent]
  lea rdx,[child_settle_ok]
  call valid
  test eax,eax
  jz fail
  ; failed qualification cannot propagate
+ lea rdi,[parent]
  lea rdx,[child_failed]
  call valid
  test eax,eax
