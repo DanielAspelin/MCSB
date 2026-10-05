@@ -1,0 +1,224 @@
+# MCSP Determination Boundary 0.15
+
+Status: Constructive kernel experiment
+Qualification: Under Conditional Experiment
+Parent: Anonymous Condition Kernel 0.14
+
+## Problem
+
+0.14 asks:
+
+What makes a CONDITION available without already interpreting it?
+
+MCSP SHALL NOT answer this by assigning an object, name, value, state, type, position, order, taxonomy, or host encoding.
+
+MCSP also SHALL NOT make an unrestricted metaphysical existence claim.
+
+## Determination hypothesis
+
+Introduce a provisional distinction:
+
+CONDITION
+    pre-semantic candidate
+
+DETERMINATION
+    limitation on admissible interpretation
+
+Determination does not state what the condition means.
+
+It only requires that not every interpretation is equally admissible.
+
+This supplies non-vacuity without supplying semantic product.
+
+## Kernel boundary
+
+Provisional kernel relation:
+
+    CONDITION | DETERMINATION
+
+The vertical bar is documentary notation only. It does not yet assert direction, order, identity, causation, or binary opposition.
+
+The intended requirement is:
+
+A condition becomes usable by MCSP only insofar as interpretation is constrained.
+
+No constraint means no qualified semantic claim.
+
+## Negative definition
+
+DETERMINATION is not automatically:
+- truth;
+- value;
+- identity;
+- state;
+- measurement;
+- observation;
+- physical cause;
+- instruction;
+- encoding;
+- name;
+- taxonomy;
+- temporal event.
+
+Any of these may later realize or interpret determination.
+
+## Interpretation
+
+Interpretation may introduce a semantic claim only when its asserted distinctions are supported by determination.
+
+Therefore:
+
+    arbitrary assertion
+        is not qualified interpretation
+
+and:
+
+    pre-written semantic rule
+        is not sufficient by itself
+
+A canonical semantic rule still requires an applicable determination when projected onto a realization.
+
+## Semantic emergence
+
+Provisional dependency:
+
+    CONDITION
+      + DETERMINATION
+        -> admissible distinction
+
+    admissible distinctions
+        -> relations
+
+    qualified relations
+        -> identity / position / order / scope
+
+    interpreted configuration
+        -> STATE
+
+    ordered interpreted conditions
+        -> TRANSITION
+
+    qualified relation graph
+        -> SEMANTICS
+
+This is a hypothesis for reduction, not a mandatory construction sequence.
+
+## Why CONDITION is not STATE
+
+STATE asserts an interpreted configuration.
+
+CONDITION at the kernel boundary does not.
+
+A state can therefore be projected from conditions, but the kernel condition is not forced to inherit the state model.
+
+## Why DETERMINATION is not CONSTRAINT
+
+CONSTRAINT is already an interpreted semantic role limiting admissible states or transitions.
+
+DETERMINATION is proposed earlier than those concepts.
+
+If determination ultimately requires the full semantics of constraint, this hypothesis fails and must be rolled back.
+
+## Realization witnesses
+
+A realization may supply evidence of determination through physical, logical, protocol, or computational behavior.
+
+The witness does not define the kernel semantics.
+
+Examples are deliberately non-authoritative: voltage discrimination, stored charge, register behavior, protocol field discrimination, mechanical position, or an emulator's modeled condition may each witness determination under a realization.
+
+MCSP semantics remain independent of which witness is used.
+
+## Driver consequence
+
+A driver author need not describe the complete ontology of a device.
+
+The driver needs enough realization evidence to determine the distinctions on which its invoked semantics depend.
+
+Thus:
+
+    device evidence
+      -> determination
+      -> qualified distinction
+      -> selected semantics
+      -> OS projection
+
+Unknown device conditions may remain uninterpreted.
+
+MCSP SHALL permit that incompleteness.
+
+## Canonical consequence
+
+A canonical is not made true by its definition alone.
+
+A canonical supplies a stable semantic relation graph.
+
+Its application to a realization requires determination sufficient to support the graph's required distinctions.
+
+This separates:
+
+    semantic definition
+from
+    semantic applicability
+
+## Tests
+
+D1 Product-free:
+Determination must not prescribe the resulting meaning.
+
+D2 Non-vacuous:
+At least one interpretation must be rejectable when unsupported.
+
+D3 Name-free:
+Determination must not require an intrinsic label.
+
+D4 Value-free:
+Determination must not require a predefined value domain.
+
+D5 State-free:
+Determination must precede interpreted STATE.
+
+D6 Order-free:
+Determination must not require temporal precedence.
+
+D7 Position-free:
+Determination must not require a coordinate space.
+
+D8 Host-free:
+No realization witness may become the universal definition.
+
+D9 Extensible:
+Previously unknown conditions may acquire later interpretations without rewriting the kernel.
+
+D10 Canonical-safe:
+New extension semantics may not mutate an existing invoked canonical.
+
+D11 Driver-local:
+A realization may qualify only the semantic subset it needs.
+
+D12 Self-description:
+MCSP must eventually represent determination and these qualification rules using MCSP itself.
+
+## Residue
+
+The following remain unresolved:
+
+    limitation
+    admissible
+    support
+    applicability
+    interpretation
+
+These terms are not silently accepted as final primitives.
+
+## Current hypothesis
+
+The kernel may require neither a named object nor a predefined state.
+
+It may require only:
+
+    an anonymous CONDITION
+    with sufficient DETERMINATION
+    for a claimed interpretation to be non-arbitrary.
+
+Whether CONDITION and DETERMINATION can be reduced to one self-consistent kernel form remains open.
