@@ -1,0 +1,104 @@
+# MCSP Assembly / Disassembly / Decompilation 0.38
+
+Status: Constructive architecture amendment
+Qualification: Under Conditional Experiment
+Extends: ASSEMBLY-DISASSEMBLY-0.37
+
+## Official machine-level disciplines
+
+MCSP formally recognizes:
+
+    ASSEMBLY
+    DISASSEMBLY
+    DECOMPILATION
+
+as first-class project disciplines.
+
+### ASSEMBLY
+
+Projects qualified semantic/scaffold obligations toward machine realization.
+
+    semantic obligation -> scaffold -> assembly -> encoding -> behavior
+
+### DISASSEMBLY
+
+Decodes a machine artifact into instruction-level realization observations.
+
+    machine artifact -> decoded instructions/structure -> observations
+
+Disassembly is observational evidence, not semantic authority.
+
+### DECOMPILATION
+
+Reconstructs higher-level structural or semantic candidates from machine realization evidence.
+
+    machine artifact
+    -> disassembly/realization observations
+    -> reconstructed structure
+    -> candidate MCSP projection
+    -> qualification
+
+A decompiler SHALL distinguish observation from inference.
+
+## Non-authority rule
+
+Decompiler output SHALL NOT automatically be treated as:
+- original source;
+- original names;
+- original types;
+- original control abstractions;
+- original data structures;
+- original provenance;
+- original semantic intent;
+- canonical MCSP meaning.
+
+Information erased by compilation/assembly cannot be claimed recovered without independent evidence.
+
+## Qualification rule
+
+For a pre-settled semantic scaffold S and machine realization R:
+
+    R = ASSEMBLE(S,H)
+    O = DISASSEMBLE(R,H)
+    D = DECOMPILE(O, constraints)
+    S' = PROJECT(D, scope)
+
+A bounded round-trip qualifies only when S' preserves the applicable material invariant of S.
+
+Exact textual reconstruction is not required.
+
+## Ambiguity
+
+Where more than one higher-level reconstruction is compatible with the same machine evidence, decompilation SHALL retain ambiguity or explicitly qualify the additional assumptions used to choose among candidates.
+
+A single binary may therefore admit multiple non-equivalent decompilation candidates until additional determination excludes alternatives.
+
+This follows the MCSP kernel rule: interpretation requires sufficient determination to exclude incompatible alternatives.
+
+## Official project evidence
+
+Material decompilation evidence SHOULD retain:
+- input artifact hash;
+- architecture/object format;
+- disassembly observations used;
+- reconstruction rules/constraints;
+- inferred structures;
+- unresolved ambiguity;
+- candidate semantic projection;
+- comparison against pre-settled material invariant;
+- qualification state.
+
+## Recovery and reconstruction
+
+Decompiler evidence may assist reconstruction and recovery, but it does not replace retained source/provenance where those exist.
+
+## Long-term target
+
+    MCSP-native assembler
+    MCSP-native disassembler
+    MCSP-native decompiler
+
+These tools should ultimately operate through MCSP-qualified structural semantics rather than making external tool syntax semantic authority.
+
+C remains a temporary testing stud only.
+Kernel remains DETERMINATE CONDITION.
