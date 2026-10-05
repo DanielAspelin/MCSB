@@ -1,0 +1,337 @@
+# MCSP Primitive Attack — 0.12
+
+**Status:** Constructive reduction
+**Qualification:** Under Conditional Experiment
+**Parent:** Orthogonal Reduction 0.11
+
+## Objective
+
+Attack the surviving coordinate candidates:
+
+    IDENTITY
+    POSITION
+    ORDER
+    SCOPE
+
+A reduction succeeds only if the removed concept can be reconstructed without semantic loss and without importing an unnamed equivalent.
+
+---
+
+## 1. IDENTITY versus DISTINGUISH + SCOPE
+
+Candidate reduction:
+
+    IDENTITY ?= persistent DISTINGUISH relation within SCOPE
+
+### Counterexample
+
+At observation O1:
+
+    DISTINGUISH(A,B,S) = different
+
+At observation O2:
+
+    DISTINGUISH(C,D,S) = different
+
+DISTINGUISH alone does not establish whether A at O1 is the same referent as C at O2.
+
+Identity carries continuity/reference across observations.
+
+Therefore:
+
+    distinction != identity
+
+A useful reduction is instead:
+
+    IDENTITY(x,S)
+      := stable self-correspondence of a distinguishable referent
+         across admitted observations within S.
+
+This still uses CORRESPOND/RELATION and ORDER/observation.
+
+### Result
+
+IDENTITY survives as a semantic role unless continuity itself is represented by a more primitive relation.
+
+Status: RETAIN.
+
+---
+
+## 2. POSITION versus ORDER + SCOPE
+
+Candidate reduction:
+
+    POSITION ?= ORDER relation within SCOPE
+
+### Counterexample A: unordered distinct positions
+
+Two memory regions, graph nodes, registers, devices or semantic fields can occupy distinct positions in a space without a required before/after relation.
+
+### Counterexample B: order without position
+
+Events may satisfy:
+
+    A before B
+
+without either event occupying an address-like or geometric position.
+
+Therefore:
+
+    position != order
+
+Position requires a reference-space relation; order requires precedence.
+
+Provisional:
+
+    POSITION(x, space, reference)
+      := relation locating x relative to a declared reference structure.
+
+### Result
+
+POSITION survives.
+
+Status: RETAIN.
+
+---
+
+## 3. SCOPE versus COLLECTION + RELATION
+
+Candidate reduction:
+
+    SCOPE ?= COLLECTION of admitted referents/relations
+
+### Problem
+
+A collection enumerates or relates members.
+
+Scope does more: it declares the domain under which a distinction, identity, equivalence, rule or observation is interpreted.
+
+Two scopes may contain the same members but apply different admissibility/observation boundaries.
+
+Example:
+
+    same constructs
+    same relations
+    different observable relation set
+
+can change EQUIVALENT/PRESERVE results.
+
+Thus membership alone does not reconstruct scope.
+
+Better formulation:
+
+    SCOPE :=
+      boundary relation declaring which distinctions,
+      relations and observations participate in an interpretation.
+
+A scope may be represented by collections, but is not semantically identical to a collection.
+
+### Result
+
+SCOPE survives as a boundary/context role.
+
+Status: RETAIN.
+
+---
+
+## 4. ORDER reduction
+
+Candidate reduction:
+
+    ORDER ?= POSITION in an ordering space
+
+This is stronger than the reverse reduction.
+
+If an ordering relation can be represented as positions in an abstract order-space, perhaps ORDER is derived.
+
+### Counterexample: partial order
+
+Suppose:
+
+    A before C
+    B before C
+    A incomparable B
+
+A simple scalar position does not represent this without adding a richer topology/relation.
+
+If POSITION is generalized enough to encode arbitrary partial-order topology, POSITION has silently absorbed ORDER.
+
+That is not a reduction; it is renaming.
+
+### Result
+
+ORDER remains a distinct relation kind.
+
+Status: RETAIN.
+
+---
+
+## 5. Hidden substrate attack
+
+The four survivors depend on RELATION.
+
+Can RELATION itself be reduced?
+
+A relation requires at least distinguishable participants and a distinguishable association.
+
+Attempt:
+
+    RELATION(A,B)
+      := distinguishable configuration containing A and B
+
+fails because mere co-membership does not state *how* A and B are associated.
+
+The association itself must be representable.
+
+Therefore RELATION currently survives as substrate.
+
+Can CONSTRUCT be reduced to relations?
+
+A pure relation graph still requires distinguishable termini or relation identities. If every terminus is itself only another relation, an ungrounded regress is possible.
+
+Provisional grounding pair:
+
+    DISTINGUISH
+    RELATE
+
+with admitted referents arising as stable distinguishable structures.
+
+This suggests CONSTRUCT may eventually be a stabilized graph pattern rather than an irreducible atom, but that is not yet proven.
+
+---
+
+## 6. Revised semantic nucleus
+
+The current strongest nucleus is:
+
+    DISTINGUISH
+    RELATION
+
+with irreducible semantic roles presently required for:
+
+    IDENTITY
+    POSITION
+    ORDER
+    SCOPE
+
+These roles are not necessarily six machine primitives. They may be canonical relation forms built from a smaller substrate.
+
+The distinction is:
+
+    substrate primitive
+        versus
+    irreducible semantic role
+
+MCSP must not confuse the two.
+
+---
+
+## 7. Topological interpretation
+
+The surviving roles create a semantic topology:
+
+    DISTINGUISH -> separates
+    RELATION    -> connects
+    IDENTITY    -> preserves referent continuity
+    POSITION    -> locates relative to a reference structure
+    ORDER       -> establishes precedence
+    SCOPE       -> establishes interpretive boundary
+
+From these, candidate derived topology can be built:
+
+    ADJACENT
+    CONNECTED
+    REACHABLE
+    PATH
+    REGION
+    BOUNDARY
+    OVERLAP
+    DISJOINT
+
+This makes topology a derived relational geometry rather than a new primitive family.
+
+---
+
+## 8. Assembly / bit-space projection
+
+At the machine realization boundary:
+
+    bit-state        = distinguishable state at a machine position
+    bit-field        = scoped region of positions
+    instruction      = interpreted bit-field selecting transition relation
+    register         = architecturally identified scoped state region
+    address          = representation of position in an address scope
+    opcode           = representation selecting an ISA transition class
+    mnemonic         = assembler representation of an ISA selection
+
+No item above automatically becomes an MCSP primitive.
+
+NASM and GNU assembler may provide different textual coordinates for the same ISA transition.
+
+---
+
+## 9. Canonical forms
+
+A canonical should now be tested as a normalized semantic relation graph, not merely a preferred word.
+
+Candidate:
+
+    CANONICAL(X,S)
+      := normalized identity of the semantic relation graph
+         for X under scope S.
+
+Two host realizations project to the same canonical when their observable semantic relation graphs are EQUIVALENT under the declared scope.
+
+This makes canonicalization structural rather than linguistic.
+
+---
+
+## 10. Taxonomy consequence
+
+Taxonomy can be generated from graph properties.
+
+Examples:
+
+    has pre/post state relation -> transition class
+    locates in reference space -> positional class
+    restricts admissibility -> constraint class
+    maps representation -> representation class
+    preserves canonical graph across host -> realization class
+
+Therefore taxonomy remains derived unless a counterexample demonstrates semantic information that cannot be reconstructed from the graph.
+
+---
+
+## 11. Current qualification
+
+### Survived attack
+
+    IDENTITY
+    POSITION
+    ORDER
+    SCOPE
+    RELATION
+    DISTINGUISH
+
+### Reduced / derived from previous stage
+
+    VALUE
+    EXTENT
+    CONSTRAINT
+    OUTCOME
+    REPRESENTATION
+    REALIZATION
+    TOPOLOGY relations
+    TAXONOMY
+
+### Unresolved
+
+1. Is DISTINGUISH primitive, or can it be defined as non-equivalence?
+2. Is RELATION primitive, or can association emerge from configuration?
+3. Can IDENTITY be reduced to stable correspondence without circularity?
+4. Can SCOPE be reduced to a boundary relation without presupposing scope?
+5. What grounds the first referent in a relation graph?
+6. Can canonical normalization be deterministic without importing an external ordering?
+7. Can the entire nucleus be encoded and evaluated using itself?
+
+The next reduction must attack DISTINGUISH and RELATION and address grounding/regress.
