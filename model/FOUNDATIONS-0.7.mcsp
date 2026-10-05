@@ -1,0 +1,206 @@
+# MCSP Foundations and Closure — 0.7
+
+**Status:** Constructive implementation  
+**Qualification:** Under Conditional Experiment
+
+## Purpose
+
+Define the smallest current foundational graph needed to decide whether MCSP is finitely self-describing and whether a host realization preserves MCSP semantics.
+
+## Foundation candidates
+
+### DISTINGUISH
+
+    DISTINGUISH(a, b, scope) -> same | different | indeterminate
+
+DISTINGUISH is a relation evaluation. It does not prescribe bytes, names, addresses or physical comparison mechanisms.
+
+IDENTITY is stable distinction of a CONSTRUCT within SCOPE under declared relations.
+
+### CONFIGURATION
+
+    CONFIGURATION(construct, relation-set, order-position) -> STATE
+
+A configuration is the set/collection of relations applicable to a construct at an ORDER position. STATE is the distinguishable configuration at that position.
+
+### COLLECTION
+
+    COLLECTION {
+      membership: RELATION*
+      order: optional ORDER
+      bounds: optional EXTENT
+    }
+
+A collection does not require contiguous memory or a host container type.
+
+### COUNT
+
+    COUNT(collection, unit) -> extent
+
+Cardinality is represented as an extent over membership relations, not assumed as a machine integer encoding.
+
+### PARTITION
+
+    PARTITION(space-or-collection, rule)
+      -> COLLECTION(regions)
+
+A valid partition relates members/positions to regions under a RULE. Host page sizes, bytes, cache lines, sectors and lanes are realizations/domain partitions.
+
+### CORRESPOND
+
+    CORRESPOND(source, target, rule) -> RELATION
+
+MAP and REPRESENT are collections of CORRESPOND relations constrained by RULE.
+
+### ADMIT
+
+    ADMIT(candidate-state-or-transition, CONSTRAINT*) -> condition
+
+Admissibility is condition evaluation under constraints. REQUIRE and RULE therefore reduce to relations plus ADMIT.
+
+### OCCURRENCE
+
+    OCCURRENCE(rule-or-operation, pre-state, order-position)
+      -> TRANSITION
+
+A transition definition and an occurrence are distinct. RULE describes admissible relations; OCCURRENCE identifies an instantiated transition in an ORDER space.
+
+## Semantic preservation
+
+A host realization is not qualified because its mnemonic resembles the MCSP operation.
+
+Let:
+
+    M = MCSP construct/operation
+    H = host realization sequence
+    P = pre-state relation mapping
+    Q = post-state relation mapping
+    C = declared constraints
+    O = allowed outcomes
+
+H preserves M iff, for every admitted mapped pre-state under C:
+
+1. H is supported or explicitly reports unsupported;
+2. when H completes normally, the mapped observable post-state satisfies M's post-state relations;
+3. H introduces no observable state change forbidden by M under the declared observation scope;
+4. ordering/atomicity requirements of M are preserved;
+5. exceptions/failures map to an allowed OUTCOME;
+6. required continuation/control state is preserved;
+7. any implementation-specific residue is explicitly constrained rather than silently ignored.
+
+This is **observational semantic preservation**, scoped by declared observable relations.
+
+## EQUIVALENT
+
+    EQUIVALENT(a, b, scope, constraints)
+      -> condition
+
+Two constructs/realizations are equivalent only if DISTINGUISH cannot separate their required observable relations within scope under constraints.
+
+This does not assert physical identity.
+
+## PRESERVE
+
+    PRESERVE(source-semantics, target-realization, scope, constraints)
+      -> condition
+
+PRESERVE is satisfied when the realization relation passes the semantic preservation conditions above.
+
+REALIZATION therefore becomes:
+
+    REALIZATION(M, host, mapping)
+      requires CAPABILITY
+      requires PRESERVE(M, mapping, declared-scope, constraints)
+
+## Finite closure criterion
+
+MCSP reaches **structural finite closure** for a version V iff:
+
+1. the set of admitted foundational construct kinds in V is finite;
+2. every admitted definition is a finite graph whose nodes are admitted constructs/relations;
+3. following definition dependencies from every admitted node reaches only nodes inside that finite graph;
+4. no dependency requires an undefined external semantic node;
+5. cycles are explicit graph cycles, not hidden natural-language substitutions;
+6. every cycle has declared interpretation sufficient to evaluate its relations without introducing a new semantic kind.
+
+MCSP reaches **semantic self-description closure** only when, in addition:
+
+7. MCSP can represent the complete closure graph as MCSP state;
+8. MCSP can represent DEFINE and each foundational definition using that graph;
+9. MCSP can represent the closure conditions themselves;
+10. an evaluator/realization can test the represented relations without requiring an unrepresented semantic category.
+
+## Termination test
+
+Given definition graph G(V):
+
+    frontier := all admitted definitions
+    visited := empty
+
+    while frontier not empty:
+        take node n
+        if n not admitted in G(V): FAIL_EXTERNAL
+        if n not visited:
+            add n to visited
+            add n.dependencies to frontier
+
+    if visited is finite and every cycle is explicit:
+        PASS_STRUCTURAL_TERMINATION
+    else:
+        FAIL_OPEN_GRAPH
+
+This is an abstract algorithmic requirement, not a commitment to a particular implementation language.
+
+## 0.7 candidate foundation graph
+
+    CONSTRUCT
+    RELATION
+    DISTINGUISH
+    IDENTITY
+    SCOPE
+    COLLECTION
+    ORDER
+    POSITION
+    CONFIGURATION
+    STATE
+    TRANSITION
+    OPERATION
+    RULE
+    CONSTRAINT
+    CONDITION
+    OUTCOME
+    OCCURRENCE
+
+Derived relations/constructs include VALUE, WIDTH, UNIT, EXTENT, REPRESENT, CORRESPOND, MAP, ADDRESS, TRANSLATE, OBSERVE, PARTITION, COUNT, ADMIT, EQUIVALENT, PRESERVE, REALIZATION, CAPABILITY and machine/domain operations.
+
+## Residue audit
+
+0.6 residue is reduced as follows:
+
+- distinguishability -> DISTINGUISH
+- configuration -> CONFIGURATION
+- collection/cardinality -> COLLECTION + COUNT
+- partition -> PARTITION
+- correspondence -> CORRESPOND
+- admissibility -> ADMIT
+- occurrence -> OCCURRENCE
+- semantic preservation/equivalence -> PRESERVE + EQUIVALENT
+- termination criterion -> finite closure criterion + termination test
+
+However, naming these constructs does not by itself prove semantic closure. Their definitions still depend on relation evaluation and the ability to represent finite graph membership.
+
+## 0.7 qualification
+
+**PASS:** every explicit 0.6 residue item now has a formal candidate construct/relation.
+
+**PASS:** structural closure has an explicit finite termination criterion.
+
+**PASS:** host realization has an observational semantic-preservation criterion.
+
+**OPEN:** encode the 0.7 foundation graph as actual MCSP data rather than explanatory notation.
+
+**OPEN:** implement an evaluator that traverses that representation and proves structural termination.
+
+**OPEN:** exercise PRESERVE against representative x86-64, AArch64 and RISC-V mappings.
+
+Therefore MCSP is not yet declared semantically closed.
