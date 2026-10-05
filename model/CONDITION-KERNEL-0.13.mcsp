@@ -1,0 +1,322 @@
+# MCSP Condition Kernel Experiment — 0.13
+
+**Status:** Constructive kernelization experiment
+**Qualification:** Under Conditional Experiment
+**Parent:** Primitive Attack 0.12
+
+## Intent
+
+Do not create a semantic product.
+
+Do not begin with:
+- object;
+- instruction;
+- value;
+- bit;
+- Boolean;
+- truth;
+- language;
+- taxonomy;
+- topology;
+- machine;
+- address;
+- time;
+- space.
+
+Instead investigate the minimum condition under which interpretation can become possible.
+
+The word CONDITION is provisional. Its name must not be mistaken for its final semantics.
+
+---
+
+## 1. Kernel hypothesis
+
+Provisional hypothesis:
+
+    CONDITION
+
+may precede explicit distinction and relation.
+
+But CONDITION must not be defined as a Boolean predicate, because that already imports:
+- values;
+- alternatives;
+- evaluation;
+- truth semantics.
+
+Kernel CONDITION instead denotes only:
+
+    circumstance under which interpretation may become admissible
+
+This sentence is explanatory natural language, not a closed MCSP definition.
+
+---
+
+## 2. Non-product rule
+
+The kernel must not manufacture the interpreted thing.
+
+It may establish that an interpretation is admissible, distinguishable, repeatable or relatable, but it must not prescribe what the interpretation means.
+
+Therefore:
+
+    kernel != ontology
+    kernel != taxonomy
+    kernel != instruction set
+    kernel != object system
+    kernel != data model
+    kernel != language
+
+Products arise after interpretation.
+
+---
+
+## 3. Conditional distinction
+
+First candidate emergence:
+
+    CONDITION
+        -> possibility of distinction
+
+Not:
+
+    CONDITION -> 0 | 1
+
+and not:
+
+    CONDITION -> true | false
+
+Those are later representations.
+
+Provisional operator:
+
+    UNDER(C) {
+        X differs from Y
+    }
+
+is still too mature because C, X and Y already have identity.
+
+A more primitive formulation must allow distinction before named referents.
+
+Candidate event:
+
+    DIFFERENCE-UNDER-CONDITION
+
+This may be more fundamental than either CONDITION or DISTINGUISH considered independently.
+
+---
+
+## 4. Co-emergence hypothesis
+
+There is a circularity:
+
+- a condition must somehow differ from non-condition to be identified;
+- a distinction requires circumstances under which difference is admitted.
+
+Therefore CONDITION and DISTINCTION may co-emerge.
+
+Candidate kernel pair:
+
+    CONDITION <-> DISTINCTION
+
+Neither is necessarily prior.
+
+This is not automatically a defect. A finite mutually defining kernel may be valid if it can be interpreted without importing a third semantic category.
+
+---
+
+## 5. From repeated distinction to identity
+
+Identity should not be inserted into the kernel.
+
+If a distinction can be encountered/observed again under compatible conditions, correspondence may become possible.
+
+    conditional distinction
+        -> recurrence/correspondence
+            -> identity
+
+But "again" imports ORDER and "compatible" imports equivalence.
+
+Therefore identity emergence remains unresolved.
+
+We must not claim the reduction yet.
+
+---
+
+## 6. From multiple distinctions to relation
+
+A relation cannot simply be declared.
+
+If distinctions can be jointly admitted under a condition, their co-admission may permit association.
+
+    conditional distinctions
+        -> co-admission
+            -> candidate relation
+
+But "jointly" or "co-" may import SCOPE/COLLECTION.
+
+Therefore RELATION is not yet reduced.
+
+---
+
+## 7. State
+
+STATE should emerge only after an interpretation can distinguish a configuration under a condition.
+
+Provisional:
+
+    STATE
+      := an interpreted distinguishability of configuration
+         under a condition
+
+This remains derived and deliberately non-kernel.
+
+---
+
+## 8. Transition
+
+TRANSITION should emerge only after at least two distinguishable states can participate in an order relation.
+
+    distinguishable states
+        + order
+        + condition
+            -> transition
+
+Therefore change is not assumed at the kernel.
+
+---
+
+## 9. Machine-space consequence
+
+At the physical realization boundary, no bit meaning is assumed.
+
+A physical system may expose distinguishable conditions.
+
+Only after an interpretation relation is established may those conditions be represented as:
+
+    low/high
+    off/on
+    0/1
+    clear/set
+
+The labels are representation products.
+
+Similarly, a machine-code region does not intrinsically contain an MCSP instruction meaning. Under an ISA interpretation condition, a distinguishable encoding configuration may select a machine transition.
+
+Assembly remains a later representation of that interpretation.
+
+---
+
+## 10. Interpretation boundary
+
+Candidate architecture:
+
+    kernel condition/distinction
+        -> admissible interpretation
+            -> relation
+                -> identity / position / order / scope
+                    -> state / transition
+                        -> semantics
+                            -> canonicalization
+                                -> taxonomy / representation
+                                    -> realization
+
+This is a dependency hypothesis, not a finalized hierarchy.
+
+---
+
+## 11. Kernelization tests
+
+A candidate kernel is rejected if its definition silently requires any unrepresented concept.
+
+Test K1 — Object-free:
+    Can it operate without assuming an object/entity?
+
+Test K2 — Value-free:
+    Can it operate without assuming a value domain?
+
+Test K3 — Binary-free:
+    Can it operate without assuming two predefined symbols/states?
+
+Test K4 — Space-free:
+    Can it operate without assuming position?
+
+Test K5 — Time-free:
+    Can it operate without assuming temporal order?
+
+Test K6 — Language-free:
+    Can its structure exist independently of its textual name?
+
+Test K7 — Host-free:
+    Does it remain unchanged across physical/computational realizations?
+
+Test K8 — Product-free:
+    Does it establish interpretability without prescribing interpreted meaning?
+
+Test K9 — Closure:
+    Can all concepts required to state the kernel eventually be represented by the kernel's own admitted emergence?
+
+Test K10 — Non-vacuity:
+    Does the kernel constrain interpretation enough to distinguish admissible interpretation from arbitrary assertion?
+
+---
+
+## 12. Current failure points
+
+The current natural-language definition still imports residue:
+
+    circumstance
+    under
+    admissible
+    interpretation
+    difference
+
+These are not accepted primitives.
+
+They are markers for the next reduction.
+
+Especially:
+
+    "under" may conceal SCOPE/RELATION;
+    "circumstance" may conceal STATE;
+    "admissible" may conceal RULE/CONSTRAINT;
+    "interpretation" may conceal REPRESENTATION/RELATION;
+    "difference" may conceal DISTINGUISH.
+
+Therefore 0.13 does not claim closure.
+
+---
+
+## 13. Current strongest hypothesis
+
+Do not yet state:
+
+    kernel = CONDITION
+
+Instead state:
+
+    kernel candidate =
+      minimal self-consistent conditional distinction
+
+where CONDITION and DISTINCTION may be mutually defining aspects of one kernel phenomenon.
+
+This avoids manufacturing a product and avoids prematurely privileging either condition or distinction.
+
+---
+
+## 14. Next attack
+
+Attempt to eliminate the five residue words:
+
+    circumstance
+    under
+    admissible
+    interpretation
+    difference
+
+Then determine whether the kernel:
+1. collapses to one self-referential form;
+2. requires a mutually recursive pair;
+3. requires a third grounding relation;
+4. is impossible to define semantically without a realization witness.
+
+No option is preferred in advance.
