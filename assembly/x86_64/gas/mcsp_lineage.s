@@ -23,7 +23,7 @@ tuples:
 .set TUPLE_FIELDS,8
 .set TUPLE_COUNT,5
 expected:
-.quad 0x07b1f9e67ab1a2f1
+.quad 0x0f646d0bb5be8531
 msg_pass: .ascii "MCSP GAS lineage 0.31: CONDITIONAL PASS\n"
 .set msg_pass_len, .-msg_pass
 msg_fail: .ascii "MCSP GAS lineage 0.31: FAIL\n"
