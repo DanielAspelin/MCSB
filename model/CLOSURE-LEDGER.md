@@ -1,69 +1,70 @@
 # MCSP Closure Ledger
 
-**Version:** 0.6  
+**Version:** 0.7  
 **Qualification:** Under Conditional Experiment
 
-## Reduced terms
+## 0.6 residue disposition
 
-| Term | 0.6 reduction |
-| --- | --- |
-| representation | REPRESENT relation |
-| observation | OBSERVE relation over STATE at ORDER position |
-| unit | UNIT partition reference |
-| extent | bounded POSITION relation under UNIT |
-| scope | relation domain for identity distinction |
-| coordinates | representation of POSITION relative to reference |
-| mapping | MAP correspondence relation |
-| ordering | ORDER relation |
-| requirement | REQUIRE / CONSTRAINT relation |
-| event | observed TRANSITION construct |
-| rule | admissible transition RELATION |
-| cause | antecedent/consequent relation under RULE |
-| logical observation position | POSITION within ORDER space |
-| availability | STATE over resource/capability under constraints |
+| 0.6 residue | 0.7 candidate reduction | Status |
+| --- | --- | --- |
+| distinguishability | DISTINGUISH | candidate |
+| configuration | CONFIGURATION | candidate |
+| collection/cardinality | COLLECTION + COUNT | candidate |
+| partition | PARTITION | candidate |
+| correspondence | CORRESPOND | candidate |
+| admissibility | ADMIT | candidate |
+| occurrence | OCCURRENCE | candidate |
+| semantic preservation/equivalence | PRESERVE + EQUIVALENT | candidate |
+| primitive graph termination criterion | finite closure criterion + graph traversal | specified |
 
-## Candidate foundational graph
+## Candidate foundation
 
-- CONSTRUCT
-- RELATION
-- IDENTITY
-- SCOPE
-- STATE
-- POSITION
-- ORDER
-- TRANSITION
-- OPERATION
-- CONSTRAINT
-- OUTCOME
+CONSTRUCT, RELATION, DISTINGUISH, IDENTITY, SCOPE, COLLECTION, ORDER, POSITION, CONFIGURATION, STATE, TRANSITION, OPERATION, RULE, CONSTRAINT, CONDITION, OUTCOME, OCCURRENCE.
 
-Derived machinery includes REPRESENT, UNIT, EXTENT, COORDINATE, MAP, OBSERVE, REQUIRE, EVENT, RULE, CAUSE, AVAILABLE, REALIZATION, CAPABILITY, ADDRESS, WIDTH, VALUE, READ, WRITE, COPY, COMPUTE, SCHEDULE, ALLOCATE, RELEASE, TRANSFER, SIGNAL and control-transition constructs.
+Everything else should be tested for derivability from this set before being promoted to foundational status.
 
-## Open foundational residue
+## Structural closure gates
 
-| Residue | Why still open |
-| --- | --- |
-| distinguishability | needed to explain identity/value/state without circular synonym substitution |
-| configuration | needed for STATE |
-| collection / cardinality | needed for relation sets and repeated structures |
-| partition | needed for UNIT and bounded representation |
-| correspondence | needed for MAP/REPRESENT |
-| admissibility | needed for CONSTRAINT/RULE |
-| occurrence | needed to distinguish a transition definition from a transition instance |
-| semantic preservation/equivalence | needed to qualify host realizations |
-| termination criterion | needed to prove finite closure rather than merely observe a finite document |
+- finite admitted foundation;
+- finite definition graph;
+- no external undefined dependency;
+- explicit cycles;
+- interpretable cycles;
+- closure graph representable as MCSP state.
 
-## Cycle audit
+## Semantic closure gates
 
-- CONSTRUCT <-> RELATION: mutual recursion; provisionally acceptable as graph structure, semantically unqualified.
-- IDENTITY <-> SCOPE: mutual dependence; requires domain/distinction formalization.
-- STATE <-> OBSERVE: previous definitional cycle reduced; STATE no longer depends on OBSERVE for its definition.
-- OPERATION -> RULE -> RELATION: structurally finite, semantics depend on admissibility.
-- REALIZATION -> MAP -> correspondence: open until preservation/equivalence is formalized.
+- DEFINE represented in MCSP;
+- foundation definitions represented in MCSP;
+- closure rules represented in MCSP;
+- relation evaluation requires no unrepresented semantic category;
+- host realization preservation test executable.
 
-## Qualification gate for 0.7
+## Host witness gates
 
-Do not declare self-description closure unless:
-1. foundational residue is represented without introducing equal or greater unexplained residue;
-2. recursive definition graph has an explicit finite termination criterion;
-3. host realization equivalence can be stated and tested;
-4. at least x86-64, AArch64 and RISC-V mappings pass representative semantic tests.
+Representative semantic mappings must be tested on:
+- x86-64;
+- AArch64;
+- RISC-V.
+
+Initial witness classes:
+- COPY;
+- VALUE;
+- READ;
+- WRITE;
+- COMPUTE/ADD;
+- COMPARE/condition;
+- BRANCH;
+- INVOKE/RETURN;
+- ordering/barrier;
+- atomic read-modify-write.
+
+## Current result
+
+0.7 closes the named 0.6 residue at the specification level, but does **not** yet prove semantic self-description.
+
+Next evidence must be executable/machine-readable:
+1. encode foundation graph;
+2. traverse graph and verify finite dependency closure;
+3. encode representative host mappings;
+4. evaluate PRESERVE conditions.
