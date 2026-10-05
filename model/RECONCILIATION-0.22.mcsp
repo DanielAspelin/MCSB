@@ -1,0 +1,277 @@
+# MCSP Reconciliation 0.22
+
+Status: Constructive reconciliation checkpoint
+Qualification: Under Conditional Experiment
+Lineage: 0.13 through 0.21
+
+## Purpose
+
+Reconcile the current MCSP kernel, semantic architecture, hardware-clearance method, hardware-independence target, and qualification work without silently rewriting originating versions.
+
+Earlier files remain historical evidence.
+
+## 1. Current kernel candidate
+
+The smallest current pre-semantic kernel candidate is:
+
+    DETERMINATE CONDITION
+
+It SHALL NOT intrinsically require:
+
+    object
+    name
+    identity
+    value
+    state
+    Boolean
+    position
+    order
+    taxonomy
+    topology
+    ISA
+    assembler
+    ABI
+    operating system
+    device class
+    physical encoding
+
+CONDITION and DETERMINATION are not treated as two independent kernel objects.
+
+Determinacy is the aspect by which a condition can constrain later interpretation enough to reject arbitrary semantic projection.
+
+## 2. Corrected status of earlier candidates
+
+STATE:
+    derived semantic construct; not kernel.
+
+DISTINGUISH:
+    first-order semantic/qualification operation candidate; not currently kernel.
+
+RELATION:
+    semantic structural substrate candidate; not proven kernel primitive.
+
+IDENTITY / POSITION / ORDER / SCOPE:
+    irreducible semantic-role candidates from earlier reduction;
+    not pre-semantic kernel primitives.
+
+BOUNDARY:
+    established by interpretation/applicability; not currently kernel.
+
+INTERPRETATION:
+    semantic commencement operation; not currently kernel ontology.
+
+POSTURE / GESTURE:
+    explanatory/decomposition views; not kernel primitives.
+
+TRANSFER:
+    useful canonical candidate; explicitly non-primitive pending decomposition.
+
+## 3. Architecture
+
+    PRE-SEMANTIC
+        determinate condition
+
+    SEMANTIC COMMENCEMENT
+        qualified interpretation
+        applicability / boundary
+
+    MCSP SELF-DESCRIPTION
+        ontology
+        semantics
+        dimensions
+        orthogonalization
+        canonicalization
+        topology
+        taxonomy
+
+    SEMANTIC COMPOSITION
+        canonical semantics
+        extension semantics
+
+    REALIZATION
+        ISA
+        assembler
+        ABI
+        firmware
+        protocol
+        bus
+        device
+        physical machine
+
+    QUALIFICATION
+        projection
+        preservation
+        comparison
+        bounded host/hardware-independence result
+
+## 4. Hardware clearance and independence
+
+HARDWARE CLEARANCE:
+    methodology for removing unnecessary realization assumptions.
+
+HOST INDEPENDENCE:
+    semantic invariants do not depend on a particular software host environment
+    within the qualified boundary.
+
+HARDWARE INDEPENDENCE:
+    semantic invariants survive materially different hardware realizations
+    within the qualified boundary.
+
+Neither independence is established merely by abstraction.
+
+Both require realization evidence and preservation tests.
+
+## 5. Canonical correction
+
+CANONICAL does not mean primitive.
+
+A canonical is a qualified reusable semantic relation whose invariant is stable when invoked.
+
+A canonical may decompose into more fundamental relations.
+
+A realization may decline/unsupported a canonical.
+
+An extension may compose canonicals but SHALL NOT silently mutate their qualified invariants.
+
+## 6. Orthogonal correction
+
+An ORTHOGONAL is not merely a category.
+
+It is a semantic dimension for which independent variation can be demonstrated while selected other material dimensions remain invariant.
+
+Candidate roles retained for continued testing:
+
+    identity
+    position
+    order
+    scope
+
+Other earlier candidates remain derived unless new evidence reverses that conclusion.
+
+Orthogonality requires counterexample testing.
+
+## 7. Dimensionality
+
+DIMENSIONALITY describes the minimal independently relevant coordinates needed to qualify a semantic construct under applicability.
+
+It is not assumed Euclidean, spatial, finite, or identical across constructs.
+
+Dimensions SHALL be derived/tested rather than accumulated by vocabulary.
+
+## 8. Topology
+
+TOPOLOGY describes qualified relational structure such as:
+
+    adjacency
+    connection
+    reachability
+    containment
+    overlap
+    boundary
+    path
+    region
+
+Topology SHALL NOT assume physical geometry unless the realization requires it.
+
+## 9. Taxonomy
+
+TAXONOMY classifies admitted structures.
+
+Classification SHALL NOT define kernel meaning.
+
+Where possible taxonomy should derive from semantic graph properties rather than arbitrary naming.
+
+## 10. Ontology
+
+MCSP ontology states what MCSP itself admits.
+
+It SHALL NOT claim to be the complete ontology of external hardware, operating systems, drivers, applications, or the physical world.
+
+Extension ontologies may map into MCSP semantics.
+
+## 11. Preservation priority
+
+The next foundational target is PRESERVATION.
+
+TRANSFER appears to depend on preservation of material distinctions across differing conditions/relations.
+
+Host/hardware independence also depends on preservation:
+
+    semantic invariant
+      -> realization
+      -> projection
+      -> preserved semantic invariant
+
+Therefore PRESERVE must be reduced before promoting TRANSFER or similar convenience semantics.
+
+## 12. Required corrections to qualification
+
+Conceptual tests are evidence, but not runtime evidence.
+
+The 0.16 conceptual 10/10 result remains a CONDITIONAL PASS only.
+
+The 0.20 hardware-independence matrix remains architecture evidence only.
+
+The 0.21 witness contracts remain UNVERIFIED until executed.
+
+No file in the current lineage establishes universal hardware independence.
+
+## 13. Completion gates
+
+G1 Kernel reduction:
+    attack PRESERVE and remaining hidden semantic residue.
+
+G2 Self-description:
+    represent the current kernel and semantic architecture in MCSP's own admitted form.
+
+G3 Canonical normalization:
+    define deterministic canonical equivalence without relying on English names.
+
+G4 Orthogonal qualification:
+    prove or reject candidate independent dimensions through controlled variation.
+
+G5 Decomposition:
+    reduce TRANSFER, READ, WRITE, COPY, ALLOCATE, RELEASE, SIGNAL and related canonicals toward the kernel.
+
+G6 Realization mappings:
+    construct explicit x86-64, AArch64, RISC-V and non-CPU mappings.
+
+G7 Assembler witnesses:
+    keep NASM and GAS representations independently reconstructible.
+
+G8 Runtime evidence:
+    build and execute qualified witnesses and compare projected observations.
+
+G9 Driver experiment:
+    express a small device/driver contract using only required MCSP kernel/canonicals/extensions.
+
+G10 Closure:
+    test whether MCSP can define and qualify its own governing structures without undefined semantic authority.
+
+G11 Host independence:
+    qualify across materially different software host environments.
+
+G12 Hardware independence:
+    qualify across materially different hardware realization classes.
+
+## 14. Recommended order
+
+    PRESERVE reduction
+    -> canonical normalization
+    -> orthogonal qualification
+    -> canonical decomposition
+    -> self-description encoding
+    -> concrete realization witnesses
+    -> runtime qualification
+    -> driver experiment
+    -> closure audit
+    -> bounded host/hardware-independence qualification
+
+## 15. Constructive seal
+
+0.22 is a reconciliation checkpoint.
+
+It does not replace or rewrite prior versions.
+It records the currently preferred interpretation of their lineage.
+
+No Permanent Seal is asserted.
