@@ -1,0 +1,201 @@
+# MCSP Qualification Residue Reduction 0.17
+
+Status: Constructive reduction
+Qualification: Under Conditional Experiment
+Parent: Determinate Condition Kernel 0.16
+
+## Objective
+
+Reduce the remaining residue:
+
+    evidence
+    incompatibility
+    interpretation boundary
+    support
+    exclusion
+
+Do not promote qualification vocabulary into ontology unless necessary.
+
+## Evidence
+
+EVIDENCE is not currently required as an MCSP ontological primitive.
+
+It is a qualification role: a determinate condition or qualified relation may be used when testing a semantic claim.
+
+Therefore:
+
+    evidence := role in qualification procedure
+
+not:
+
+    EVIDENCE := fundamental kind of thing
+
+Status: PROCEDURAL / DERIVED.
+
+## Support
+
+SUPPORT likewise describes a qualification relation between determination and a claimed interpretation.
+
+It does not require independent ontology.
+
+Provisional:
+
+    SUPPORT(K,I,B)
+      iff I remains admissible under the determinations of K within boundary B.
+
+Status: DERIVED QUALIFICATION RELATION.
+
+## Exclusion
+
+EXCLUSION need not be primitive.
+
+An interpretation is excluded when it fails admissibility under the same determination and boundary used for the qualification test.
+
+    EXCLUDE(K,I,B)
+      := NOT ADMIT(K,I,B)
+
+The NOT notation is documentary and does not establish Boolean kernel semantics.
+
+Status: DERIVED QUALIFICATION RESULT.
+
+## Incompatibility
+
+Two interpretations are incompatible when they cannot both remain admissible under the same relevant determination and interpretation boundary while preserving their asserted semantic invariants.
+
+    INCOMPATIBLE(I,J,K,B)
+      := no joint admissibility under K and B
+
+This is relational qualification, not a new ontological object.
+
+Status: DERIVED.
+
+## Interpretation boundary
+
+BOUNDARY survives the reduction.
+
+Without a boundary, competing interpretations can silently change:
+- observable distinctions;
+- relevant relations;
+- scope;
+- constraints;
+- realization assumptions.
+
+Then qualification becomes meaningless because the comparison does not hold anything invariant.
+
+The boundary does not have to be spatial.
+
+It is the declared limit of what participates in an interpretation/qualification.
+
+Status: IRREDUCIBLE ROLE CANDIDATE.
+
+## Boundary versus SCOPE
+
+Earlier MCSP retained SCOPE as an irreducible semantic role.
+
+Interpretation boundary may be the pre-semantic ancestor of SCOPE.
+
+Hypothesis:
+
+    BOUNDARY
+      -> interpreted SCOPE
+
+If true, SCOPE is not kernel-level but a semantic interpretation of boundary.
+
+This requires further attack because "limit" and "participates" remain residue.
+
+## Revised qualification rule
+
+For determinate condition K, interpretation I, boundary B:
+
+    QUALIFY(K,I,B)
+
+requires:
+1. B is held invariant for the comparison;
+2. K provides determination relevant within B;
+3. at least one materially incompatible interpretation is not jointly admissible under the same K and B;
+4. I does not contradict the invoked canonical invariants;
+5. host realization details do not silently redefine B or I.
+
+No Boolean truth ontology is implied.
+
+## Kernel consequence
+
+The kernel candidate is now:
+
+    DETERMINATE CONDITION
+        within an INTERPRETATION BOUNDARY
+
+But BOUNDARY is not yet admitted into the kernel.
+
+It may instead be required only at the first act of interpretation.
+
+Thus distinguish:
+
+    pre-interpretation:
+        determinate condition
+
+    interpretation qualification:
+        determinate condition + boundary
+
+This keeps the kernel smaller.
+
+## Driver consequence
+
+A driver may declare only the boundary relevant to the semantic contract it exposes.
+
+Unknown or irrelevant device conditions may remain outside that boundary.
+
+Therefore qualification can be local rather than requiring total device ontology.
+
+## Canonical consequence
+
+A canonical semantic graph defines invariants.
+
+Application to a realization is qualified only within a declared boundary.
+
+Two realizations may differ outside the boundary and still preserve the same canonical semantics.
+
+This is necessary for host independence.
+
+## Tests to break 0.17
+
+R1:
+Can qualification work with no invariant boundary at all?
+
+R2:
+Can two interpretations be compared if each chooses its own observables?
+
+R3:
+Can boundary be reduced entirely to determination without losing comparison scope?
+
+R4:
+Can boundary be reduced to relation without presupposing which relations participate?
+
+R5:
+Can SCOPE be derived from interpreted boundary?
+
+R6:
+Can a driver qualify a semantic subset while leaving other conditions uninterpreted?
+
+R7:
+Can NASM/GAS realizations differ outside B while projecting the same canonical within B?
+
+## Current result
+
+Reduced from ontology:
+    evidence
+    support
+    exclusion
+    incompatibility
+
+Survivor:
+    interpretation boundary
+
+Current kernel hypothesis remains:
+    DETERMINATE CONDITION
+
+Current first-interpretation requirement:
+    BOUNDARY
+
+Next:
+Attack BOUNDARY and determine whether it is intrinsic to condition, intrinsic to interpretation, or derivable from determination.
