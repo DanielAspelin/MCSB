@@ -119,14 +119,14 @@ puts:
 .done:
     ret
 
-; isa-debug-exit at 0xf4: QEMU exits with (value<<1)|1.
+; isa-debug-exit at 0x501: QEMU exits with (value<<1)|1.
 quit_ok:
-    mov dx,0xf4
+    mov dx,0x501
     mov eax,0x10
     out dx,eax
     hlt
 quit_bad:
-    mov dx,0xf4
+    mov dx,0x501
     mov eax,0x11
     out dx,eax
     hlt
