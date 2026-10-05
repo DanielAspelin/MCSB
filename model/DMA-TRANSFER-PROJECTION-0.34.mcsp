@@ -1,0 +1,82 @@
+# MCSP DMA Transfer Projection 0.34
+
+Status: Constructive non-CPU realization model
+Qualification: Under Conditional Experiment
+
+## Purpose
+
+Test whether MCSP pre-settlement and preservation can cross from processor-instruction realizations into a DMA-style transfer realization without making CPU instructions, registers, opcodes, or instruction count part of the semantic invariant.
+
+This checkpoint models a DMA realization contract. It does not claim execution by a physical DMA controller.
+
+## Pre-settled transfer invariant
+
+For the declared fixture, the material invariant is:
+
+- source role;
+- destination role;
+- transfer extent;
+- material payload distinctions;
+- completion requirement;
+- failure state;
+- forbidden-effect condition;
+- provenance/dependency token when declared material.
+
+The following remain realization-defined:
+
+- DMA controller identity;
+- descriptor binary format;
+- bus address representation;
+- queue/ring organization;
+- cache-coherency mechanism;
+- interrupt/polling completion mechanism;
+- physical path;
+- burst width;
+- scheduling;
+- implementation timing.
+
+## Bootstrap descriptor projection
+
+The 0.34 structural projection is:
+
+    source_token
+    destination_token
+    extent
+    payload_token
+    provenance_token
+    completion
+    failure
+    forbidden_effect
+
+This tuple is qualification scaffolding, not the MCSP kernel and not a universal DMA descriptor format.
+
+## Preservation
+
+A DMA-style realization satisfies the declared fixture only when:
+
+1. source and destination roles remain applicable;
+2. extent is preserved;
+3. material payload distinctions are preserved;
+4. required provenance/dependency is preserved;
+5. completion satisfies the pre-settlement;
+6. failure is not silently converted into success;
+7. forbidden effects are absent.
+
+Same final payload with wrong material provenance MUST fail when provenance is part of the pre-settlement.
+
+## Hardware boundary
+
+CPU execution of a validator can test the descriptor/projection contract.
+
+That is not evidence that a physical DMA controller performed the transfer.
+
+Qualification levels are therefore separated:
+
+- DMA semantic projection;
+- DMA descriptor/validator implementation;
+- emulated/simulated DMA execution;
+- physical DMA controller execution.
+
+Only the applicable achieved level may be claimed.
+
+Kernel remains DETERMINATE CONDITION.
