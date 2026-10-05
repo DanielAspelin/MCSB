@@ -1,0 +1,133 @@
+# MCSP Determinate Condition Kernel 0.16
+
+Status: Constructive kernel experiment
+Qualification: Under Conditional Experiment
+Parent: Determination Boundary 0.15
+
+## Reduction result
+
+CONDITION and DETERMINATION are not accepted as two independent primitives.
+
+A CONDITION without any determination cannot support a qualified interpretation.
+DETERMINATION without a condition has nothing to constrain.
+
+The current kernel candidate is therefore a coupled form:
+
+    DETERMINATE CONDITION
+
+This phrase is documentary. It does not imply a named object, Boolean value, state, position, order, type, or host representation.
+
+## Kernel rule
+
+MCSP may admit a pre-semantic condition only insofar as it constrains the interpretations that may validly be projected from it.
+
+The kernel does not prescribe which interpretation wins.
+It only rejects the claim that every interpretation is equally supported.
+
+## Non-arbitrariness
+
+For any claimed interpretation I over a determinate condition K:
+
+    QUALIFIED(K,I)
+
+requires evidence sufficient to exclude at least one incompatible interpretation under the same declared interpretation boundary.
+
+If no incompatible interpretation can in principle be excluded, the claim remains unqualified.
+
+This is a qualification rule, not binary truth semantics.
+
+## Emergence
+
+From determinate condition, later MCSP layers may establish:
+
+    distinction
+    relation
+    identity
+    position
+    order
+    scope
+    state
+    transition
+    semantics
+    canonicalization
+    orthogonalization
+    topology
+    taxonomy
+    extension
+    realization
+
+None is silently inserted into the kernel.
+
+## State rule
+
+STATE remains derived.
+
+STATE is an interpreted configuration supported by determinate conditions and qualified relations.
+
+## Canonical rule
+
+A canonical definition is reusable semantic structure.
+
+Applying a canonical to a realization requires sufficient determination to support every distinction material to that canonical's semantic invariant.
+
+## Extension rule
+
+Unknown conditions may remain uninterpreted.
+
+New interpretations may be added later without rewriting the kernel or changing existing canonical meanings.
+
+## Driver rule
+
+A driver qualifies only the semantic subset it invokes.
+
+It need not classify or name every exposed device condition.
+
+## Kernel tests
+
+A determinate-condition kernel must be:
+- object-free
+- name-free
+- identity-free
+- value-free
+- state-free
+- binary-free
+- position-free
+- order-free
+- taxonomy-free
+- host-free
+- product-free
+- non-vacuous
+- extensible
+- self-describable
+
+## Counterexample policy
+
+The kernel hypothesis fails if a meaningful qualified interpretation:
+1. requires no determination whatsoever; or
+2. cannot be expressed without inserting a semantic product into the kernel; or
+3. requires a host-specific representation to define the kernel; or
+4. makes unsupported and supported interpretations indistinguishable to qualification.
+
+## Current residue
+
+Still unresolved:
+
+    evidence
+    incompatible
+    interpretation boundary
+    support
+    exclusion
+
+These are targets for later reduction, not accepted hidden primitives.
+
+## Constructive conclusion
+
+The strongest current kernel candidate is not CONDITION plus a separate DETERMINATION object.
+
+It is:
+
+    determinate condition
+
+where condition and determinacy are inseparable aspects of the pre-semantic qualification boundary.
+
+No Permanent Seal is asserted.
