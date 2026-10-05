@@ -1,0 +1,260 @@
+# MCSP Continuous Pre-Settlement Scaffolding 0.24
+
+Status: Constructive architecture
+Qualification: Under Conditional Experiment
+Parent: Preservation and Pre-Settlements 0.23
+
+## 1. Objective
+
+MCSP SHALL support continuous pre-settlement through semantic scaffolding.
+
+As interpretation becomes richer, MCSP may establish additional qualified commitments without requiring the complete semantic structure or final hardware realization to be known in advance.
+
+The process is progressive:
+
+    determinate condition
+      -> initial pre-settlement
+      -> scaffold
+      -> additional qualified pre-settlement
+      -> richer scaffold
+      -> realization
+      -> qualification
+      -> further qualified refinement
+
+Continuous does not mean uncontrolled or automatic.
+
+## 2. Scaffold
+
+A SCAFFOLD is a provisional semantic structure that:
+- retains qualified pre-settlements;
+- exposes unresolved dimensions;
+- permits later extension;
+- records applicability;
+- records qualification state;
+- preserves lineage;
+- does not silently convert open dimensions into fixed assumptions.
+
+A scaffold is not necessarily a runtime object.
+
+## 3. Continuous pre-settlement
+
+A scaffold continuously pre-settles by adding qualified commitments as sufficient determination becomes available.
+
+At each step:
+
+    settled := qualified commitments
+    open    := explicitly unresolved or realization-variable dimensions
+
+A valid refinement may increase settled structure while preserving legitimate openness.
+
+## 4. Monotonic rule
+
+Where applicability remains unchanged:
+
+    new pre-settlement SHALL preserve prior qualified commitments.
+
+A refinement may add information.
+
+It SHALL NOT silently contradict an earlier qualified commitment.
+
+If contradiction is required, the affected settlement is:
+- suspended;
+- versioned;
+- requalified;
+- or replaced by an explicit successor with lineage.
+
+This follows MCSP qualification/versioning discipline.
+
+## 5. Narrowing rule
+
+A later scaffold may legitimately narrow applicability.
+
+Such narrowing SHALL be explicit.
+
+A narrower settlement does not prove the broader settlement false.
+
+Example structural relation:
+
+    broad semantic pre-settlement
+      -> narrower device extension
+      -> concrete realization
+
+The narrower layer inherits only commitments that remain applicable.
+
+## 6. Open-dimension rule
+
+Orthogonal dimensions may remain intentionally unsettled.
+
+Examples may include:
+- host;
+- ISA;
+- assembler;
+- representation;
+- position;
+- encoding;
+- scheduling mechanism;
+- transport;
+- device implementation.
+
+A scaffold SHALL distinguish:
+
+    PRESET
+    CONSTRAINED
+    OPEN
+    REALIZATION_DEFINED
+    UNSUPPORTED
+    UNRESOLVED
+
+These are qualification/scaffolding statuses, not kernel ontology.
+
+## 7. Canonical scaffolding
+
+A canonical is a reusable qualified pre-settlement scaffold.
+
+A more specialized canonical may extend another canonical if it preserves inherited material invariants.
+
+Thus semantic construction can proceed without rebuilding meaning from zero.
+
+## 8. Extension scaffolding
+
+Drivers, protocols, devices, operating systems, and applications may add local pre-settlements.
+
+They SHALL declare:
+- inherited settlements;
+- new settlements;
+- open dimensions;
+- realization-specific dimensions;
+- applicability;
+- qualification evidence.
+
+This enables progressive hardware approach without forcing universal device semantics.
+
+## 9. Correspondence reduction
+
+0.23 left CORRESPOND / "matched" unresolved.
+
+Under scaffolding, correspondence need not mean equality.
+
+Two interpreted conditions correspond when they independently satisfy the same material pre-settlement within the relevant applicability.
+
+Provisional:
+
+    SATISFY(A, P)
+    SATISFY(B, P)
+      -> CORRESPOND(A, B, P)
+
+CORRESPOND is therefore likely derived.
+
+The deeper unresolved relation becomes SATISFY.
+
+## 10. Satisfaction
+
+SATISFY does not mean textual equality or identical representation.
+
+It means that the determinations projected from a realization do not violate the material commitments of pre-settlement P.
+
+This remains qualification vocabulary.
+
+Candidate reduction:
+
+    SATISFY
+      := successful qualification against pre-settlement
+
+If retained, SATISFY is procedural rather than kernel ontology.
+
+## 11. Preservation reduction
+
+Then:
+
+    PRESERVE(P, A, B)
+
+can be reduced to qualified satisfaction of the same material pre-settlement across the compared projections, plus any pre-settled cross-condition relation.
+
+Therefore:
+
+    CORRESPOND
+    SATISFY
+    PRESERVE
+
+need not become pre-semantic primitives.
+
+Kernel remains:
+
+    DETERMINATE CONDITION
+
+## 12. Continuous hardware clearance
+
+Continuous pre-settlement provides a progressive route toward hardware clearance:
+
+    semantic invariant preset
+      -> irrelevant dimensions left open
+      -> canonical scaffold reused
+      -> extensions add only required commitments
+      -> realization fills hardware-specific dimensions
+      -> projection qualifies inherited settlements
+
+At no stage should implementation convenience silently settle an otherwise open semantic dimension.
+
+## 13. Independence consequence
+
+Host/hardware independence can emerge incrementally.
+
+A scaffold may first be:
+    representation-cleared
+
+then:
+    assembler-cleared
+
+then:
+    ISA-cleared
+
+then:
+    platform-cleared
+
+then:
+    cross-hardware qualified
+
+Each increase requires evidence.
+
+The semantic scaffold can therefore mature without pretending to have achieved universal independence at its first version.
+
+## 14. Recovery and contradiction
+
+If a later realization disproves a pre-settlement:
+
+    stop reliance on affected conclusion
+    preserve evidence
+    identify affected scaffold/version
+    de-naturalize if necessary
+    correct or successor-version the settlement
+    requalify affected descendants
+
+Unrelated qualified settlements need not automatically fail.
+
+## 15. Self-scaffolding target
+
+Ultimately MCSP SHALL be capable of using its own qualified semantic mechanisms to scaffold further MCSP definitions.
+
+That is a required part of self-description closure.
+
+Until this is demonstrated, continuous pre-settlement remains an architectural mechanism rather than a closed self-hosting system.
+
+## 16. Current result
+
+Continuous pre-settlement:
+    ADMITTED as constructive scaffolding mechanism.
+
+CORRESPOND:
+    DERIVED candidate.
+
+SATISFY:
+    qualification procedure candidate.
+
+PRESERVE:
+    DERIVED qualification relation.
+
+Pre-semantic kernel:
+    DETERMINATE CONDITION.
+
+Next:
+    formalize machine-readable pre-settlement/scaffold records and attack canonical normalization without relying on names.
