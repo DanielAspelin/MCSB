@@ -1,0 +1,126 @@
+# MCSP Semantic Definitions — 0.4
+
+**Qualification:** Under Conditional Experiment
+
+This file is the first machine-oriented bridge toward MCSP self-description. It is deliberately independent of ISA mnemonics.
+
+## Definition form
+
+Each semantic construct is represented by:
+
+    DEFINE {
+      identity
+      category
+      inputs
+      outputs
+      preconditions
+      transition
+      outcomes
+      relations
+      realization_constraints
+    }
+
+The DEFINE form is itself provisional and must eventually be representable as an MCSP construct.
+
+## Definitions
+
+    DEFINE VALUE {
+      category: state-construction
+      inputs: value, width
+      outputs: destination
+      transition: destination receives value under width
+      outcomes: completed | exception | unsupported
+    }
+
+    DEFINE COPY {
+      category: state-transfer
+      inputs: source, width
+      outputs: destination
+      transition: destination receives source value
+      outcomes: completed | exception | unsupported
+    }
+
+    DEFINE POSITION {
+      category: relation
+      inputs: base, displacement, index, scale, relation
+      outputs: address
+      transition: derive address relation
+      outcomes: completed | exception | unsupported
+    }
+
+    DEFINE READ {
+      category: state-transfer
+      inputs: address, width, attributes
+      outputs: destination
+      relations: POSITION, TRANSLATE
+      transition: addressed state is observed and transferred to destination
+      outcomes: completed | exception | unsupported | environment-defined
+    }
+
+    DEFINE WRITE {
+      category: state-transfer
+      inputs: address, source, width, attributes
+      outputs: addressed-state
+      relations: POSITION, TRANSLATE
+      transition: source value changes addressed state subject to constraints
+      outcomes: completed | exception | unsupported | environment-defined
+    }
+
+    DEFINE COMPUTE {
+      category: state-transition
+      inputs: operation, values, width, attributes
+      outputs: destination
+      transition: operation maps input values to output value/state
+      outcomes: completed | exception | unsupported
+    }
+
+    DEFINE COMPARE {
+      category: relation-evaluation
+      inputs: relation, values, width
+      outputs: condition
+      transition: derive condition state
+      outcomes: completed | exception | unsupported
+    }
+
+    DEFINE BRANCH {
+      category: control-transition
+      inputs: condition?, target, fallthrough?
+      outputs: control-position
+      transition: select next control position
+      outcomes: completed | exception | unsupported
+    }
+
+    DEFINE INVOKE {
+      category: control-transition
+      inputs: target, continuation, convention
+      outputs: control-position, continuation-relation
+      transition: transfer control while preserving a continuation relation
+      outcomes: completed | exception | unsupported
+    }
+
+    DEFINE RETURN {
+      category: control-transition
+      inputs: continuation, convention
+      outputs: control-position
+      transition: restore/select continuation control position
+      outcomes: completed | exception | unsupported
+    }
+
+## Unresolved definitions
+
+The following terms are intentionally not declared closed:
+
+- STATE
+- VALUE representation
+- width
+- relation
+- attributes
+- TRANSLATE
+- condition
+- operation
+- convention
+- exception
+- environment-defined
+- realization constraint
+
+They form the current self-description residue. The next closure work must decompose them rather than assuming their meaning.
