@@ -1,0 +1,58 @@
+# MCSP Emulated DMA Realization 0.35
+
+Status: Experimental realization design
+Qualification: Under Conditional Experiment
+
+## Selected mechanism
+
+QEMU's PCI EDU device is selected as the first emulated DMA realization witness because it exposes an explicit DMA engine while remaining isolated from physical host devices.
+
+This device is realization evidence only. Its register layout does not define MCSP semantics.
+
+## Semantic inheritance
+
+0.35 inherits the 0.34 transfer pre-settlement:
+
+- source role;
+- destination role;
+- extent;
+- material payload distinctions;
+- material provenance/dependency where declared;
+- completion;
+- failure;
+- forbidden effects.
+
+The EDU-specific MMIO registers, PCI BAR, DMA command encoding, guest physical addresses, interrupt behavior and QEMU implementation are REALIZATION_DEFINED.
+
+## Required observation
+
+A qualifying experiment SHALL:
+
+1. initialize a known source buffer;
+2. initialize a distinct destination buffer;
+3. submit an EDU DMA operation through the emulated device;
+4. observe device completion;
+5. observe destination memory after device completion;
+6. compare the destination with the pre-settled material payload;
+7. retain source/destination/provenance/extent/completion/failure evidence;
+8. reject a deliberately incompatible fixture.
+
+CPU copying of source to destination SHALL NOT count as DMA evidence.
+
+## Qualification boundary
+
+A successful QEMU EDU experiment may qualify:
+
+    emulated PCI DMA realization
+
+It SHALL NOT be described as:
+
+    physical DMA controller qualification
+    native hardware DMA qualification
+    universal non-CPU hardware independence
+
+## Recovery
+
+The experiment SHALL run with temporary guest/build artifacts and no host physical-device passthrough.
+
+Kernel remains DETERMINATE CONDITION.
