@@ -1,0 +1,100 @@
+# MCSP Anonymous Condition Kernel 0.14
+
+Status: Constructive experiment
+Qualification: Under Conditional Experiment
+Parent: 0.13
+
+## Governing correction
+
+CONDITION is the current pre-semantic substrate candidate.
+
+STATE is derived and SHALL NOT define CONDITION.
+
+A CONDITION SHALL NOT require a prior:
+NAME, IDENTITY, VALUE, TYPE, STATE, POSITION, ORDER, TAXONOMY, or host representation.
+
+Symbols used to discuss a condition are documentary representations and do not confer intrinsic identity.
+
+## Interpretation boundary
+
+The kernel does not prescribe what a condition means.
+
+Meaning is introduced only through qualified interpretation.
+
+Provisional emergence:
+
+CONDITION
++ qualified interpretation
++ distinguishability
++ relation
+= interpreted semantic structure
+
+STATE is an interpreted condition or configuration. It is not the pre-semantic condition itself.
+
+NAME is an optional later representation relation. Naming is not an existence requirement.
+
+## MCSP systems
+
+MCSP SHALL distinguish its own:
+- ontology
+- semantics
+- dimensions
+- canonicalization
+- orthogonalization
+- topology
+- taxonomy
+- extensions
+- realizations
+
+These systems may relate but SHALL NOT silently substitute for one another.
+
+## Decomposition
+
+An interpreted MCSP construct must be decomposable toward the condition kernel.
+
+A decomposition records only applicable dimensions and relations. Missing dimensions SHALL NOT be filled by invented semantics.
+
+Pre-written canonical semantics are reusable commitments. They constrain a construct only when that canonical is invoked.
+
+Therefore:
+
+canonical availability != universal semantic obligation
+
+Extension semantics may add meaning without mutating an invoked canonical.
+
+## Driver consequence
+
+A device or driver may expose conditions first and introduce only the distinctions, relations, canonicals, extensions, and realization constraints required by its contract.
+
+A driver is not required to implement the whole MCSP semantic universe.
+
+## Kernel tests
+
+A CONDITION candidate must remain independent of:
+1. object
+2. intrinsic identity
+3. value
+4. STATE
+5. binary truth/value
+6. position
+7. order
+8. language/name
+9. taxonomy
+10. host/ISA/assembler
+11. semantic product
+
+It must additionally satisfy:
+12. non-vacuity: qualified interpretation must eventually be distinguishable from arbitrary assertion.
+13. self-description: MCSP must eventually express the kernel boundary through its own admitted mechanism.
+
+## Residue
+
+The terms interpretation, distinction, relation, boundary, observation, and admissibility remain unresolved semantic residue. They are not accepted as primitives merely because this document uses them.
+
+## Constructive hypothesis
+
+MCSP SHALL permit an anonymous pre-semantic CONDITION without requiring STATE or semantic naming.
+
+STATE, identity, naming, value, and richer semantics SHALL arise only through subsequent qualified interpretation.
+
+This is not a Permanent Seal.
