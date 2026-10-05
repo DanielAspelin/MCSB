@@ -1,0 +1,199 @@
+# MCSP Structural Scaffold Carrier 0.25
+
+Status: Constructive bootstrap design
+Qualification: Under Conditional Experiment
+Parent: Continuous Pre-Settlement Scaffolding 0.24
+
+## 1. Purpose
+
+Provide a machine-representable scaffold form for continuous pre-settlement and canonical normalization.
+
+This carrier is NOT the final MCSP-native encoding.
+
+It is bootstrap scaffolding used to discover the encoding MCSP must eventually describe for itself.
+
+## 2. Principle
+
+Names may locate records.
+
+Names SHALL NOT determine semantic equivalence.
+
+Two independently authored scaffolds may use different documentary identifiers and still normalize to the same semantic structure.
+
+## 3. Record form
+
+A scaffold record provisionally contains:
+
+    record {
+        local_id
+        qualification
+        applicability
+        commitments[]
+        relations[]
+        dimensions[]
+        dependencies[]
+        extensions[]
+        realization_constraints[]
+        unresolved[]
+    }
+
+local_id is documentary only.
+
+## 4. Commitment
+
+A commitment records a pre-settlement:
+
+    commitment {
+        local_id
+        structure
+        materiality
+        applicability
+        qualification
+    }
+
+The semantic authority is the qualified structure, not local_id.
+
+## 5. Relation
+
+A relation records structural participation:
+
+    relation {
+        kind_structure
+        participants[]
+        applicability
+        qualification
+    }
+
+kind_structure must itself eventually be represented structurally.
+
+A textual relation name is bootstrap metadata only.
+
+## 6. Dimension status
+
+Each applicable dimension records one of:
+
+    PRESET
+    CONSTRAINED
+    OPEN
+    REALIZATION_DEFINED
+    UNSUPPORTED
+    UNRESOLVED
+
+The status vocabulary is bootstrap qualification notation and must later be self-described.
+
+## 7. Normalization objective
+
+Normalization SHALL remove documentary differences that do not change qualified semantic structure.
+
+Candidate normalization steps:
+
+1. discard non-semantic documentary labels;
+2. retain qualification/applicability boundaries;
+3. reduce derived aliases to their qualified structural definitions;
+4. order structural records deterministically;
+5. canonicalize relation participant ordering only where the relation is qualified order-insensitive;
+6. retain order where material;
+7. retain open/constrained/preset dimension status;
+8. retain unresolved residue;
+9. produce a deterministic structural form;
+10. derive a structural digest only after deterministic form exists.
+
+A digest is evidence of normalized representation equality, not semantic proof by itself.
+
+## 8. Equivalence
+
+Two scaffolds are candidate-equivalent when their normalized qualified structures are isomorphic under documentary identifier renaming while preserving:
+
+    material commitments
+    applicability
+    relation structure
+    material order
+    dimension status
+    qualification
+    unresolved semantic residue
+
+Identifier equality is neither necessary nor sufficient.
+
+## 9. Canonicalization
+
+A CANONICAL may be represented as a normalized qualified pre-settlement scaffold.
+
+Thus:
+
+    CANONICAL
+      := qualified reusable normalized scaffold
+         with stable material invariant
+
+This remains a constructive definition.
+
+## 10. Continuous pre-settlement
+
+A successor scaffold may add commitments while preserving inherited qualified commitments.
+
+Provisional lineage:
+
+    scaffold_n
+      -> qualified refinement
+      -> scaffold_n+1
+
+The successor records:
+- inherited structure;
+- additions;
+- explicit narrowing;
+- superseded unqualified hypotheses;
+- affected qualification.
+
+Silent mutation is forbidden.
+
+## 11. Orthogonalization
+
+A dimension is an orthogonal candidate only if controlled scaffold variants can change that dimension while preserving selected other material commitments.
+
+Therefore orthogonalization becomes testable over normalized scaffolds.
+
+## 12. Hardware independence
+
+Hardware-specific realization records may differ substantially while projecting to the same normalized semantic scaffold.
+
+That provides a structural target for hardware-independence qualification.
+
+The normalized scaffold does not erase material hardware constraints when those constraints are part of the pre-settlement.
+
+## 13. Anonymous condition
+
+The carrier SHALL permit a determinate condition to participate without a human semantic name.
+
+A local machine identifier may be necessary for representation, but it is not semantic identity.
+
+This distinction is mandatory.
+
+## 14. Bootstrap warning
+
+This file still uses:
+- textual field names;
+- textual statuses;
+- documentary ordering;
+- external parser assumptions.
+
+Therefore it does NOT satisfy MCSP self-description closure.
+
+These dependencies must be progressively replaced by MCSP-described structure.
+
+## 15. Next implementation
+
+Create a minimal bootstrap scaffold data instance containing:
+- the determinate-condition kernel candidate;
+- pre-settlement;
+- continuous refinement;
+- canonical normalization obligations;
+- open hardware/host dimensions.
+
+Then implement deterministic normalization in C and test:
+- renaming invariance;
+- ordering invariance where non-material;
+- ordering sensitivity where material;
+- open-versus-preset sensitivity;
+- qualification sensitivity;
+- unresolved-residue sensitivity.
+
+No runtime PASS is asserted by this specification.
