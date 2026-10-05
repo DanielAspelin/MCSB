@@ -1,44 +1,69 @@
 # MCSP Closure Ledger
 
-**Version:** 0.5  
-**Purpose:** Prevent unresolved semantics from being mistaken for primitive closure.
+**Version:** 0.6  
+**Qualification:** Under Conditional Experiment
 
-| Term | 0.5 status | Depends on / next test |
-| --- | --- | --- |
-| CONSTRUCT | candidate foundation | identity, relation, state |
-| DEFINE | structurally recursive | CONSTRUCT + RELATION |
-| IDENTITY | candidate | scope |
-| RELATION | candidate foundation | source, target, relation-kind |
-| POSITION | decomposed provisionally | space, coordinates |
-| VALUE | decomposed provisionally | representation, width |
-| WIDTH | decomposed provisionally | unit, extent |
-| STATE | decomposed provisionally | observation |
-| TRANSITION | decomposed provisionally | operation, constraints, outcome |
-| CONDITION | decomposed provisionally | relation, observation |
-| ATTRIBUTE | decomposed provisionally | relation + value |
-| CONSTRAINT | decomposed provisionally | requirement |
-| SPACE | decomposed provisionally | identity + relations |
-| OPERATION | decomposed provisionally | transition rule |
-| OUTCOME | decomposed provisionally | classification/state |
-| EXCEPTION | decomposed provisionally | cause |
-| CONVENTION | decomposed provisionally | rules |
-| REALIZATION | decomposed provisionally | host, capability, mapping |
-| CAPABILITY | decomposed provisionally | availability |
-| representation | OPEN | encode distinguishable state |
-| observation | OPEN | relation between state and observer/position |
-| unit | OPEN | measurement/partition relation |
-| extent | OPEN | bounded relation over space |
-| scope | OPEN | identity domain |
-| coordinates | OPEN | positional representation |
-| mapping | OPEN | relation-preserving correspondence |
-| ordering | OPEN | relation among transitions/positions |
-| requirement | OPEN | admissibility relation |
-| event | OPEN | observable transition/state |
-| rule | OPEN | relation governing admissible transition |
-| cause | OPEN | explanatory/precedence relation |
-| logical observation position | OPEN | state + ordering model |
-| availability | OPEN | capability/resource state |
+## Reduced terms
 
-## Qualification rule
+| Term | 0.6 reduction |
+| --- | --- |
+| representation | REPRESENT relation |
+| observation | OBSERVE relation over STATE at ORDER position |
+| unit | UNIT partition reference |
+| extent | bounded POSITION relation under UNIT |
+| scope | relation domain for identity distinction |
+| coordinates | representation of POSITION relative to reference |
+| mapping | MAP correspondence relation |
+| ordering | ORDER relation |
+| requirement | REQUIRE / CONSTRAINT relation |
+| event | observed TRANSITION construct |
+| rule | admissible transition RELATION |
+| cause | antecedent/consequent relation under RULE |
+| logical observation position | POSITION within ORDER space |
+| availability | STATE over resource/capability under constraints |
 
-A term moves from OPEN only when its definition reduces semantic residue rather than merely renaming it. Cycles are permitted only when their semantics are fully expressed by a finite closed relation graph.
+## Candidate foundational graph
+
+- CONSTRUCT
+- RELATION
+- IDENTITY
+- SCOPE
+- STATE
+- POSITION
+- ORDER
+- TRANSITION
+- OPERATION
+- CONSTRAINT
+- OUTCOME
+
+Derived machinery includes REPRESENT, UNIT, EXTENT, COORDINATE, MAP, OBSERVE, REQUIRE, EVENT, RULE, CAUSE, AVAILABLE, REALIZATION, CAPABILITY, ADDRESS, WIDTH, VALUE, READ, WRITE, COPY, COMPUTE, SCHEDULE, ALLOCATE, RELEASE, TRANSFER, SIGNAL and control-transition constructs.
+
+## Open foundational residue
+
+| Residue | Why still open |
+| --- | --- |
+| distinguishability | needed to explain identity/value/state without circular synonym substitution |
+| configuration | needed for STATE |
+| collection / cardinality | needed for relation sets and repeated structures |
+| partition | needed for UNIT and bounded representation |
+| correspondence | needed for MAP/REPRESENT |
+| admissibility | needed for CONSTRAINT/RULE |
+| occurrence | needed to distinguish a transition definition from a transition instance |
+| semantic preservation/equivalence | needed to qualify host realizations |
+| termination criterion | needed to prove finite closure rather than merely observe a finite document |
+
+## Cycle audit
+
+- CONSTRUCT <-> RELATION: mutual recursion; provisionally acceptable as graph structure, semantically unqualified.
+- IDENTITY <-> SCOPE: mutual dependence; requires domain/distinction formalization.
+- STATE <-> OBSERVE: previous definitional cycle reduced; STATE no longer depends on OBSERVE for its definition.
+- OPERATION -> RULE -> RELATION: structurally finite, semantics depend on admissibility.
+- REALIZATION -> MAP -> correspondence: open until preservation/equivalence is formalized.
+
+## Qualification gate for 0.7
+
+Do not declare self-description closure unless:
+1. foundational residue is represented without introducing equal or greater unexplained residue;
+2. recursive definition graph has an explicit finite termination criterion;
+3. host realization equivalence can be stated and tested;
+4. at least x86-64, AArch64 and RISC-V mappings pass representative semantic tests.
