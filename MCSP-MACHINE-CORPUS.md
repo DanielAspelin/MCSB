@@ -1,4 +1,4 @@
-# MCSP Machine Corpus — Constructive Specification 0.2
+# MCSP Machine Corpus — Constructive Specification 0.3
 
 **Project:** Machine Construct Set Positional (MCSP)  
 **Repository lineage:** MCSB  
@@ -6,13 +6,36 @@
 **Qualification:** Pre-informative / Unverified  
 **Origin:** Successor to the initial README specification; the originating README remains unchanged.
 
+## Governing requirements
+
+MCSP has two governing requirements:
+
+1. **Host independence** — fundamental MCSP meaning must not depend on x86-64, AArch64, RISC-V, a particular operating system, firmware, bus, device, protocol, or vendor.
+2. **Self-description closure** — MCSP must be able to formally describe its own constructs, definitions, relationships, semantics, encodings, execution rules, and host-realization rules using MCSP constructs.
+
+External specifications are evidence and realization inputs. They do not define MCSP's universal semantics.
+
+A proposed primitive is not accepted as host-independent merely because it appears on several hosts. A host mapping must preserve the primitive's meaning without changing that meaning.
+
+Self-description has not closed while an undefined external language is required to explain the formal meaning of MCSP itself.
+
 ## Objective
 
-Develop MCSP from real machine specifications, beginning with assembly-visible computation and progressively decomposing the hardware mechanisms around it. MCSP does not assume that every hardware operation is a CPU opcode. It models instructions together with registers, memory, addresses, queues, descriptors, MMIO/port I/O, DMA, interrupts, firmware interfaces, protocols and device state.
+Develop MCSP from real machine specifications, beginning with assembly-visible computation and progressively decomposing all relevant hardware mechanisms. MCSP does not assume every hardware operation is a CPU opcode. It models instructions together with registers, memory, addresses, queues, descriptors, MMIO/port I/O, DMA, interrupts, firmware interfaces, protocols, devices, links and state.
 
 The working question is:
 
-> What is the smallest machine construct vocabulary capable of describing computation across different processors and hardware domains while preserving host-specific behavior?
+> What is the smallest host-independent machine construct vocabulary capable of describing computation, its own definition, and its realization on different processors and hardware domains?
+
+## Architectural layers
+
+    MCSP self-description
+        -> host-independent construct semantics
+            -> realization mapping
+                -> ISA / bus / device / protocol / firmware
+                    -> concrete machine
+
+Human syntax and binary encoding are projections/realizations and are not the semantic foundation.
 
 ## Initial architecture set
 
@@ -20,7 +43,7 @@ The working question is:
 - AArch64 / A64
 - RISC-V
 
-Additional architectures are admitted only through explicit mappings rather than by silently generalizing one ISA.
+Additional architectures are admitted through explicit mappings rather than by silently generalizing one ISA.
 
 ## Hardware domains
 
@@ -28,48 +51,78 @@ Additional architectures are admitted only through explicit mappings rather than
 Instructions; operands; general, vector, control and system registers; execution state; privilege; exceptions; interrupts; atomics; synchronization; timers; virtualization; encoding.
 
 ### Memory
-Physical and virtual addresses; regions; blocks; pages; loads; stores; allocation; release; translation; protection; attributes; ordering; barriers; caches; coherency; atomics; DMA-visible memory.
+Physical and virtual addresses; regions; blocks; pages; loads; stores; allocation; release; translation; protection; attributes; ordering; barriers; caches; coherency; atomics; DMA-visible memory; persistent/nonvolatile memory where applicable.
 
 ### Storage
-Blocks; namespaces; queues; command descriptors; read/write; flush; completion; persistence; DMA; controller registers; interrupts. Initial concrete model: NVMe/NVM command set.
+Blocks; sectors/logical blocks; namespaces; queues; command descriptors; read/write; flush; completion; persistence; DMA; controller registers; interrupts; removable and embedded storage. Initial concrete model: NVMe/NVM command set, with ATA/SATA, SCSI and SD-family mappings staged.
 
-### Graphics and display
-GPU-visible memory; command buffers/queues; synchronization; compute/graphics execution; framebuffer/image state; scanout/display controller; display links and device commands. GPU execution and physical display output remain distinct domains.
+### Graphics / compute acceleration
+GPU-visible memory; command buffers; command queues; shaders/kernels; synchronization; compute and graphics execution; images/textures/buffers; accelerator-local state. GPU computation remains distinct from physical display output.
+
+### Display
+Framebuffer/scanout state; display controller; timing; pixel formats; connectors/links; display identification; device commands; brightness/power/control. Display output is modeled independently of GPU execution.
 
 ### Network
-NIC registers; MMIO; DMA; TX/RX descriptor rings; queues; interrupts/MSI-X; link frames; MAC addressing; IPv4/IPv6; ICMP; UDP; TCP; address resolution; routing; configuration; and higher protocol projections where needed.
+NIC registers; MMIO; DMA; TX/RX descriptors and rings; queues; interrupts/MSI-X; link frames; MAC addressing; Ethernet; IPv4/IPv6; ARP/NDP; ICMP; UDP; TCP; DHCP; DNS; routing; multicast; configuration; sockets/API projections; wireless and cellular link realization where applicable.
 
 Conceptual transmit path:
 
-    CPU instruction
+    instruction
       -> memory
       -> descriptor
-      -> allocation
+      -> allocate/map
       -> queue/schedule
-      -> DMA
+      -> DMA/transfer
       -> NIC
       -> frame
       -> packet
       -> transport
-      -> remote machine
+      -> link
+      -> remote host
 
 Receive is the corresponding inbound state-transfer path.
 
-### Bus and I/O
-PCI Express; MMIO; port I/O where applicable; DMA; enumeration; configuration space; interrupts; device registers; queue/doorbell mechanisms.
+### Bus / interconnect / I/O
+PCI Express; MMIO; port I/O where applicable; DMA; enumeration; configuration space; interrupts; MSI/MSI-X; device registers; queue/doorbell mechanisms; USB; serial buses; on-board interconnects.
 
-### Firmware and platform
-Reset; boot; firmware interfaces; hardware discovery; power state; platform configuration; UEFI; ACPI; timers.
+### Firmware / platform / boot
+Reset; initialization; boot; firmware interfaces; hardware discovery; power states; platform configuration; UEFI; ACPI; device trees where applicable; timers; clocks; watchdogs; secure/verified boot mechanisms as realization features.
 
-### Peripheral domains
-USB; serial/UART; SPI; I2C/I3C; GPIO; audio; input; camera; sensors; Bluetooth; Wi-Fi; cellular; GNSS; accelerators. These are staged corpus targets and are not yet claimed as decomposed.
+### Input
+Keyboard; pointer; touch; HID; game/input controllers; buttons; digitizers and other human-interface sources.
+
+### Audio
+PCM/sample representation; buffers; streams; clocks; codecs; capture; playback; DMA; device control; digital audio links.
+
+### Camera / imaging
+Sensors; pixel formats; buffers; capture queues; control; timing; DMA; image-processing accelerators.
+
+### Sensors / positioning
+Accelerometer; gyroscope; magnetometer; environmental sensors; GNSS; timing and location measurements; sensor buses.
+
+### Wireless / radio
+Wi-Fi; Bluetooth; cellular; NFC/RFID where machine-accessible; radio control/data paths. Protocol layers remain distinguishable from physical-radio realization.
+
+### Power / thermal / clock
+Power states; voltage/frequency control; thermal state; sleep/wake; clocks; timers; counters; energy/resource constraints.
+
+### Security hardware
+Privilege mechanisms; memory protection; IOMMU; trusted/secure execution features; cryptographic accelerators; entropy/random-number hardware; device isolation. Host-specific trust models are mappings, not universal MCSP assumptions.
+
+### Virtualization
+CPU virtualization; virtual memory; virtual devices; emulation; paravirtual interfaces; IOMMU/device assignment; nested machine realization.
+
+### Peripheral / embedded I/O
+UART; SPI; I2C/I3C; GPIO; PWM; CAN and other machine-facing peripheral mechanisms as evidence becomes available.
 
 ## Candidate primitive vocabulary
 
-The following are candidates, not yet a closed universal set:
+Candidates, not yet a closed universal set:
 
 - construct
+- definition
 - identity
+- relation
 - position
 - address
 - width
@@ -88,6 +141,7 @@ The following are candidates, not yet a closed universal set:
 - allocate
 - release
 - map
+- unmap
 - translate
 - queue
 - descriptor
@@ -105,22 +159,72 @@ The following are candidates, not yet a closed universal set:
 - command
 - completion
 - device
+- interface
+- link
 - host
+- realization
 
 ## Fundamental separation
 
-MCSP currently distinguishes:
-
-    syntax       = representation
-    semantics    = meaning/state transition
-    encoding     = binary or machine realization
+    syntax       = representation for humans/tools
+    semantics    = host-independent meaning/state transition
+    encoding     = concrete representation
+    position     = relationship/location within a construct space
     allocation   = placement/resource assignment
     scheduling   = temporal/order assignment
     execution    = performance of an operation
     transfer     = movement of state/data
+    realization  = mapping semantics to concrete machinery
     host         = concrete realization environment
 
-Allocation does not imply execution. Scheduling does not imply authority or placement. A write is an operation; the resulting mutation is a state transition.
+Allocation does not imply execution. Scheduling does not imply placement. Encoding does not define semantics. A write is an operation; the resulting mutation is a state transition. A protocol is not automatically a primitive merely because a host uses it.
+
+## Self-description model
+
+Every MCSP construct must ultimately be expressible as MCSP data/constructs with at least:
+
+    construct
+      identity
+      definition
+      relations
+      operands/inputs
+      results/outputs
+      pre-state
+      transition
+      post-state
+      ordering
+      representation
+      realization constraints
+
+MCSP must be able to represent this schema using the same construct system it defines.
+
+### Closure test
+
+For each candidate primitive:
+
+1. Define it using current MCSP constructs.
+2. Represent that definition in MCSP.
+3. Represent its relationships and execution/state rules in MCSP.
+4. Represent host mappings in MCSP.
+5. Determine whether an undefined external semantic primitive remains.
+6. If one remains, expose it as a candidate primitive or revise the model.
+7. Repeat until finite closure or a demonstrated obstruction is reached.
+
+Natural-language documentation may explain MCSP, but must not be the sole carrier of formal semantics.
+
+## Host-independence test
+
+For every fundamental construct:
+
+1. map it to x86-64 where applicable;
+2. map it to AArch64 where applicable;
+3. map it to RISC-V where applicable;
+4. map it to relevant device/protocol realizations;
+5. identify architecture-specific residue;
+6. move residue into the realization layer;
+7. reject or refine any alleged universal whose semantics change between mappings.
+
+Absence of a native host operation is permitted: a realization may require multiple instructions, firmware, software, emulation, or may report unsupported capability. The MCSP meaning itself remains stable.
 
 ## Cross-domain hypothesis
 
@@ -136,14 +240,17 @@ A provisional recurring pattern is:
       -> observe state
       -> release/reuse
 
-This is a hypothesis to test against each architecture and hardware domain, not a universal claim.
+This is evidence to test, not yet a universal law.
 
-## Specification corpus — initial authoritative sources
+## Specification corpus — authoritative-source families
+
+The corpus records source, version, licensing/access conditions, extracted machine concepts and MCSP mappings. Specification text is referenced and modeled rather than copied wholesale.
 
 ### Processor / ISA
 - Intel 64 and IA-32 Software Developer Manuals: https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html
-- Arm A-profile architecture material: https://www.arm.com/architecture/learn-the-architecture/a-profile
-- RISC-V ratified specifications: https://docs.riscv.org/
+- AMD64 architecture documentation: https://www.amd.com/en/search/documentation/hub.html
+- Arm A-profile architecture: https://www.arm.com/architecture/learn-the-architecture/a-profile
+- RISC-V specifications: https://docs.riscv.org/
 
 ### Storage
 - NVM Express specifications: https://nvmexpress.org/specifications/
@@ -153,49 +260,81 @@ This is a hypothesis to test against each architecture and hardware domain, not 
 - NVMe over TCP: https://nvmexpress.org/specification/tcp-transport-specification/
 
 ### Bus / I/O
-- PCI Express Base specification index: https://pcisig.com/specification-overview/pci-express-base
+- PCI Express specification index: https://pcisig.com/specification-overview/pci-express-base
+- USB specifications: https://www.usb.org/documents
 
-### Networking
-- IPv6, RFC 8200: https://www.rfc-editor.org/rfc/rfc8200.html
-- TCP, RFC 9293: https://www.rfc-editor.org/rfc/rfc9293.html
-- UDP, RFC 768: https://www.rfc-editor.org/rfc/rfc768.html
+### Firmware / platform
+- UEFI and ACPI specifications: https://uefi.org/specifications
 
-The corpus will expand with authoritative specifications for Ethernet, IPv4, ICMP, ARP/NDP, DHCP, DNS, USB, graphics/display, firmware/platform and peripheral domains.
+### Graphics / compute
+- Vulkan specification: https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html
 
-## Decomposition method
+### Network / Internet
+- IPv4: RFC 791
+- IPv6: RFC 8200
+- ARP: RFC 826
+- ICMPv4: RFC 792
+- ICMPv6 / NDP family: RFC 4443, RFC 4861
+- UDP: RFC 768
+- TCP: RFC 9293
+- DHCPv4: RFC 2131
+- DHCPv6: RFC 8415
+- DNS concepts/implementation baseline: RFC 1034, RFC 1035
+- RFC corpus: https://www.rfc-editor.org/
+
+Ethernet/Wi-Fi/Bluetooth/cellular and device-family specifications will be mapped from their respective standards bodies subject to availability and licensing.
+
+## Decomposition record
 
 For every architecture/domain entry record:
 
 1. construct identity;
-2. specification provenance and version;
+2. source provenance and version;
 3. architectural layer;
 4. inputs/operands;
 5. outputs/results;
 6. addressing/position;
 7. binary/register/descriptor representation;
-8. state before and after;
-9. ordering/scheduling constraints;
-10. memory effects;
-11. synchronization/completion;
-12. exception/error behavior;
-13. host-specific constraints;
-14. mapping to candidate MCSP primitives.
+8. pre-state;
+9. transition;
+10. post-state;
+11. ordering/scheduling constraints;
+12. memory/storage effects;
+13. synchronization/completion;
+14. exception/error behavior;
+15. privilege/security constraints;
+16. concurrency/atomicity;
+17. persistence/durability where relevant;
+18. host-specific constraints;
+19. MCSP primitive mapping;
+20. unresolved semantic residue;
+21. self-description status.
 
-Specification text is referenced and modeled, not indiscriminately copied. Licensing and access restrictions remain attached to source provenance.
+## Development sequence
 
-## First implementation sequence
-
-1. Processor: x86-64, AArch64, RISC-V.
-2. Memory semantics and addressing across all three.
-3. Interrupts, exceptions, atomics and ordering.
-4. PCIe/MMIO/DMA.
-5. NVMe block read/write path.
-6. NIC transmit/receive path and Ethernet/IP/UDP/TCP decomposition.
-7. GPU/display path.
-8. Firmware/boot/platform.
-9. Peripheral families.
-10. Compare all decompositions and reduce the primitive vocabulary.
+1. Processor: x86-64, AArch64, RISC-V instruction/register/state decomposition.
+2. Memory: addressing, load/store, pages, translation, ordering, atomics and caches.
+3. Exceptions, interrupts, timers and synchronization.
+4. PCIe/MMIO/DMA/IOMMU.
+5. Storage: NVMe block read/write/completion path, then additional storage families.
+6. Network: NIC TX/RX then Ethernet/IP/ICMP/UDP/TCP and configuration/name-resolution layers.
+7. GPU/accelerator execution.
+8. Display output/control.
+9. Firmware/boot/platform/power.
+10. USB and human input.
+11. Audio, camera and sensors.
+12. Wireless/radio and positioning.
+13. Embedded/peripheral buses.
+14. Virtualization and security hardware.
+15. Cross-domain reduction of primitives.
+16. Encode MCSP definitions in MCSP.
+17. Execute the self-description closure test.
+18. Build and test host realization mappings.
 
 ## Qualification boundary
 
-This document establishes the development topology only. It does not yet establish semantic equivalence among ISAs, universal primitives, complete hardware coverage, or production qualification. Each such conclusion requires evidence and architecture-specific testing.
+This specification establishes development topology and governing invariants. It does not yet establish semantic equivalence among ISAs, universal primitive closure, complete hardware coverage, executable self-description, or production qualification.
+
+Current qualification: **Under Constructive Development / Unverified**.
+
+A future Constructive Seal requires at minimum reproducible source provenance, formal construct definitions, cross-host mappings, a machine-readable self-description representation, closure testing, and contradiction tracking.
