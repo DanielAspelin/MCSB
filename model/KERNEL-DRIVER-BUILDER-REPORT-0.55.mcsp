@@ -1,0 +1,126 @@
+# MCSP Kernel Driver Builder Report 0.55
+
+Status: Constructive report-boundary experiment
+Qualification: Under Conditional Experiment
+Parents:
+- DETERMINE-CONDITION kernel lineage through 0.16
+- DRIVER-BUILDER-INTERFACE-0.52.mcsp
+- LINUX-KERNEL-OBJECT-PROJECTION-0.53.mcsp
+- KBUILD-MODULE-INTEGRATION-0.54.mcsp
+
+## Foundational notice: MCSP is a kernel
+
+MCSP is not merely a language, assembler, driver generator, or Linux integration
+layer. MCSP has its own kernel.
+
+    MCSP KERNEL = DETERMINATE CONDITION
+
+The MCSP kernel is the semantic and qualification center from which applicable
+construction obligations are determined.
+
+The Linux kernel is a distinct external operating-system kernel.
+
+Therefore:
+
+    MCSP kernel != Linux kernel
+
+and coupling MCSP to Linux does not subordinate the MCSP kernel to Linux semantics.
+
+Linux ABI, Kbuild, module metadata, return thunks, driver registration mechanisms,
+and hardware APIs are downstream realization constraints when Linux is the chosen
+projection.
+
+## Objective
+
+Produce a machine-representable driver-builder report from MCSP-kernel obligations
+and carry that report toward a hardware/OS realization without allowing the target
+kernel or driver builder to redefine the originating semantics.
+
+## Report record
+
+The bounded 0.55 record contains:
+
+    schema
+    semantic_relation
+    width_or_extent
+    source_role
+    destination_role
+    preservation
+    replacement
+    hardware_boundary
+    access_mode
+    transfer_mode
+    interrupt_mode
+    kernel_projection
+    qualification
+    unresolved_residue
+    lineage
+
+MODE is preferred to TYPE. STATE is not required.
+
+## Propagation
+
+    MCSP KERNEL
+       DETERMINATE CONDITION
+              |
+              v
+       semantic obligation
+              |
+              v
+       hardware examination
+              |
+              v
+       DRIVER-BUILDER REPORT
+              |
+              v
+       driver builder
+              |
+              v
+       MCSP Assembler / construction
+              |
+              v
+       target kernel object/module
+              |
+              v
+       Disassemble / Decompile / Verify
+              |
+              v
+       REALIZE / SUSPEND / REJECT
+
+## Authority direction
+
+Semantic authority flows from the MCSP kernel obligation into the report.
+
+Hardware observations constrain applicability and realization but do not rewrite
+the originating semantic obligation.
+
+The driver builder chooses implementation mechanisms within the report constraints.
+The external kernel supplies its realization boundary.
+Neither becomes the MCSP kernel.
+
+## Bounded fixture
+
+0.55 uses an x86-64/Linux projection with a bounded exclusive relation and a
+driver-builder report declaring:
+- width 64;
+- source preserved;
+- destination replaced;
+- hardware boundary x86-64;
+- access mode callable;
+- transfer mode register;
+- interrupt mode none;
+- kernel projection Linux;
+- qualified;
+- no unresolved residue.
+
+A compatible report may proceed to REALIZE.
+Unknown hardware or unresolved compatibility shall SUSPEND.
+Semantic mutation or incompatible construction shall REJECT.
+
+## Boundary
+
+This checkpoint does not load a driver, access hardware, register a Linux device,
+or claim universal driver generation.
+
+The MCSP kernel identity is architectural and semantic; 0.55 does not claim that
+MCSP is an operating-system kernel equivalent to Linux.
