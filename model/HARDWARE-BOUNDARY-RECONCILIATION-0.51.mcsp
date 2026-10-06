@@ -1,0 +1,115 @@
+# MCSP Hardware Boundary Reconciliation 0.51
+
+Status: Constructive hardware-boundary experiment
+Qualification: Under Conditional Experiment
+Parents:
+- HARDWARE-CLEARANCE-0.18.mcsp
+- INTERPRETATION-HARDWARE-INDEPENDENCE-0.19.mcsp
+- HARDWARE-INDEPENDENCE-MATRIX-0.20.md
+- TRANSFER-WITNESS-CONTRACTS-0.21.md
+- CONDITION-PROPAGATION-0.50.mcsp
+
+## Objective
+
+Exercise the established REALIZE propagation operation at a hardware boundary while
+preserving semantic authority above the hardware-specific projection.
+
+Kernel remains:
+
+    DETERMINATE CONDITION
+
+## Boundary rule
+
+A hardware boundary may determine whether and how a qualified semantic obligation
+can be realized. It SHALL NOT redefine that obligation merely because a particular
+machine representation differs.
+
+At a boundary MCSP may:
+
+    REALIZE
+    PROJECT
+    SUSPEND
+    REJECT
+
+REALIZE means a compatible concrete machine witness exists for the bounded
+obligation. It does not mean the concrete encoding becomes canonical semantics.
+
+## Bounded semantic obligation
+
+The 0.51 fixture uses the already-established exclusive bit relation:
+
+    relation = EXCLUSIVE
+    width = 64
+    source role = B
+    destination role = A
+    source preserved = true
+    destination replaced = true
+
+Truth relation:
+
+    0,0 -> 0
+    0,1 -> 1
+    1,0 -> 1
+    1,1 -> 0
+
+The relation is the obligation.
+An ISA encoding is a realization witness.
+
+## Hardware witnesses
+
+Known qualified lineage already contains bounded realization evidence for:
+
+    x86-64
+    AArch64
+    RISC-V
+
+0.51 does not claim those ISAs have identical instructions or encodings.
+It requires only preservation of the bounded obligation.
+
+Hardware identity is therefore applicability information, not semantic authority.
+
+## REALIZE contract
+
+Input:
+
+    qualified semantic obligation
+    hardware applicability
+    compatible realization witness
+
+Output:
+
+    REALIZE accepted
+    lineage advanced
+    semantic obligation preserved
+    hardware-specific representation permitted
+
+If hardware compatibility is unresolved:
+
+    SUSPEND
+
+If a material incompatibility is established:
+
+    REJECT
+
+If a proposed realization mutates the semantic obligation to fit hardware:
+
+    REJECT
+
+## Safety invariants
+
+1. hardware identifier cannot alter relation;
+2. hardware identifier cannot alter semantic width;
+3. realization cannot introduce STATE;
+4. realization cannot introduce TYPE;
+5. representation token is not semantic authority;
+6. unsupported hardware is explicit rather than guessed;
+7. absence of a witness does not imply semantic contradiction;
+8. terminal release/background execution are unrelated and remain absent.
+
+## Boundary
+
+0.51 qualifies the reconciliation mechanism against bounded existing witness
+classes. It does not prove support for every processor, device, bus, accelerator,
+memory topology, firmware interface, or physical machine.
+
+Hardware independence remains a qualification target, not an assumption.
