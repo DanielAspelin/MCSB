@@ -1,0 +1,73 @@
+# MCSP Linux Kernel Object Projection 0.53
+
+Status: Constructive kernel-object experiment
+Qualification: Under Conditional Experiment
+Parent:
+- DRIVER-BUILDER-INTERFACE-0.52.mcsp
+
+## Objective
+
+Allow a bounded MCSP construction to be emitted as a relocatable ELF object that
+can participate in a Linux kernel build/link boundary.
+
+This is a realization projection. Linux does not become MCSP semantic authority.
+
+MCSP kernel:
+
+    DETERMINATE CONDITION
+
+is distinct from the Linux operating-system kernel.
+
+## Projection
+
+    MCSP semantic obligation
+      -> MCSP construction/report
+      -> MCSP Assembler
+      -> Linux kernel-object projection
+      -> ELF relocatable object (.o)
+      -> Kbuild/link boundary
+
+0.53 stops before module loading, kernel insertion, or privileged execution.
+
+## Kernel-object requirements
+
+The bounded object SHALL:
+
+1. be ELF64 relocatable for x86-64;
+2. expose an explicit MCSP callable symbol rather than a userspace _start entry;
+3. contain no direct userspace write/exit syscall path;
+4. require no libc or userspace runtime;
+5. preserve the bounded MCSP exclusive relation;
+6. be inspectable with ordinary ELF/binutils tooling;
+7. remain a projection, not semantic authority.
+
+## Bounded callable contract
+
+Symbol:
+
+    mcsp_exclusive_u64
+
+Machine-level calling projection for the fixture:
+
+    input A: RDI
+    input B: RSI
+    output : RAX = A XOR B
+
+The register convention is a Linux/x86-64 realization choice. It is not the
+canonical MCSP semantic definition.
+
+## Boundary
+
+0.53 does not claim:
+- a loadable .ko module;
+- Linux module metadata;
+- kernel symbol export;
+- kernel-version portability;
+- in-kernel execution;
+- driver registration;
+- privileged installation/loading;
+- arbitrary ISA kernel objects.
+
+Those require later qualification.
+
+C is not required for the MCSP object.
