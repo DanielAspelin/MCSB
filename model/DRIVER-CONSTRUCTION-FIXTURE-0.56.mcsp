@@ -1,0 +1,87 @@
+# MCSP Driver Construction Fixture 0.56
+
+Status: Constructive driver-construction experiment
+Qualification: Under Conditional Experiment
+Parents:
+- DMA-TRANSFER-PROJECTION-0.34.mcsp
+- QEMU EDU DMA witness 0.35
+- DRIVER-BUILDER-INTERFACE-0.52.mcsp
+- KBUILD-MODULE-INTEGRATION-0.54.mcsp
+- KERNEL-DRIVER-BUILDER-REPORT-0.55.mcsp
+
+## Foundational direction
+
+MCSP is itself a kernel:
+
+    MCSP KERNEL = DETERMINATE CONDITION
+
+The MCSP kernel determines semantic obligations. A driver builder consumes the
+resulting report. Linux is a downstream external realization kernel when selected.
+
+## Objective
+
+Demonstrate a bounded report-driven construction of a Linux PCI driver artifact for
+the QEMU EDU device witness without loading the driver or touching hardware.
+
+QEMU EDU identification used by the established witness:
+
+    vendor = 0x1234
+    device = 0x11e8
+
+The identification values locate the bounded hardware applicability. They do not
+define MCSP semantics.
+
+## Construction
+
+    MCSP KERNEL
+      -> QEMU EDU boundary obligation
+      -> driver-builder report
+      -> builder projection
+      -> MCSP assembly-owned probe predicate
+      -> Linux PCI registration adapter
+      -> Kbuild
+      -> .ko
+      -> static disassembly / symbol / metadata verification
+      -> REALIZE / SUSPEND / REJECT
+
+## Bounded report obligations
+
+- hardware boundary: PCI;
+- vendor 0x1234;
+- device 0x11e8;
+- transfer capability: DMA witness exists;
+- access realization: Linux PCI;
+- no interrupt requirement in this construction fixture;
+- no DMA execution in this construction fixture;
+- no MMIO access in this construction fixture;
+- semantic mutation forbidden;
+- STATE and TYPE not required;
+- unresolved incompatibility suspends construction.
+
+## Assembly ownership
+
+The MCSP assembly component exposes:
+
+    mcsp_edu_identity_match
+
+Input projection:
+    RDI = vendor
+    RSI = device
+
+Output projection:
+    RAX = 1 only for 0x1234:0x11e8, otherwise 0.
+
+This is a bounded construction predicate derived from the report. It does not probe
+PCI configuration space itself.
+
+## Linux adapter
+
+The Linux adapter registers a PCI driver table for the bounded EDU identity and
+calls the MCSP predicate during probe. It performs no MMIO, DMA, interrupt setup,
+or device mutation.
+
+## Boundary
+
+0.56 produces a driver-shaped Linux module artifact but does not load it.
+Actual PCI probing, binding, hardware access, DMA, interrupt operation, unload
+behavior, recovery, and production safety remain unverified.
