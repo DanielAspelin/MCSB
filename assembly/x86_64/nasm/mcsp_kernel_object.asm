@@ -5,7 +5,6 @@ default rel
 section .text
 extern __x86_return_thunk
 
-global mcsp_exclusive_u64:function
 mcsp_exclusive_u64:
     mov rax,rdi
     xor rax,rsi
