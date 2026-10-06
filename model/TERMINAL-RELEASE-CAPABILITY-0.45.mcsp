@@ -1,0 +1,66 @@
+# MCSP Terminal Release Capability 0.45
+
+Status: Constructive capability-condition experiment
+Qualification: Under Conditional Experiment
+Parent: HEX-POSSIBILITY-LAYER-0.44
+
+## Principle
+
+MCSP SHALL distinguish:
+
+    current condition
+    capability condition
+    invoked transition
+
+without requiring any of them to be foundational STATE.
+
+A condition may be estimated, calculated, observed or derived without being reified as a state.
+
+## Current condition
+
+For this fixture the assembly program is launched from an invoking terminal/process environment and remains foreground-attached for the entire qualification run.
+
+The fixture does not detach itself.
+
+## Capability condition
+
+The program may determine:
+
+    TERMINAL_RELEASE_CAPABLE
+
+when the applicable host realization exposes sufficient mechanisms for a future explicit terminal-release transition.
+
+For the current Linux x86-64 realization the bounded capability calculation requires knowledge of available process/session and file-descriptor mechanisms sufficient to construct a later detachment procedure.
+
+This is capability evidence only.
+
+## Non-invocation rule
+
+Capability SHALL NOT imply action.
+
+    TERMINAL_RELEASE_CAPABLE != TERMINAL_RELEASE_INVOKED
+
+No session detachment, fork/background continuation, terminal descriptor reassignment, daemonization or equivalent release transition is invoked by 0.45.
+
+A future release operation requires an explicit transition request and separate qualification.
+
+## Condition vocabulary
+
+    TERMINAL_ATTACHED
+        current invocation remains attached to its terminal/process boundary.
+
+    TERMINAL_RELEASE_CAPABLE
+        applicable realization contains a qualified route by which a later explicit operation could release terminal occupation.
+
+    TERMINAL_RELEASE_INVOKED
+        reserved for a future explicit transition; false/uninvoked in 0.45.
+
+    BACKGROUND_OPERATING
+        possible later derived condition; not established in 0.45.
+
+These are determinations of condition, not kernel states.
+
+## Kernel
+
+Kernel remains DETERMINATE CONDITION.
+STATE remains derived and optional.
