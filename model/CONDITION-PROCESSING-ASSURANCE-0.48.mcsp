@@ -1,0 +1,81 @@
+# MCSP Condition Processing Assurance 0.48
+
+Status: Constructive processing-assurance experiment
+Qualification: Under Conditional Experiment
+Parent: SEMANTIC-DIMENSIONAL-MINIMIZATION-0.47
+
+## Objective
+
+Establish that a determinate condition may be repeatedly calculated and processed
+across operational mode changes without becoming STATE and without MODE becoming TYPE.
+
+Kernel remains:
+
+    DETERMINATE CONDITION
+
+## Processing model
+
+A bounded semantic record contains:
+
+    condition
+    mode
+    observation
+    calculation
+    processing_count
+    state_introduced
+    type_introduced
+
+The record is not a state record.
+
+Processing SHALL calculate the current condition from explicit bounded inputs.
+A changed calculation may produce a changed CONDITION. Such change does not imply
+a state transition.
+
+MODE may change how the condition is operationally projected. Such change does not
+imply TYPE.
+
+## Tested condition cycle
+
+The fixture uses two condition determinations:
+
+    IDLE = 1
+    PROCESSING = 2
+
+and two modes:
+
+    FOREGROUND = 1
+    BACKGROUND = 2
+
+For 0.48 BACKGROUND is a semantic mode value only. It SHALL NOT cause terminal
+detachment or background execution.
+
+The processing sequence is:
+
+    input work=0 -> CONDITION=IDLE
+    input work=1 -> CONDITION=PROCESSING
+    mode FOREGROUND -> BACKGROUND -> FOREGROUND
+    input work=0 -> CONDITION=IDLE
+
+Throughout:
+
+    STATE_INTRODUCED = 0
+    TYPE_INTRODUCED = 0
+
+## Safety invariants
+
+1. calculation determines CONDITION, not STATE;
+2. mode selection determines MODE, not TYPE;
+3. condition change does not create STATE;
+4. mode change does not create TYPE;
+5. repeated processing does not promote dimensions;
+6. BACKGROUND mode does not itself invoke background execution;
+7. terminal release capability remains separate from processing;
+8. unsupported condition inputs are rejected rather than guessed.
+
+## Qualification boundary
+
+0.48 tests bounded condition-processing integrity.
+It does not introduce a scheduler, lifecycle state machine, process type system,
+terminal release, daemonization, or autonomous background operation.
+
+STATE and TYPE remain derived and optional.
