@@ -8,7 +8,7 @@ Baseline sequence:
 4. PROCESSING -> IDLE / FOREGROUND
 
 Required:
-- deterministic final lineage = 254;
+- deterministic final lineage = 257;
 - final sequence = 4;
 - final condition = IDLE;
 - equal consecutive PROCESSING conditions remain separate calculations;
