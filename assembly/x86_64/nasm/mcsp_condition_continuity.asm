@@ -101,8 +101,8 @@ _start:
     jne fail
     cmp qword [last_condition],COND_IDLE
     jne fail
-    ; deterministic expected lineage: 254
-    cmp qword [record+32],254
+    ; deterministic expected lineage: 257
+    cmp qword [record+32],257
     jne fail
 
     mov eax,SYS_WRITE
