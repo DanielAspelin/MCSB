@@ -1,0 +1,124 @@
+# MCSP Condition Propagation 0.50
+
+Status: Constructive reconciliation experiment
+Qualification: Under Conditional Experiment
+Parents:
+- PROPAGATION-0.26.mcsp
+- CONDITION-CONTINUITY-0.49.mcsp
+
+## Objective
+
+Reconcile established MCSP propagation mechanics with the condition-minimization
+architecture.
+
+Kernel remains:
+
+    DETERMINATE CONDITION
+
+Propagation transports qualified semantic/scaffolding determination under explicit
+applicability. It SHALL NOT manufacture STATE or TYPE.
+
+## Propagation operations
+
+The established operation vocabulary remains:
+
+    INHERIT
+    REFINE
+    NARROW
+    REALIZE
+    PROJECT
+    SUSPEND
+    REJECT
+
+0.50 exercises INHERIT, REFINE, NARROW and PROJECT as accepted propagation paths,
+and SUSPEND/REJECT as contradiction containment paths.
+
+REALIZE remains established vocabulary but is outside this bounded witness because
+0.50 is testing semantic propagation rather than a new machine realization.
+
+## Record
+
+A bounded propagated record contains:
+
+    condition
+    mode
+    applicability
+    qualification
+    lineage
+    propagation_operation
+    state_introduced
+    type_introduced
+
+STATE and TYPE fields are negative sentinels only. They do not establish those
+dimensions as operative ontology.
+
+## Rules
+
+INHERIT:
+    preserve qualified determination when governing conditions remain compatible.
+
+REFINE:
+    add determination without contradicting inherited determination.
+
+NARROW:
+    reduce applicability while preserving the inherited determination inside the
+    narrower boundary.
+
+PROJECT:
+    express the determination through an applicable operational mode without
+    changing its semantic condition.
+
+SUSPEND:
+    stop affected propagation when compatibility cannot currently be established.
+
+REJECT:
+    refuse propagation when a material contradiction is established.
+
+No accepted propagation operation implies:
+
+    CONDITION -> STATE
+    MODE -> TYPE
+
+No repetition, lineage continuity, applicability narrowing, or projection implies
+those promotions either.
+
+## Bounded path
+
+    source:
+      CONDITION=PROCESSING
+      MODE=FOREGROUND
+      applicability=GENERAL
+      qualification=QUALIFIED
+
+    INHERIT:
+      preserves PROCESSING
+
+    REFINE:
+      preserves PROCESSING and establishes explicit operational determination
+
+    NARROW:
+      applicability GENERAL -> TERMINAL
+
+    PROJECT:
+      MODE FOREGROUND -> BACKGROUND
+      CONDITION remains PROCESSING
+
+BACKGROUND is a semantic mode value only. It does not detach the process.
+
+## Contradiction containment
+
+A child that attempts to propagate an incompatible condition under an operation
+that requires preservation SHALL NOT be silently repaired.
+
+The affected path must be SUSPENDED or REJECTED.
+
+Contradiction therefore stops propagation before stronger semantic dimensions can
+be invented to explain it.
+
+## Boundary
+
+0.50 does not introduce terminal release, actual background execution, a state
+machine, a type system, or universal propagation semantics.
+
+The 0.26 propagation vocabulary is preserved.
+The 0.49 continuity discipline is preserved.
