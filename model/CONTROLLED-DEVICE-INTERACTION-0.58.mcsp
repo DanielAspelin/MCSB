@@ -1,0 +1,77 @@
+# MCSP Controlled Device Interaction 0.58
+
+Status: Constructive isolated-runtime experiment
+Qualification: Under Conditional Experiment
+Parents:
+- CONTROLLED-KERNEL-EXECUTION-0.57.mcsp
+- EMULATED-DMA-REALIZATION-0.35.mcsp
+
+## Objective
+
+Extend the qualified 0.57 Linux-kernel realization by one bounded, read-only
+interaction with the emulated QEMU EDU device.
+
+MCSP remains its own kernel:
+
+    MCSP KERNEL = DETERMINATE CONDITION
+
+Linux remains an external realization kernel.
+
+## Report-derived observation contract
+
+Target:
+- PCI vendor 0x1234;
+- PCI device 0x11e8;
+- BAR0;
+- register offset 0x00;
+- access width 32 bits;
+- operation READ only.
+
+The installed QEMU 10.0.13 EDU specification defines BAR0 offset 0x00 as a
+read-only identification register in the form 0xRRrr00edu, where RR and rr are
+version fields.
+
+0.58 therefore pre-settles only the stable identification suffix:
+
+    observed_value & 0x0000ffff == 0x000000ed
+
+The version fields remain realization-defined observations.
+
+## Controlled path
+
+    report-derived PCI identity
+      -> MCSP assembly identity predicate
+      -> Linux PCI probe
+      -> pci_enable_device
+      -> pci_iomap BAR0
+      -> ioread32 BAR0+0x00
+      -> MCSP assembly observation predicate
+      -> CONDITION accepted or rejected
+      -> pci_iounmap
+      -> pci_disable_device
+      -> guest termination
+
+The assembly observation predicate determines whether the read value satisfies
+the bounded report invariant. Linux performs the external-kernel mapping/read
+mechanics but does not define MCSP semantics.
+
+## Prohibitions
+
+0.58 SHALL NOT:
+- write any EDU MMIO register;
+- start DMA;
+- register or handle an IRQ;
+- enable PCI bus mastering;
+- mutate EDU device data;
+- load an MCSP module into the host kernel;
+- promote the observation into foundational STATE or TYPE.
+
+Failure to map, read, or satisfy the predicate rejects the bounded probe.
+
+## Qualification boundary
+
+This checkpoint may qualify a single read-only MMIO observation of the emulated
+EDU identification register through the MCSP condition path.
+
+It does not qualify arbitrary MMIO, physical hardware, DMA, interrupts,
+production deployment, or universal driver operation.
