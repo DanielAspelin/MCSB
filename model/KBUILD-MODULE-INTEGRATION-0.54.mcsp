@@ -1,0 +1,60 @@
+# MCSP Kbuild Module Integration 0.54
+
+Status: Constructive Linux module-build experiment
+Qualification: Under Conditional Experiment
+Parent:
+- LINUX-KERNEL-OBJECT-PROJECTION-0.53.mcsp
+
+## Objective
+
+Demonstrate that a qualified MCSP kernel-object projection can participate in the
+Linux Kbuild module pipeline and be packaged into a loadable-module artifact (.ko)
+without loading or executing that module.
+
+Linux module machinery is a realization boundary. It is not MCSP semantic authority.
+
+## Composition
+
+    MCSP semantic obligation
+      -> MCSP Assembler
+      -> mcsp_kernel_object.o
+      -> minimal Linux module adapter
+      -> Kbuild / modpost
+      -> mcsp_probe.ko
+      -> static qualification
+
+The adapter exists only to satisfy the Linux module interface. It must not redefine
+the MCSP semantic obligation.
+
+## Bounded MCSP symbol
+
+    mcsp_exclusive_u64
+
+The adapter may call this symbol to establish link integration.
+
+## 0.54 requirements
+
+The resulting .ko SHALL:
+- be ELF64 x86-64 relocatable/module artifact;
+- contain the MCSP symbol;
+- contain Linux module init/exit metadata required by Kbuild;
+- pass modpost/build for the running kernel headers;
+- preserve the MCSP object as an assembly-owned component;
+- contain no userspace _start entry;
+- not be loaded during qualification.
+
+## Boundary
+
+0.54 qualifies build/link integration only.
+
+It does not qualify:
+- insmod/modprobe;
+- module initialization inside the running kernel;
+- kernel-space execution of MCSP;
+- driver registration;
+- hardware access;
+- production safety;
+- kernel-version portability;
+- module signing/enforcement compatibility.
+
+Loading is a separate privileged authorization boundary.
