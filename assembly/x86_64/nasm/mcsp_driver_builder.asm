@@ -122,29 +122,29 @@ verify_report:
     cmp qword [semantic+16],1
     jne .reject
     ; truth triples: 000,011,101,110 already represented in data
+    cmp qword [semantic+24],0
+    jne .reject
+    cmp qword [semantic+32],0
+    jne .reject
     cmp qword [semantic+40],0
     jne .reject
     cmp qword [semantic+48],0
     jne .reject
-    cmp qword [semantic+56],0
+    cmp qword [semantic+56],1
     jne .reject
-    cmp qword [semantic+64],0
+    cmp qword [semantic+64],1
     jne .reject
     cmp qword [semantic+72],1
     jne .reject
-    cmp qword [semantic+80],1
+    cmp qword [semantic+80],0
     jne .reject
     cmp qword [semantic+88],1
     jne .reject
-    cmp qword [semantic+96],0
+    cmp qword [semantic+96],1
     jne .reject
     cmp qword [semantic+104],1
     jne .reject
-    cmp qword [semantic+112],1
-    jne .reject
-    cmp qword [semantic+120],1
-    jne .reject
-    cmp qword [semantic+128],0
+    cmp qword [semantic+112],0
     jne .reject
 
     cmp qword [state_introduced],0
