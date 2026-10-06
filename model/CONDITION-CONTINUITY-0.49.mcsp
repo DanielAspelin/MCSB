@@ -1,0 +1,78 @@
+# MCSP Condition Continuity 0.49
+
+Status: Constructive continuity experiment
+Qualification: Under Conditional Experiment
+Parent: CONDITION-PROCESSING-ASSURANCE-0.48
+
+## Objective
+
+Establish continuity across successive determinate-condition calculations without
+introducing STATE, TYPE, or a lifecycle state machine.
+
+Kernel remains:
+
+    DETERMINATE CONDITION
+
+## Continuity record
+
+A bounded continuity record contains:
+
+    prior_condition
+    current_condition
+    mode
+    sequence
+    lineage
+    state_introduced
+    type_introduced
+    release_invoked
+
+The words prior and current describe observation positions in a qualified sequence.
+They do not denote states.
+
+## Sequence
+
+The fixture processes:
+
+    sequence 1: prior=NONE,       current=IDLE,       mode=FOREGROUND
+    sequence 2: prior=IDLE,       current=PROCESSING, mode=FOREGROUND
+    sequence 3: prior=PROCESSING, current=PROCESSING, mode=BACKGROUND
+    sequence 4: prior=PROCESSING, current=IDLE,       mode=FOREGROUND
+
+The third step is intentionally important:
+
+    PROCESSING -> PROCESSING
+
+Continuity therefore cannot be defined merely as a change of state. A new
+observation/calculation can preserve the same condition while advancing sequence
+and lineage evidence.
+
+## Lineage rule
+
+Each accepted calculation advances a deterministic bounded lineage accumulator:
+
+    lineage_next = lineage_previous * 5 + current_condition + mode + sequence
+
+for the 0.49 fixture.
+
+This formula is a witness mechanism, not universal MCSP semantic authority.
+
+Continuity requires the supplied prior condition to equal the previously accepted
+current condition. A broken predecessor relation is rejected.
+
+## Safety invariants
+
+1. prior/current are positional observations, not STATE;
+2. repeated equal conditions remain distinct calculations by sequence/lineage;
+3. condition change does not introduce STATE;
+4. mode change does not introduce TYPE;
+5. BACKGROUND mode does not invoke terminal release;
+6. continuity mismatch is rejected rather than repaired by guessing;
+7. no lifecycle ontology is inferred from sequence ordering.
+
+## Boundary
+
+0.49 does not authorize terminal release, background continuation, autonomous
+execution, scheduler behavior, lifecycle states, or a type system.
+
+STATE and TYPE remain derived and optional.
+MODE remains derived.
