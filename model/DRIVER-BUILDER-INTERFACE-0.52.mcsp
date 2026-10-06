@@ -1,0 +1,109 @@
+# MCSP Driver Builder Interface 0.52
+
+Status: Constructive interface experiment
+Qualification: Under Conditional Experiment
+Parents:
+- ASSEMBLER-SEED-0.40.mcsp
+- DISASSEMBLER-SEED-0.41.mcsp
+- DECOMPILER-SEED-0.42.mcsp
+- CLOSED-ROUND-TRIP-0.43.mcsp
+- HEX-POSSIBILITY-LAYER-0.44.mcsp
+- HARDWARE-BOUNDARY-RECONCILIATION-0.51.mcsp
+
+## Objective
+
+Place MCSP immediately behind the driver-building boundary.
+
+A driver builder may consume an MCSP hardware-boundary report and reuse MCSP
+assembly machinery to construct a target-machine realization. MCSP then verifies
+the resulting realization through disassembly and decompilation before accepting
+REALIZE.
+
+MCSP does not own the resulting driver merely because its construction machinery
+was reused.
+
+## Driver-builder report
+
+A bounded machine-representable report contains:
+
+    semantic_relation
+    semantic_width
+    destination_role
+    source_role
+    encoding_form
+    hardware_target
+    applicability
+    qualification
+    unresolved_residue
+
+The report states obligations and boundary information. It does not prescribe
+driver architecture, operating-system policy, lifecycle, ownership, or deployment.
+
+## Construction path
+
+    DETERMINATE CONDITION / semantic obligation
+        -> hardware boundary
+        -> MCSP driver-builder report
+        -> driver builder
+        -> MCSP ASSEMBLER
+        -> target encoding
+        -> MCSP DISASSEMBLER
+        -> reconstructed structural tuple
+        -> MCSP DECOMPILER
+        -> reconstructed semantic obligation
+        -> compare with report
+        -> REALIZE / SUSPEND / REJECT
+
+## Authority rule
+
+The semantic obligation is authoritative over the realization.
+
+The machine encoding is evidence of realization, not semantic authority.
+The driver builder retains implementation choice inside the report constraints.
+MCSP qualification accepts only a realization that preserves the report obligation.
+
+## Reuse rule
+
+A driver builder may reuse the MCSP Assembler without adopting MCSP as the driver's
+runtime, scheduler, state machine, type system, or operating-system abstraction.
+
+Reuse is therefore construction reuse, not ownership transfer or semantic inversion.
+
+## Bounded 0.52 fixture
+
+Report:
+
+    relation = EXCLUSIVE
+    width = 64
+    destination = 0
+    source = 3
+    form = 1
+    hardware = x86-64
+
+MCSP Assembler projection:
+
+    48 31 D8
+
+MCSP Disassembler reconstructs the same structural tuple.
+MCSP Decompiler reconstructs the exclusive relation and its truth obligation.
+
+Only after report/tuple/semantic agreement may the bounded path return REALIZE.
+
+## Failure containment
+
+Unknown/unsupported target construction -> SUSPEND.
+Encoding inconsistent with report -> REJECT.
+Disassembled tuple inconsistent with report -> REJECT.
+Decompiled semantics inconsistent with report -> REJECT.
+Unresolved residue incompatible with qualification -> SUSPEND or REJECT according
+to whether compatibility is unresolved or contradicted.
+
+## Boundary
+
+0.52 is a driver-builder interface witness, not a production driver generator.
+It does not claim operating-system driver integration, arbitrary ISA assembly,
+device discovery, deployment, signing, privileged installation, or universal
+hardware support.
+
+Kernel remains DETERMINATE CONDITION.
+STATE and TYPE remain derived and unnecessary to this interface.
