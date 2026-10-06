@@ -1,0 +1,56 @@
+# MCSP Controlled Kernel Execution 0.57
+
+Status: Constructive isolated-runtime experiment
+Qualification: Under Conditional Experiment
+Parents:
+- DRIVER-CONSTRUCTION-FIXTURE-0.56.mcsp
+- KBUILD-MODULE-INTEGRATION-0.54.mcsp
+- QEMU EDU DMA witness 0.35
+
+## Objective
+
+Execute the bounded 0.56 driver artifact only inside a disposable QEMU Linux guest
+with the QEMU EDU PCI device attached.
+
+The host kernel SHALL NOT load the MCSP module.
+
+## Architecture
+
+    MCSP KERNEL = DETERMINATE CONDITION
+        -> report-derived driver construction
+        -> Linux .ko realization
+        -> disposable QEMU guest kernel
+        -> module insertion inside guest
+        -> PCI probe evidence
+        -> guest termination
+
+Linux remains an external realization kernel.
+
+## 0.57 runtime boundary
+
+Guest:
+- QEMU x86-64;
+- matching Debian kernel;
+- QEMU EDU device 1234:11e8;
+- disposable initramfs;
+- no persistent guest disk required;
+- serial evidence captured by host.
+
+The 0.56 probe performs identity qualification only. It does not enable PCI,
+map MMIO, execute DMA, register IRQs, or mutate device registers.
+
+## Qualification events
+
+The isolated runtime shall evidence:
+1. guest kernel boot;
+2. EDU PCI device enumeration;
+3. module insertion attempt inside guest only;
+4. module init/probe result;
+5. MCSP bounded identity predicate participates in probe;
+6. no host module insertion;
+7. deterministic guest termination.
+
+## Boundary
+
+Actual MMIO, DMA, IRQ handling, device mutation, production deployment, and host
+kernel insertion remain outside 0.57.
