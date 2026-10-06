@@ -1,0 +1,103 @@
+# MCSP Terminal Release Transition Contract 0.46
+
+Status: Constructive condition-only contract experiment
+Qualification: Under Conditional Experiment
+Parent: TERMINAL-RELEASE-CAPABILITY-0.45
+
+## Governing requirement
+
+MCSP SHALL NOT introduce STATE to describe terminal attachment, release capability,
+release determination, release invocation, background operation, idleness, processing,
+or any related observation in this contract.
+
+The kernel remains:
+
+    DETERMINATE CONDITION
+
+STATE remains derived, optional, and unused by this contract.
+
+## Condition-only interpretation
+
+A condition is a determination under an applicable boundary. A condition does not
+become a state merely because it is repeatedly observed, calculated, preserved,
+changed, or used to constrain a later operation.
+
+The following are condition determinations only:
+
+    TERMINAL_ATTACHED
+    TERMINAL_RELEASE_CAPABLE
+    TERMINAL_RELEASE_DETERMINED
+    TERMINAL_RELEASE_INVOKED
+    BACKGROUND_OPERATING
+
+0.46 establishes only:
+
+    TERMINAL_ATTACHED = true
+    TERMINAL_RELEASE_CAPABLE = true
+    TERMINAL_RELEASE_DETERMINED = false
+    TERMINAL_RELEASE_INVOKED = false
+    BACKGROUND_OPERATING = false
+
+## No readiness condition
+
+0.46 SHALL NOT define RELEASE_READY or equivalent.
+
+Capability is not readiness:
+
+    TERMINAL_RELEASE_CAPABLE
+        does not imply
+    TERMINAL_RELEASE_DETERMINED
+
+A future explicit determination may authorize a release experiment only after its
+own requirements and qualification boundary are established.
+
+## Release transition contract
+
+A future terminal release MAY occur only through an explicit invoked transition.
+
+Before such a transition can be qualified, the successor experiment must preserve
+or explicitly account for:
+
+1. semantic/scaffold lineage;
+2. process identity or an explicit identity derivation;
+3. applicability and qualification residue;
+4. output and error destinations after terminal occupation ends;
+5. termination/control observability;
+6. failure handling and recovery;
+7. explicit evidence that release was requested rather than inferred from capability.
+
+No item above authorizes release in 0.46.
+
+## Forbidden implications
+
+The following implications are invalid:
+
+    CAPABLE -> DETERMINED
+    CAPABLE -> INVOKED
+    CAPABLE -> BACKGROUND_OPERATING
+    ATTACHED -> STATE
+    IDLE -> STATE
+    PROCESSING -> STATE
+    repeated condition -> STATE
+
+No temporal persistence of a condition creates STATE.
+
+## 0.46 execution boundary
+
+The witness SHALL:
+- execute normally from the invoking terminal;
+- calculate release capability;
+- preserve attachment through completion;
+- leave release determination false;
+- leave release invocation false;
+- leave background operation false;
+- contain no executable terminal-detachment path.
+
+The witness SHALL NOT fork, create a new session, daemonize, redirect terminal
+descriptors for detachment, or continue after releasing the invoking terminal.
+
+## Qualification consequence
+
+A PASS means only that the bounded witness satisfies this condition-only contract.
+It does not mean MCSP is ready to detach, does not authorize detachment, and does
+not establish any state-machine ontology.
