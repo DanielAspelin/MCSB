@@ -1,0 +1,60 @@
+# MCSP Disassembler 0.41
+
+Status: Constructive native disassembler experiment
+Qualification: Under Conditional Experiment
+Parent: ASSEMBLER-SEED-0.40
+
+## Objective
+
+Establish the first bounded MCSP disassembler mechanism:
+
+    machine encoding -> MCSP structural machine description
+
+The decoder SHALL derive the structural tuple directly from machine bytes. External disassembler text is audit evidence only.
+
+## Qualified input
+
+For the 0.40 realization:
+
+    48 31 d8
+
+the bounded decoder reconstructs:
+
+    relation = 0x01
+    width = 64
+    destination-register-token = 0
+    source-register-token = 3
+    operand-form = register/register
+
+The relation token inherits the 0.39 structural definition:
+
+    00->0
+    01->1
+    10->1
+    11->0
+
+The mnemonic XOR is not part of the reconstructed semantic tuple.
+
+## Rejection
+
+Unsupported or mutated encodings SHALL be rejected.
+
+0.41 does not guess instruction meaning from partial resemblance.
+
+## Round trip
+
+Within the qualified scope:
+
+    S -> ASSEMBLE_0.40(S) -> bytes
+    bytes -> DISASSEMBLE_0.41(bytes) -> S'
+
+Pass requires S' = S for every material field admitted by the fixture.
+
+This equality is bounded structural equality, not a claim that assembly and disassembly are universal mathematical inverses.
+
+## Boundary
+
+The 0.41 decoder implementation is bootstrapped in NASM but its target-byte decoding decision is internal.
+
+General x86-64 decoding remains outside scope.
+Kernel remains DETERMINATE CONDITION.
