@@ -98,6 +98,26 @@ narrow:
 .fail: xor eax,eax
     ret
 
+contain_contradiction:
+    ; rdi=0 -> SUSPEND unresolved compatibility
+    ; rdi=1 -> REJECT established contradiction
+    cmp rdi,0
+    je .suspend
+    cmp rdi,1
+    je .reject
+    xor eax,eax
+    ret
+.suspend:
+    mov qword [record+40],OP_SUSPEND
+    call advance_lineage
+    mov eax,1
+    ret
+.reject:
+    mov qword [record+40],OP_REJECT
+    call advance_lineage
+    mov eax,1
+    ret
+
 project:
     call guard
     test eax,eax
