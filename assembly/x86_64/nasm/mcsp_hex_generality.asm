@@ -243,7 +243,8 @@ _start:
  call compose
  jc fail
  call split
- cmp ah,r8b
+ mov cl,r8b
+ cmp ah,cl
  jne fail
  test al,al
  jne fail
