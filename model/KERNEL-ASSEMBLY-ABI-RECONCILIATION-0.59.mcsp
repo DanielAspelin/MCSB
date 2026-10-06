@@ -1,0 +1,40 @@
+# MCSP Kernel Assembly ABI Reconciliation 0.59
+
+Status: Constructive reconciliation
+Qualification: Verified within bounded Linux x86-64 fixture
+Parent: CONTROLLED-DEVICE-INTERACTION-0.58.mcsp
+
+## Purpose
+
+Remove the explicit 0.58 objtool/MITIGATION_RETHUNK residue without changing the
+MCSP semantic obligation.
+
+MCSP remains its own kernel:
+
+    MCSP KERNEL = DETERMINATE CONDITION
+
+Linux x86-64 kernel ABI/hardening conventions are realization constraints only.
+
+## Reconciliation
+
+Kernel-facing MCSP assembly functions use:
+- ELF FUNC symbol with explicit size;
+- __x86_return_thunk for the Linux x86-64 return projection;
+- non-executable GNU stack note.
+
+The 0.58 observation relation remains unchanged:
+
+    (observed_value & 0xffff) == 0x00ed
+
+No new STATE, TYPE, device operation, or semantic primitive is introduced.
+
+## Qualification
+
+0.59 requires:
+1. warning-free Kbuild/objtool;
+2. sized FUNC symbols for identity and observation predicates;
+3. relocations to __x86_return_thunk;
+4. unchanged isolated EDU read-only observation;
+5. no host module insertion.
+
+This reconciliation is bounded to the tested Linux x86-64 kernel configuration.
