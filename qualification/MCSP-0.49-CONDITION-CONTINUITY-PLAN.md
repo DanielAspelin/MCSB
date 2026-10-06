@@ -1,27 +1,27 @@
-# MCSP 0.49 Condition Continuity Qualification Plan
+# MCSP 0.49 Condition Continuity Qualification Plan — Reconciled
 
-Baseline sequence:
+0.49 previously failed because manually entered expected lineage constants were incorrect.
+Those failed checkpoints remain part of lineage and are not qualification evidence.
 
-1. NONE -> IDLE / FOREGROUND
-2. IDLE -> PROCESSING / FOREGROUND
-3. PROCESSING -> PROCESSING / BACKGROUND
-4. PROCESSING -> IDLE / FOREGROUND
+Reconciled target:
 
-Required:
-- deterministic final lineage = 257;
-- final sequence = 4;
-- final condition = IDLE;
-- equal consecutive PROCESSING conditions remain separate calculations;
-- STATE remains absent;
-- TYPE remains absent;
-- terminal release remains absent.
+1. predecessor condition must equal the previously accepted current condition;
+2. sequence must advance exactly by one;
+3. primary lineage calculation and independent reconstruction must agree after every accepted observation;
+4. no manually entered final lineage constant determines PASS;
+5. equal consecutive PROCESSING conditions must remain distinguishable by sequence/continuity evidence;
+6. STATE remains absent;
+7. TYPE remains absent;
+8. terminal release remains absent.
 
 Attacks:
-- incorrect prior condition must be rejected;
-- unsupported current condition must be rejected;
-- unsupported mode must be rejected;
-- forced STATE must be rejected;
-- forced TYPE must be rejected;
-- forced release must be rejected.
+- broken predecessor;
+- skipped sequence;
+- unsupported current condition;
+- unsupported mode;
+- forced STATE;
+- forced TYPE;
+- forced release;
+- corrupted independent lineage accumulator.
 
-The fixture remains attached to inherited terminal output.
+A PASS requalifies only the reconciled 0.49 scope.
