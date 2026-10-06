@@ -1,0 +1,99 @@
+# MCSP Semantic Dimensional Minimization 0.47
+
+Status: Constructive semantic-safety experiment
+Qualification: Under Conditional Experiment
+Parent: TERMINAL-RELEASE-TRANSITION-CONTRACT-0.46
+
+## Objective
+
+MCSP SHALL minimize semantic commitment while preserving sufficient determination.
+
+Preference relations:
+
+    CONDITION before STATE
+    MODE before TYPE
+
+These are reduction/preferences, not claims that STATE or TYPE can never exist.
+
+A stronger dimension SHALL NOT be introduced merely because a weaker dimension is
+persistent, repeatedly processed, operationally useful, or convenient to name.
+
+## CONDITION before STATE
+
+When a determinate condition sufficiently excludes incompatible interpretations,
+MCSP SHALL NOT require STATE.
+
+Examples:
+
+    CONDITION = IDLE
+    CONDITION = PROCESSING
+    CONDITION = TERMINAL_ATTACHED
+    CONDITION = TERMINAL_RELEASE_CAPABLE
+
+Persistence, repetition, observation, calculation, estimation, transition relevance,
+or execution relevance do not by themselves promote CONDITION to STATE.
+
+STATE may be considered only if a future requirement demonstrates a material
+semantic distinction that cannot be preserved through determinate conditions.
+
+## MODE before TYPE
+
+When an operational/projection distinction can be expressed without asserting what
+a construct intrinsically is, MCSP SHALL prefer MODE over TYPE.
+
+Example:
+
+    CONDITION = PROCESSING
+    MODE = FOREGROUND
+
+rather than requiring:
+
+    TYPE = FOREGROUND_PROCESS
+
+A later condition may be:
+
+    CONDITION = PROCESSING
+    MODE = BACKGROUND
+
+without requiring a new TYPE.
+
+TYPE may be considered only if a future requirement demonstrates a material
+classification invariant that MODE cannot preserve.
+
+## No automatic promotion
+
+Forbidden automatic promotions:
+
+    CONDITION -> STATE
+    persistent CONDITION -> STATE
+    changing CONDITION -> STATE
+    MODE -> TYPE
+    persistent MODE -> TYPE
+    changing MODE -> TYPE
+
+Processing a condition SHALL preserve its dimensional boundary unless explicit
+qualified evidence establishes insufficiency.
+
+## Safety rule
+
+For every processed semantic record in this bounded model:
+
+1. determine the required condition;
+2. determine an applicable mode only when operational interpretation needs it;
+3. test whether the resulting determination is sufficient;
+4. leave STATE absent when CONDITION is sufficient;
+5. leave TYPE absent when MODE is sufficient;
+6. reject any unrequested promotion.
+
+Absence of STATE or TYPE is not missing information when the weaker dimensions
+already provide sufficient determination.
+
+## Kernel
+
+Kernel remains DETERMINATE CONDITION.
+
+MODE is a derived semantic dimension above the kernel.
+STATE remains derived and optional.
+TYPE remains derived and optional.
+
+Neither STATE nor TYPE is introduced as an operative dimension by 0.47.
