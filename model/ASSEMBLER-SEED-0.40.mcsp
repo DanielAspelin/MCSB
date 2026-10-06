@@ -1,0 +1,55 @@
+# MCSP Assembler Seed 0.40
+
+Status: Constructive native assembler experiment
+Qualification: Under Conditional Experiment
+Parent: NATIVE-MACHINE-DESCRIPTION-0.39
+
+## Objective
+
+Establish the first bounded MCSP assembler mechanism:
+
+    MCSP structural machine description -> selected machine encoding
+
+The assembler seed SHALL make its encoding decision from structural commitments rather than from an assembly mnemonic supplied as semantic input.
+
+## Input structure
+
+For this fixture the admitted structure contains:
+- operation relation token: 0x01, defined by 0.39 four-row distinction relation;
+- width: 64;
+- destination realization register token: 0;
+- source realization register token: 3;
+- operand form: register/register.
+
+Register tokens and concrete encoding remain x86-64 REALIZATION_DEFINED.
+
+## Output
+
+For the admitted fixture the expected x86-64 encoding is:
+
+    48 31 d8
+
+The emitted bytes are output evidence, not MCSP semantic identity.
+
+## Decision rule
+
+The seed accepts only the exact qualified structural tuple supported by 0.40.
+
+Unsupported or mutated tuples SHALL be rejected rather than guessed.
+
+This deliberately narrow admission rule prevents a lookup table from masquerading as a general assembler.
+
+## Execution qualification
+
+The emitted bytes SHALL be placed in executable memory followed by a return instruction supplied by the harness boundary.
+
+The emitted operation SHALL execute over the 0.39 A/B fixture and produce the structurally predicted destination while preserving the declared source role.
+
+## Boundary
+
+NASM may bootstrap the emitter program but SHALL NOT select the target operation encoding.
+
+The target bytes SHALL be written by the MCSP assembler seed at runtime.
+
+0.40 is not a general x86 assembler.
+Kernel remains DETERMINATE CONDITION.
