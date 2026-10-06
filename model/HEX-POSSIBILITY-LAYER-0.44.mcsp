@@ -1,0 +1,102 @@
+# MCSP Hex Possibility Layer 0.44
+
+Status: Constructive architectural extension
+Qualification: Under Conditional Experiment
+Parent: CLOSED-ROUND-TRIP-0.43
+
+## Placement
+
+Hexadecimal representation is an explicit MCSP projection possibility before machine assembly/compilation and alongside disassembly.
+
+Forward:
+
+    semantic structure
+    -> structural tuple
+    -> HEX POSSIBILITY / ENCODING TABLE
+    -> assembly / compilation realization
+    -> machine bytes
+
+Reverse:
+
+    machine bytes
+    -> disassembly
+    -> HEX RECONSTRUCTION / TABLE VIEW
+    -> structural tuple
+    -> decompilation
+    -> semantic structure
+
+Hex is not semantic authority. It is a compact positional representation of binary machine possibilities.
+
+## Hex table
+
+Each hexadecimal digit represents four binary positions:
+
+    HEX  BINARY
+    0    0000
+    1    0001
+    2    0010
+    3    0011
+    4    0100
+    5    0101
+    6    0110
+    7    0111
+    8    1000
+    9    1001
+    A    1010
+    B    1011
+    C    1100
+    D    1101
+    E    1110
+    F    1111
+
+This is the complete single-hex-position possibility table: 16 determinate values over four binary positions.
+
+## Byte composition
+
+Two hex positions form one byte:
+
+    high nibble x 16 + low nibble
+
+Therefore each byte has 16 x 16 = 256 possibilities.
+
+A three-byte machine encoding has 256^3 possible raw byte combinations before architectural validity constraints are applied.
+
+The existence of a raw hexadecimal possibility does not imply a valid instruction or qualified semantic meaning.
+
+## Qualified mappings
+
+Existing 0.39-0.43 relation token 1:
+
+    structural tuple {relation=1,width=64,dst=0,src=3,form=1}
+    -> hex positions 4 8 | 3 1 | D 8
+    -> bytes 48 31 D8
+
+Second materially distinct relation candidate token 2:
+
+    per-position inclusive relation:
+      00->0
+      01->1
+      10->1
+      11->1
+
+For the same x86-64 width and operand locations its qualified candidate realization is:
+
+    hex positions 4 8 | 0 9 | D 8
+    -> bytes 48 09 D8
+
+The mnemonic OR is documentary shorthand only.
+
+## Disassembly requirement
+
+MCSP disassembly SHALL retain both:
+- raw byte/hex reconstruction;
+- decoded structural projection where supported.
+
+It SHALL NOT discard the raw hex evidence merely because a structural interpretation is available.
+
+## Boundary
+
+Hex representation is positional evidence and realization data.
+It does not replace DETERMINATE CONDITION, semantic relation, provenance, applicability or qualification.
+
+Kernel remains DETERMINATE CONDITION.
