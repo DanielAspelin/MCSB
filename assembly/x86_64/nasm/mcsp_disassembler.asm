@@ -12,7 +12,7 @@ plen equ $-pass
 failmsg db "MCSP disassembler 0.41: FAIL",10
 flen equ $-failmsg
 section .bss
-out resq 5
+decoded_tuple resq 5
 section .text
 ; decode(rdi=bytes,rsi=tuple) -> eax=3 consumed, 0 unsupported
 decode:
@@ -34,11 +34,11 @@ decode:
  ret
 _start:
  lea rdi,[good]
- lea rsi,[out]
+ lea rsi,[decoded_tuple]
  call decode
  cmp eax,3
  jne fail
- lea rdi,[out]
+ lea rdi,[decoded_tuple]
  lea rsi,[expected]
  mov ecx,5
 .check:
@@ -51,13 +51,13 @@ _start:
  jnz .check
  ; mutated opcode rejected
  lea rdi,[bad_opcode]
- lea rsi,[out]
+ lea rsi,[decoded_tuple]
  call decode
  test eax,eax
  jnz fail
  ; missing 64-bit prefix / incompatible byte sequence rejected
  lea rdi,[bad_width]
- lea rsi,[out]
+ lea rsi,[decoded_tuple]
  call decode
  test eax,eax
  jnz fail
